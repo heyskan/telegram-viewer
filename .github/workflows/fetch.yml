@@ -26,7 +26,7 @@ jobs:
       - name: دریافت پست‌های واقعی از تلگرام
         run: |
           python3 << 'EOF'
-          import json, requests, os, re, base64
+          import json, requests, os, re, time
           from bs4 import BeautifulSoup
           from datetime import datetime
           import jdatetime
@@ -37,11 +37,12 @@ jobs:
           # ===========================================
           
           os.makedirs("data/posts", exist_ok=True)
-          os.makedirs("data/media", exist_ok=True)
           
           def clean_text(text):
               if not text:
                   return ""
+              # حذف HTML تگ‌ها
+              text = re.sub(r'<[^>]+>', ' ', text)
               text = re.sub(r'\s+', ' ', text)
               return text.strip()
           
@@ -49,34 +50,99 @@ jobs:
               if not views_elem:
                   return "0"
               text = views_elem.text.strip()
+              # تبدیل 1.5K به 1500
               if 'K' in text or 'k' in text:
-                  num = float(re.findall(r'[\d\.]+', text)[0])
-                  return str(int(num * 1000))
+                  try:
+                      num = float(re.findall(r'[\d\.]+', text)[0])
+                      return str(int(num * 1000))
+                  except:
+                      return text
               return text
           
           def extract_reactions(msg):
-              """استخراج ری‌اکشن‌ها از پیام"""
+              """استخراج ری‌اکشن‌ها از پیام - روش جدید"""
               reactions = []
-              reaction_elems = msg.select('.tgme_widget_message_reaction')
-              
-              for react in reaction_elems:
-                  emoji_elem = react.select_one('.tgme_widget_message_reaction_emoji')
-                  count_elem = react.select_one('.tgme_widget_message_reaction_count')
-                  
-                  if emoji_elem:
-                      emoji = emoji_elem.text.strip()
-                      count = count_elem.text.strip() if count_elem else "1"
-                      reactions.append({
-                          "emoji": emoji,
-                          "count": count
-                      })
+              # ری‌اکشن‌ها در div با کلاس tgme_widget_message_reactions
+              reactions_div = msg.select_one('.tgme_widget_message_reactions')
+              if reactions_div:
+                  reaction_items = reactions_div.select('.tgme_widget_message_reaction')
+                  for react in reaction_items:
+                      emoji_elem = react.select_one('.tgme_widget_message_reaction_emoji')
+                      count_elem = react.select_one('.tgme_widget_message_reaction_count')
+                      
+                      if emoji_elem:
+                          # استخراج ایموجی از text یا data-attribute
+                          emoji = emoji_elem.get('data-emoji', '')
+                          if not emoji:
+                              emoji = emoji_elem.text.strip()
+                          count = count_elem.text.strip() if count_elem else "1"
+                          if emoji:
+                              reactions.append({"emoji": emoji, "count": count})
               return reactions
           
-          def download_media(url, channel, msg_id, media_type):
-              """دانلود عکس یا ویدیو و ذخیره محلی (اختیاری)"""
-              # برای ذخیره لینک اصلی کافیه، نیازی به دانلود نیست
-              # ولی اگه خواستی خود فایل رو هم ذخیره کنی، این تابع رو فعال کن
-              return url
+          def extract_images(msg):
+              """استخراج عکس‌ها از پیام"""
+              images = []
+              
+              # روش 1: عکس‌های معمولی
+              photo_div = msg.select_one('.tgme_widget_message_photo')
+              if photo_div:
+                  # لینک عکس با کیفیت بالا از style یا src
+                  img = photo_div.select_one('img')
+                  if img:
+                      src = img.get('src', '')
+                      # لینک عکس با کیفیت بالا
+                      if src and 'user_photo' not in src and 'emoji' not in src:
+                          # تبدیل به لینک با کیفیت بالا
+                          high_quality = src.replace('//cdn5.telegram-cdn.org', '//cdn5.telesco.pe')
+                          images.append(high_quality)
+                  
+                  # روش جایگزین: از data-zoom
+                  zoom_link = photo_div.get('data-zoom', '')
+                  if zoom_link and 'user_photo' not in zoom_link:
+                      images.append(zoom_link)
+              
+              # روش 2: عکس‌های گروهی (گالری)
+              photo_wraps = msg.select('.tgme_widget_message_photo_wrap')
+              for pw in photo_wraps:
+                  style = pw.get('style', '')
+                  # استخراج لینک از background-image
+                  url_match = re.search(r'url\(["\']?([^"\'\)]+)["\']?\)', style)
+                  if url_match:
+                      img_url = url_match.group(1)
+                      if 'user_photo' not in img_url and 'emoji' not in img_url:
+                          images.append(img_url)
+              
+              return list(dict.fromkeys(images))  # حذف تکراری‌ها
+          
+          def extract_videos(msg):
+              """استخراج ویدیوها از پیام"""
+              videos = []
+              video_div = msg.select_one('.tgme_widget_message_video')
+              if video_div:
+                  video_elem = video_div.select_one('video')
+                  if video_elem:
+                      src = video_elem.get('src', '')
+                      if src:
+                          videos.append(src)
+                  
+                  # لینک جایگزین
+                  video_link = video_div.get('data-video', '')
+                  if video_link:
+                      videos.append(video_link)
+              return videos
+          
+          def extract_gifs(msg):
+              """استخراج گیف‌ها (انیمیشن) از پیام"""
+              gifs = []
+              gif_div = msg.select_one('.tgme_widget_message_animation')
+              if gif_div:
+                  video_elem = gif_div.select_one('video')
+                  if video_elem:
+                      src = video_elem.get('src', '')
+                      if src:
+                          gifs.append(src)
+              return gifs
           
           for channel in CHANNELS:
               print(f"📡 در حال دریافت: {channel}")
@@ -84,7 +150,9 @@ jobs:
               
               try:
                   headers = {
-                      'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
+                      'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
+                      'Accept-Language': 'en-US,en;q=0.9',
+                      'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
                   }
                   response = requests.get(url, timeout=30, headers=headers)
                   response.raise_for_status()
@@ -93,7 +161,9 @@ jobs:
                   posts = []
                   messages = soup.select('.tgme_widget_message')
                   
-                  for msg in messages[:25]:
+                  print(f"   تعداد پیام‌های پیدا شده: {len(messages)}")
+                  
+                  for idx, msg in enumerate(messages[:25]):
                       # زمان
                       time_elem = msg.select_one('time')
                       time_str = ""
@@ -121,33 +191,13 @@ jobs:
                       reactions = extract_reactions(msg)
                       
                       # عکس‌ها
-                      images = []
-                      photo_div = msg.select_one('.tgme_widget_message_photo')
-                      if photo_div:
-                          img = photo_div.select_one('img')
-                          if img and img.get('src'):
-                              img_src = img.get('src')
-                              if 'user_photo' not in img_src and 'emoji' not in img_src:
-                                  # لینک عکس با کیفیت بالا
-                                  high_quality = img_src.replace('//cdn5.telegram-cdn.org', '//cdn5.telesco.pe')
-                                  images.append(high_quality)
+                      images = extract_images(msg)
                       
                       # ویدیوها
-                      videos = []
-                      video_div = msg.select_one('.tgme_widget_message_video')
-                      if video_div:
-                          video_elem = video_div.select_one('video')
-                          if video_elem and video_elem.get('src'):
-                              video_src = video_elem.get('src')
-                              videos.append(video_src)
+                      videos = extract_videos(msg)
                       
-                      # گیف‌ها (انیمیشن)
-                      gifs = []
-                      gif_div = msg.select_one('.tgme_widget_message_animation')
-                      if gif_div:
-                          gif_elem = gif_div.select_one('video')
-                          if gif_elem and gif_elem.get('src'):
-                              gifs.append(gif_elem.get('src'))
+                      # گیف‌ها
+                      gifs = extract_gifs(msg)
                       
                       # فقط پست‌هایی که محتوا دارن ذخیره کن
                       if text or images or videos or gifs:
@@ -161,6 +211,7 @@ jobs:
                               "videos": videos,
                               "gifs": gifs
                           })
+                          print(f"   پست {len(posts)}: متن={bool(text)}, عکس={len(images)}, ویدیو={len(videos)}, ری‌اکشن={len(reactions)}")
                       
                       if len(posts) >= 20:
                           break
@@ -178,9 +229,11 @@ jobs:
                   print(f"   - عکس‌ها: {sum(len(p['images']) for p in posts)}")
                   print(f"   - ویدیوها: {sum(len(p['videos']) for p in posts)}")
                   print(f"   - ری‌اکشن‌ها: {sum(len(p['reactions']) for p in posts)}")
+                  print("")
                   
               except Exception as e:
                   print(f"❌ خطا در {channel}: {str(e)}")
+                  print("")
           
           # ذخیره لیست کانال‌ها
           channels_list = {
@@ -198,7 +251,7 @@ jobs:
       - name: ذخیره در گیت‌هاب
         run: |
           git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git config.user.email "github-actions[bot]@users.noreply.github.com"
           git add data/
           git commit -m "به‌روزرسانی خودکار پست‌ها" || echo "تغییری وجود ندارد"
           git push
