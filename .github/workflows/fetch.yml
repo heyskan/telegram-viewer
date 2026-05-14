@@ -21,15 +21,24 @@ jobs:
       
       - name: نصب کتابخانه‌ها
         run: |
-          pip install requests jdatetime beautifulsoup4 lxml
+          pip install playwright requests jdatetime
+          python -m playwright install chromium
+          python -m playwright install-deps chromium
       
-      - name: دریافت پست‌های واقعی از تلگرام
+      - name: دریافت پست‌های واقعی از تلگرام با Playwright
         run: |
           python3 << 'EOF'
-          import json, requests, os, re
-          from bs4 import BeautifulSoup
+          import asyncio
+          import json
+          import os
+          import re
+          import time
+          from pathlib import Path
           from datetime import datetime
+          
           import jdatetime
+          import requests
+          from playwright.async_api import async_playwright
           
           # ===========================================
           CHANNELS = ["rodast_omiddana", "iliaen", "proxy_kafee", "alonews"]
@@ -37,160 +46,155 @@ jobs:
           
           os.makedirs("data/posts", exist_ok=True)
           
+          HEADERS = {
+              "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
+          }
+          
           def clean_text(text):
               if not text:
                   return ""
-              text = re.sub(r'<[^>]+>', ' ', text)
               text = re.sub(r'\s+', ' ', text)
               return text.strip()
           
-          def get_views(views_elem):
-              if not views_elem:
-                  return "0"
-              text = views_elem.text.strip()
-              match = re.search(r'([\d\.]+)(K|k)?', text)
-              if match:
-                  num = float(match.group(1))
-                  if match.group(2) in ('K', 'k'):
-                      return str(int(num * 1000))
-                  return str(int(num))
-              return text
-          
-          def extract_reactions(msg):
-              reactions = []
-              # روش جدید: جستجوی مستقیم در کل پیام
-              reaction_spans = msg.find_all('span', class_=re.compile('tgme_widget_message_reaction'))
-              for react in reaction_spans:
-                  emoji = react.find_previous(class_=re.compile('emoji'))
-                  if not emoji:
-                      continue
-                  emoji_text = emoji.get('data-emoji') or emoji.text.strip()
-                  count_span = react.find('span', class_=re.compile('count'))
-                  count = count_span.text.strip() if count_span else "1"
-                  if emoji_text:
-                      reactions.append({"emoji": emoji_text, "count": count})
-              return reactions
-          
-          def extract_images(msg):
-              images = []
-              # روش جدید: جستجوی مستقیم لینک عکس
-              # 1. از img داخل پیام
-              for img in msg.find_all('img'):
-                  src = img.get('src', '')
-                  if src and 'user_photo' not in src and 'emoji' not in src:
-                      # تبدیل به لینک با کیفیت بالا
-                      src = src.replace('//cdn5.telegram-cdn.org', '//cdn5.telesco.pe')
-                      images.append(src)
+          async def scrape_channel(channel_name):
+              print(f"📡 در حال دریافت: {channel_name}")
+              url = f"https://t.me/s/{channel_name}"
               
-              # 2. از background-image در style
-              for elem in msg.find_all(style=True):
-                  style = elem['style']
-                  match = re.search(r'url\(["\']?([^"\'\)]+)["\']?\)', style)
-                  if match:
-                      img_url = match.group(1)
-                      if 'user_photo' not in img_url and 'emoji' not in img_url:
-                          images.append(img_url)
-              
-              # 3. از data-zoom
-              for elem in msg.find_all('div', attrs={'data-zoom': True}):
-                  img_url = elem['data-zoom']
-                  if img_url and 'user_photo' not in img_url:
-                      images.append(img_url)
-              
-              # 4. از data-webp
-              for elem in msg.find_all(attrs={'data-webp': True}):
-                  img_url = elem['data-webp']
-                  if img_url and 'user_photo' not in img_url:
-                      images.append(img_url)
-              
-              return list(dict.fromkeys(images))  # حذف تکراری‌ها
+              async with async_playwright() as p:
+                  browser = await p.chromium.launch(headless=True)
+                  page = await browser.new_page()
+                  
+                  await page.goto(url, wait_until="networkidle", timeout=30000)
+                  
+                  try:
+                      await page.wait_for_selector("[data-post]", timeout=15000)
+                  except:
+                      print(f"   ❌ پیامی پیدا نشد")
+                      await browser.close()
+                      return []
+                  
+                  # اسکرول برای لود بیشتر
+                  for _ in range(5):
+                      await page.evaluate("window.scrollTo(0, document.body.scrollHeight)")
+                      await asyncio.sleep(2)
+                  
+                  # استخراج داده‌ها با جاوااسکریپت داخل مرورگر
+                  messages_data = await page.evaluate("""() => {
+                      const messages = [];
+                      const containers = document.querySelectorAll('[data-post]');
+                      
+                      containers.forEach(el => {
+                          const dataPost = el.getAttribute('data-post');
+                          if (!dataPost) return;
+                          const parts = dataPost.split('/');
+                          if (parts.length < 2) return;
+                          const channel = parts[0];
+                          const postId = parseInt(parts[1]);
+                          if (isNaN(postId)) return;
+                          
+                          // زمان
+                          const timeEl = el.querySelector('time');
+                          let timeStr = '';
+                          if (timeEl) {
+                              const dt = timeEl.getAttribute('datetime');
+                              if (dt) timeStr = dt;
+                              else timeStr = timeEl.innerText;
+                          }
+                          
+                          // متن
+                          const textEl = el.querySelector('.tgme_widget_message_text');
+                          const text = textEl ? textEl.innerText : '';
+                          
+                          // بازدید
+                          const viewsEl = el.querySelector('.tgme_widget_message_views');
+                          let views = '0';
+                          if (viewsEl) views = viewsEl.innerText;
+                          
+                          // عکس‌ها
+                          const images = [];
+                          const photoWrap = el.querySelector('.tgme_widget_message_photo_wrap');
+                          if (photoWrap) {
+                              const style = photoWrap.getAttribute('style') || '';
+                              const match = style.match(/url\\(['"]?(.*?)['"]?\\)/);
+                              if (match) images.push(match[1]);
+                          }
+                          
+                          // ویدیوها
+                          const videos = [];
+                          const videoTag = el.querySelector('video');
+                          if (videoTag && videoTag.src && !videoTag.src.startsWith('blob:')) {
+                              videos.push(videoTag.src);
+                          }
+                          
+                          // ری‌اکشن‌ها
+                          const reactions = [];
+                          const reactionDivs = el.querySelectorAll('.tgme_widget_message_reaction');
+                          reactionDivs.forEach(react => {
+                              const emojiEl = react.querySelector('.tgme_widget_message_reaction_emoji');
+                              const countEl = react.querySelector('.tgme_widget_message_reaction_count');
+                              if (emojiEl) {
+                                  reactions.push({
+                                      emoji: emojiEl.innerText,
+                                      count: countEl ? countEl.innerText : '1'
+                                  });
+                              }
+                          });
+                          
+                          messages.push({
+                              id: postId,
+                              time: timeStr,
+                              text: text,
+                              views: views,
+                              images: images,
+                              videos: videos,
+                              reactions: reactions
+                          });
+                      });
+                      
+                      return messages;
+                  }""")
+                  
+                  await browser.close()
+                  
+                  print(f"   یافت شد: {len(messages_data)} پیام")
+                  return messages_data
           
-          def extract_videos(msg):
-              videos = []
-              # ویدیوها از تگ video
-              for video in msg.find_all('video'):
-                  src = video.get('src', '')
-                  if src:
-                      videos.append(src)
-              # از data-video
-              for elem in msg.find_all(attrs={'data-video': True}):
-                  video_url = elem['data-video']
-                  if video_url:
-                      videos.append(video_url)
-              return videos
-          
-          def extract_gifs(msg):
-              gifs = []
-              # گیف‌ها از انیمیشن‌ها
-              for video in msg.find_all('video', class_=re.compile('animation')):
-                  src = video.get('src', '')
-                  if src:
-                      gifs.append(src)
-              return gifs
-          
-          for channel in CHANNELS:
-              print(f"📡 در حال دریافت: {channel}")
-              url = f"https://t.me/s/{channel}"
-              
+          def convert_time(dt_str):
+              if not dt_str:
+                  return ""
               try:
-                  headers = {
-                      'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
-                  }
-                  response = requests.get(url, timeout=30, headers=headers)
-                  response.raise_for_status()
+                  # تبدیل ISO format به شمسی
+                  dt = datetime.fromisoformat(dt_str.replace('Z', '+00:00'))
+                  jd = jdatetime.datetime.fromgregorian(datetime=dt)
+                  return f"{jd.year}/{jd.month}/{jd.day} - {jd.hour:02d}:{jd.minute:02d}"
+              except:
+                  return dt_str
+          
+          async def main():
+              all_posts = {}
+              
+              for channel in CHANNELS:
+                  raw_messages = await scrape_channel(channel)
                   
-                  soup = BeautifulSoup(response.text, 'lxml')
                   posts = []
-                  messages = soup.select('.tgme_widget_message')
-                  
-                  print(f"   یافت شد: {len(messages)} پیام")
-                  
-                  for msg in messages[:25]:
-                      # زمان
-                      time_elem = msg.select_one('time')
-                      time_str = ""
-                      if time_elem:
-                          dt_attr = time_elem.get('datetime', '')
-                          if dt_attr:
-                              try:
-                                  dt = datetime.fromisoformat(dt_attr.replace('Z', '+00:00'))
-                                  jd = jdatetime.datetime.fromgregorian(datetime=dt)
-                                  time_str = f"{jd.year}/{jd.month}/{jd.day} - {jd.hour:02d}:{jd.minute:02d}"
-                              except:
-                                  time_str = time_elem.text
-                          else:
-                              time_str = time_elem.text
+                  for msg in raw_messages[:20]:
+                      posts.append({
+                          "id": msg["id"],
+                          "time": convert_time(msg["time"]),
+                          "text": clean_text(msg["text"]),
+                          "views": msg["views"],
+                          "reactions": msg["reactions"],
+                          "images": msg["images"],
+                          "videos": msg["videos"],
+                          "gifs": []
+                      })
                       
-                      # متن
-                      text_elem = msg.select_one('.tgme_widget_message_text')
-                      text = clean_text(text_elem.text) if text_elem else ""
-                      
-                      # بازدید
-                      views_elem = msg.select_one('.tgme_widget_message_views')
-                      views = get_views(views_elem)
-                      
-                      # عکس، ویدیو، ری‌اکشن
-                      images = extract_images(msg)
-                      videos = extract_videos(msg)
-                      gifs = extract_gifs(msg)
-                      reactions = extract_reactions(msg)
-                      
-                      if text or images or videos or gifs:
-                          posts.append({
-                              "id": len(posts) + 1,
-                              "time": time_str,
-                              "text": text,
-                              "views": views,
-                              "reactions": reactions,
-                              "images": images,
-                              "videos": videos,
-                              "gifs": gifs
-                          })
-                          if images:
-                              print(f"      عکس پیدا شد: {len(images)}")
-                      
-                      if len(posts) >= 20:
-                          break
+                      if posts and posts[-1]["images"]:
+                          print(f"      عکس پیدا شد: {len(posts[-1]['images'])}")
+                      if posts and posts[-1]["videos"]:
+                          print(f"      ویدیو پیدا شد: {len(posts[-1]['videos'])}")
+                      if posts and posts[-1]["reactions"]:
+                          print(f"      ری‌اکشن پیدا شد: {len(posts[-1]['reactions'])}")
                   
                   output = {
                       "channel": channel,
@@ -206,16 +210,15 @@ jobs:
                   print(f"   ویدیو: {sum(len(p['videos']) for p in posts)}")
                   print(f"   ری‌اکشن: {sum(len(p['reactions']) for p in posts)}")
                   print("")
-                  
-              except Exception as e:
-                  print(f"❌ خطا در {channel}: {str(e)}")
-                  print("")
+              
+              # ذخیره لیست کانال‌ها
+              channels_list = {"channels": [{"id": ch, "name": ch} for ch in CHANNELS]}
+              with open("data/channels.json", "w", encoding="utf-8") as f:
+                  json.dump(channels_list, f, ensure_ascii=False, indent=2)
+              
+              print("🎉 همه چیز با موفقیت انجام شد!")
           
-          channels_list = {"channels": [{"id": ch, "name": ch} for ch in CHANNELS]}
-          with open("data/channels.json", "w", encoding="utf-8") as f:
-              json.dump(channels_list, f, ensure_ascii=False, indent=2)
-          
-          print("🎉 همه چیز با موفقیت انجام شد!")
+          asyncio.run(main())
           EOF
       
       - name: ذخیره در گیت‌هاب
