@@ -33,6 +33,7 @@ jobs:
           import os
           import re
           import hashlib
+          import traceback
           from pathlib import Path
           from datetime import datetime
           
@@ -54,37 +55,24 @@ jobs:
           }
           
           def is_webm_or_animation(url):
-              """تشخیص فایل‌های webm و انیمیشن (گیف) - نباید ذخیره بشن"""
               if not url:
                   return True
               url_lower = url.lower()
-              # حذف webm و انیمیشن‌ها
-              if url_lower.endswith('.webm'):
-                  return True
-              if 'animation' in url_lower:
+              if url_lower.endswith('.webm') or 'animation' in url_lower:
                   return True
               return False
           
           def download_media(url, channel_name, post_id, media_type='photo'):
-              """دانلود عکس یا ویدیو (فقط mp4 و عکس‌ها)"""
-              if not url:
+              if not url or is_webm_or_animation(url):
                   return None
               
-              # رد کردن webm و انیمیشن‌ها
-              if is_webm_or_animation(url):
-                  return None
-              
-              # تولید نام فایل یکتا
               url_hash = hashlib.md5(url.encode()).hexdigest()[:8]
               
               try:
                   resp = requests.get(url, headers=HEADERS, timeout=30)
                   resp.raise_for_status()
-                  
-                  # تشخیص نوع محتوا از هدرها
                   content_type = resp.headers.get('Content-Type', '').lower()
                   
-                  # فقط عکس و ویدیوهای واقعی (نه webm)
                   if 'image/' in content_type:
                       ext = '.jpg'
                       if 'png' in content_type:
@@ -92,16 +80,12 @@ jobs:
                       elif 'webp' in content_type:
                           ext = '.webp'
                       filename = f"{channel_name}_{post_id}_{url_hash}{ext}"
-                      
                   elif 'video/mp4' in content_type:
                       filename = f"{channel_name}_{post_id}_{url_hash}.mp4"
                   else:
-                      # سایر فایل‌ها (webm, etc) رو ذخیره نکن
                       return None
                   
                   local_path = MEDIA_DIR / filename
-                  
-                  # اگه فایل قبلاً دانلود شده، فقط مسیر رو برگردون
                   if local_path.exists():
                       return f"data/media/{filename}"
                   
@@ -113,173 +97,161 @@ jobs:
                   print(f"      ⚠️ خطا در دانلود: {e}")
                   return None
           
-          def clean_text(text):
-              """حفظ فاصله خطوط و ساختار متن"""
-              if not text:
-                  return ""
-              # فقط حذف whitespace‌های اضافی در ابتدا و انتها، حفظ خطوط جدید
-              return text.strip()
-          
           async def scrape_channel(channel_name):
               print(f"📡 در حال دریافت: {channel_name}")
               url = f"https://t.me/s/{channel_name}"
               
-              async with async_playwright() as p:
-                  browser = await p.chromium.launch(headless=True)
-                  page = await browser.new_page()
-                  
-                  await page.goto(url, wait_until="networkidle", timeout=30000)
-                  
-                  try:
-                      await page.wait_for_selector("[data-post]", timeout=15000)
-                  except:
-                      print(f"   ❌ پیامی پیدا نشد")
+              try:
+                  async with async_playwright() as p:
+                      browser = await p.chromium.launch(headless=True)
+                      page = await browser.new_page()
+                      
+                      print(f"   🌐 بارگذاری صفحه...")
+                      await page.goto(url, wait_until="domcontentloaded", timeout=45000)
+                      
+                      # منتظر لود شدن پیام‌ها
+                      await page.wait_for_timeout(5000)
+                      
+                      # اسکرول برای لود بیشتر
+                      for i in range(8):
+                          await page.evaluate("window.scrollTo(0, document.body.scrollHeight)")
+                          await page.wait_for_timeout(2000)
+                          print(f"   اسکرول {i+1}/8")
+                      
+                      # دریافت HTML برای دیباگ
+                      html = await page.content()
+                      if 'tgme_widget_message' not in html:
+                          print(f"   ⚠️ ساختار صفحه تغییر کرده! پیامی پیدا نشد.")
+                          await browser.close()
+                          return []
+                      
+                      # استخراج داده‌ها
+                      messages_data = await page.evaluate("""() => {
+                          const messages = [];
+                          const containers = document.querySelectorAll('[data-post]');
+                          
+                          for (const el of containers) {
+                              const dataPost = el.getAttribute('data-post');
+                              if (!dataPost) continue;
+                              const parts = dataPost.split('/');
+                              if (parts.length < 2) continue;
+                              const channel = parts[0];
+                              const postId = parseInt(parts[1]);
+                              if (isNaN(postId)) continue;
+                              
+                              // زمان
+                              const timeEl = el.querySelector('time');
+                              let timeStr = '';
+                              if (timeEl) {
+                                  timeStr = timeEl.getAttribute('datetime') || timeEl.innerText;
+                              }
+                              
+                              // متن
+                              const textEl = el.querySelector('.tgme_widget_message_text');
+                              let text = '';
+                              if (textEl) {
+                                  text = textEl.innerHTML;
+                                  text = text.replace(/<br\s*\/?>/gi, '\\n');
+                                  text = text.replace(/<[^>]+>/g, '');
+                                  text = text.replace(/&nbsp;/g, ' ');
+                                  text = text.replace(/&amp;/g, '&');
+                                  text = text.trim();
+                              }
+                              
+                              // بازدید
+                              const viewsEl = el.querySelector('.tgme_widget_message_views');
+                              let views = viewsEl ? viewsEl.innerText : '0';
+                              
+                              // عکس‌ها
+                              const images = [];
+                              const imgTag = el.querySelector('.tgme_widget_message_photo img');
+                              if (imgTag && imgTag.src && !imgTag.src.includes('user_photo')) {
+                                  images.push(imgTag.src);
+                              }
+                              
+                              // ویدیوها
+                              const videos = [];
+                              const videoTag = el.querySelector('video');
+                              if (videoTag && videoTag.src && !videoTag.src.includes('.webm')) {
+                                  videos.push(videoTag.src);
+                              }
+                              
+                              // ری‌اکشن‌ها
+                              const reactions = [];
+                              const reactionDivs = el.querySelectorAll('.tgme_widget_message_reaction');
+                              for (const react of reactionDivs) {
+                                  const emojiEl = react.querySelector('.tgme_widget_message_reaction_emoji');
+                                  const countEl = react.querySelector('.tgme_widget_message_reaction_count');
+                                  if (emojiEl) {
+                                      reactions.push({
+                                          emoji: emojiEl.innerText,
+                                          count: countEl ? countEl.innerText : '1'
+                                      });
+                                  }
+                              }
+                              
+                              messages.push({
+                                  id: postId,
+                                  time: timeStr,
+                                  text: text,
+                                  views: views,
+                                  images: images,
+                                  videos: videos,
+                                  reactions: reactions
+                              });
+                          }
+                          
+                          // مرتب‌سازی بر اساس ID (جدیدترین اول)
+                          messages.sort((a, b) => b.id - a.id);
+                          return messages;
+                      }""")
+                      
                       await browser.close()
-                      return []
-                  
-                  # اسکرول برای لود بیشتر
-                  for _ in range(10):
-                      await page.evaluate("window.scrollTo(0, document.body.scrollHeight)")
-                      await asyncio.sleep(2)
-                  
-                  # استخراج داده‌ها با جاوااسکریپت
-                  messages_data = await page.evaluate("""() => {
-                      const messages = [];
-                      const containers = document.querySelectorAll('[data-post]');
+                      print(f"   ✅ {len(messages_data)} پیام استخراج شد")
+                      return messages_data
                       
-                      containers.forEach(el => {
-                          const dataPost = el.getAttribute('data-post');
-                          if (!dataPost) return;
-                          const parts = dataPost.split('/');
-                          if (parts.length < 2) return;
-                          const channel = parts[0];
-                          const postId = parseInt(parts[1]);
-                          if (isNaN(postId)) return;
-                          
-                          // زمان (به صورت میلادی)
-                          const timeEl = el.querySelector('time');
-                          let timeStr = '';
-                          if (timeEl) {
-                              const dt = timeEl.getAttribute('datetime');
-                              if (dt) timeStr = dt;
-                              else timeStr = timeEl.innerText;
-                          }
-                          
-                          // متن (حفظ ساختار اصلی)
-                          const textEl = el.querySelector('.tgme_widget_message_text');
-                          let text = '';
-                          if (textEl) {
-                              // استخراج HTML و تبدیل br به newline
-                              text = textEl.innerHTML;
-                              // تبدیل <br> به \n
-                              text = text.replace(/<br\s*\/?>/gi, '\n');
-                              // حذف تگ‌های HTML
-                              text = text.replace(/<[^>]+>/g, '');
-                              // تبدیل HTML entities
-                              text = text.replace(/&nbsp;/g, ' ');
-                              text = text.replace(/&amp;/g, '&');
-                              text = text.replace(/&lt;/g, '<');
-                              text = text.replace(/&gt;/g, '>');
-                              text = text.trim();
-                          }
-                          
-                          // بازدید
-                          const viewsEl = el.querySelector('.tgme_widget_message_views');
-                          let views = '0';
-                          if (viewsEl) views = viewsEl.innerText;
-                          
-                          // عکس‌ها
-                          const images = [];
-                          const imgTag = el.querySelector('.tgme_widget_message_photo img');
-                          if (imgTag && imgTag.src) {
-                              images.push(imgTag.src);
-                          }
-                          
-                          // ویدیوها (فقط mp4، نه webm)
-                          const videos = [];
-                          const videoTag = el.querySelector('video');
-                          if (videoTag && videoTag.src) {
-                              const src = videoTag.src;
-                              if (src && !src.includes('.webm')) {
-                                  videos.push(src);
-                              }
-                          }
-                          
-                          // ری‌اکشن‌ها
-                          const reactions = [];
-                          const reactionDivs = el.querySelectorAll('.tgme_widget_message_reaction');
-                          reactionDivs.forEach(react => {
-                              const emojiEl = react.querySelector('.tgme_widget_message_reaction_emoji');
-                              const countEl = react.querySelector('.tgme_widget_message_reaction_count');
-                              if (emojiEl) {
-                                  reactions.push({
-                                      emoji: emojiEl.innerText,
-                                      count: countEl ? countEl.innerText : '1'
-                                  });
-                              }
-                          });
-                          
-                          messages.push({
-                              id: postId,
-                              time: timeStr,
-                              text: text,
-                              views: views,
-                              images: images,
-                              videos: videos,
-                              reactions: reactions
-                          });
-                      });
-                      
-                      // مرتب‌سازی بر اساس ID (جدیدترین اول)
-                      messages.sort((a, b) => b.id - a.id);
-                      
-                      return messages;
-                  }""")
-                  
-                  await browser.close()
-                  
-                  print(f"   یافت شد: {len(messages_data)} پیام")
-                  return messages_data
+              except Exception as e:
+                  print(f"   ❌ خطا در اسکرپ {channel_name}: {str(e)}")
+                  traceback.print_exc()
+                  return []
           
           async def main():
               for channel in CHANNELS:
+                  print(f"\n{'='*50}")
+                  print(f"پردازش کانال: {channel}")
+                  print(f"{'='*50}")
+                  
                   raw_messages = await scrape_channel(channel)
                   
+                  if not raw_messages:
+                      print(f"   ⚠️ هیچ پیامی برای {channel} یافت نشد")
+                      continue
+                  
                   posts = []
-                  for msg in raw_messages[:30]:  # 30 پست آخر
-                      # دانلود عکس‌ها
+                  for msg in raw_messages[:30]:
                       downloaded_images = []
                       for img_url in msg.get('images', []):
-                          if img_url and 'user_photo' not in img_url:
+                          if img_url:
                               local_path = download_media(img_url, channel, msg['id'], 'photo')
                               if local_path:
                                   downloaded_images.append(local_path)
                       
-                      # دانلود ویدیوها (فقط mp4)
                       downloaded_videos = []
                       for vid_url in msg.get('videos', []):
-                          if vid_url and not vid_url.endswith('.webm'):
+                          if vid_url:
                               local_path = download_media(vid_url, channel, msg['id'], 'video')
                               if local_path:
                                   downloaded_videos.append(local_path)
                       
                       posts.append({
                           "id": msg["id"],
-                          "time": msg["time"],  # زمان به فرمت میلادی (ISO)
+                          "time": msg["time"],
                           "text": msg["text"],
                           "views": msg["views"],
                           "reactions": msg.get("reactions", []),
                           "images": downloaded_images,
                           "videos": downloaded_videos
                       })
-                      
-                      if downloaded_images:
-                          print(f"      ✅ {len(downloaded_images)} عکس ذخیره شد")
-                      if downloaded_videos:
-                          print(f"      ✅ {len(downloaded_videos)} ویدیو ذخیره شد")
-                  
-                  # مرتب‌سازی پست‌ها بر اساس ID (جدیدترین اول)
-                  posts.sort(key=lambda x: x['id'], reverse=True)
                   
                   output = {
                       "channel": channel,
@@ -294,14 +266,13 @@ jobs:
                   print(f"   عکس: {sum(len(p['images']) for p in posts)}")
                   print(f"   ویدیو: {sum(len(p['videos']) for p in posts)}")
                   print(f"   ری‌اکشن: {sum(len(p['reactions']) for p in posts)}")
-                  print("")
               
               # ذخیره لیست کانال‌ها
               channels_list = {"channels": [{"id": ch, "name": ch} for ch in CHANNELS]}
               with open("data/channels.json", "w", encoding="utf-8") as f:
                   json.dump(channels_list, f, ensure_ascii=False, indent=2)
               
-              print("🎉 همه چیز با موفقیت انجام شد!")
+              print("\n🎉 همه چیز با موفقیت انجام شد!")
           
           asyncio.run(main())
           EOF
@@ -309,7 +280,7 @@ jobs:
       - name: ذخیره در گیت‌هاب
         run: |
           git config user.name "github-actions[bot]"
-          git config.user.email "github-actions[bot]@users.noreply.github.com"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
           git add data/
           git commit -m "به‌روزرسانی خودکار پست‌ها" || echo "تغییری وجود ندارد"
           git push
