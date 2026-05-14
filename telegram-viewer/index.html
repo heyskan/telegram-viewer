@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>نمایشگر کانال تلگرام</title>
+    <style>
+        body {
+            font-family: Tahoma, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f0f2f5;
+        }
+        .header {
+            background: linear-gradient(135deg, #0088cc, #006699);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .channel-select {
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+            border-radius: 10px;
+            border: 1px solid #ccc;
+            margin-bottom: 20px;
+        }
+        .post {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .post-time {
+            color: #666;
+            font-size: 12px;
+            margin-bottom: 10px;
+        }
+        .post-text {
+            font-size: 15px;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+        .post-image {
+            max-width: 100%;
+            border-radius: 10px;
+            margin-top: 10px;
+        }
+        .loading {
+            text-align: center;
+            padding: 50px;
+            color: #666;
+        }
+        .error {
+            background: #fee;
+            color: #c00;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>📡 نمایشگر کانال‌های تلگرام</h1>
+        <p>مشاهده آخرین پست‌های کانال‌های مورد علاقه</p>
+    </div>
+
+    <select id="channelSelect" class="channel-select">
+        <option value="">لطفاً یک کانال انتخاب کنید...</option>
+    </select>
+
+    <div id="postsContainer">
+        <div class="loading">⏳ در حال بارگذاری...</div>
+    </div>
+
+    <script>
+        // لیست کانال‌های ما (بعداً آپدیت میشه)
+        let channels = [];
+        
+        // وقتی صفحه لود شد
+        document.addEventListener('DOMContentLoaded', function() {
+            loadChannelsList();
+        });
+        
+        // بارگذاری لیست کانال‌ها
+        async function loadChannelsList() {
+            try {
+                // این آدرس رو بعداً با آدرس واقعی گیت‌هاب عوض میکنیم
+                const response = await fetch('data/channels.json');
+                const data = await response.json();
+                channels = data.channels;
+                
+                const select = document.getElementById('channelSelect');
+                select.innerHTML = '<option value="">📢 یک کانال انتخاب کنید...</option>';
+                
+                channels.forEach(channel => {
+                    const option = document.createElement('option');
+                    option.value = channel.id;
+                    option.textContent = `${channel.name} (@${channel.id})`;
+                    select.appendChild(option);
+                });
+                
+                // وقتی کاربر کانال رو انتخاب کرد
+                select.onchange = function() {
+                    if (this.value) {
+                        loadPosts(this.value);
+                    }
+                };
+                
+                // مخفی کردن لودینگ اولیه
+                if (channels.length > 0) {
+                    document.getElementById('postsContainer').innerHTML = '<div class="loading">📱 کانال مورد نظر را انتخاب کنید</div>';
+                }
+            } catch(error) {
+                console.error('خطا:', error);
+                document.getElementById('postsContainer').innerHTML = '<div class="error">❌ خطا در بارگذاری لیست کانال‌ها</div>';
+            }
+        }
+        
+        // بارگذاری پست‌های یک کانال
+        async function loadPosts(channelId) {
+            const container = document.getElementById('postsContainer');
+            container.innerHTML = '<div class="loading">⏳ در حال دریافت پست‌ها...</div>';
+            
+            try {
+                // این آدرس رو بعداً عوض میکنیم
+                const response = await fetch(`data/posts/${channelId}.json`);
+                const data = await response.json();
+                
+                if (!data.posts || data.posts.length === 0) {
+                    container.innerHTML = '<div class="error">📭 هنوز پستی برای این کانال وجود ندارد</div>';
+                    return;
+                }
+                
+                // نمایش پست‌ها
+                let html = '';
+                for (const post of data.posts) {
+                    html += `
+                        <div class="post">
+                            <div class="post-time">🕐 ${post.time}</div>
+                            <div class="post-text">${post.text || '📝 بدون متن'}</div>
+                            ${post.images ? post.images.map(img => `<img src="${img}" class="post-image" loading="lazy">`).join('') : ''}
+                            <div style="color:#0088cc; font-size:12px; margin-top:10px;">👁️ ${post.views || 0} بازدید</div>
+                        </div>
+                    `;
+                }
+                container.innerHTML = html;
+                
+            } catch(error) {
+                console.error('خطا:', error);
+                container.innerHTML = '<div class="error">❌ خطا در دریافت پست‌ها</div>';
+            }
+        }
+    </script>
+</body>
+</html>
