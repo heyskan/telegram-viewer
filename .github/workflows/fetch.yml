@@ -25,7 +25,7 @@ jobs:
           python -m playwright install chromium
           python -m playwright install-deps chromium
       
-      - name: دریافت پست‌های واقعی از تلگرام با Playwright
+      - name: دریافت پست‌های واقعی از تلگرام
         run: |
           python3 << 'EOF'
           import asyncio
@@ -33,8 +33,10 @@ jobs:
           import os
           import re
           import time
+          import hashlib
           from pathlib import Path
           from datetime import datetime
+          from urllib.parse import urlparse
           
           import jdatetime
           import requests
@@ -44,11 +46,57 @@ jobs:
           CHANNELS = ["rodast_omiddana", "iliaen", "proxy_kafee", "alonews"]
           # ===========================================
           
-          os.makedirs("data/posts", exist_ok=True)
+          # ساخت پوشه‌ها
+          POSTS_DIR = Path("data/posts")
+          MEDIA_DIR = Path("data/media")
+          POSTS_DIR.mkdir(parents=True, exist_ok=True)
+          MEDIA_DIR.mkdir(parents=True, exist_ok=True)
           
           HEADERS = {
               "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
           }
+          
+          def download_media(url, channel_name, post_id, media_type='photo'):
+              """دانلود عکس یا ویدیو و ذخیره در پوشه media"""
+              if not url:
+                  return None
+              
+              # تولید نام فایل یکتا
+              ext_map = {'photo': '.jpg', 'video': '.mp4'}
+              ext = ext_map.get(media_type, '.jpg')
+              
+              # استفاده از هش برای نام فایل (مثل اسکریپت اصلی)
+              url_hash = hashlib.md5(url.encode()).hexdigest()[:8]
+              filename = f"{channel_name}_{post_id}_{url_hash}{ext}"
+              local_path = MEDIA_DIR / filename
+              
+              # اگه فایل قبلاً دانلود شده، فقط مسیر رو برگردون
+              if local_path.exists():
+                  return f"data/media/{filename}"
+              
+              try:
+                  resp = requests.get(url, headers=HEADERS, timeout=30)
+                  resp.raise_for_status()
+                  
+                  # اصلاح پسوند بر اساس Content-Type
+                  content_type = resp.headers.get('Content-Type', '').lower()
+                  if 'image/jpeg' in content_type and not filename.endswith('.jpg'):
+                      filename = filename.replace('.jpg', '.jpg')
+                  elif 'image/png' in content_type:
+                      filename = filename.replace('.jpg', '.png')
+                  elif 'video/mp4' in content_type:
+                      filename = filename.replace('.mp4', '.mp4')
+                  elif 'video/webm' in content_type:
+                      filename = filename.replace('.mp4', '.webm')
+                  
+                  local_path = MEDIA_DIR / filename
+                  local_path.write_bytes(resp.content)
+                  print(f"      📥 دانلود شد: {filename}")
+                  return f"data/media/{filename}"
+                  
+              except Exception as e:
+                  print(f"      ⚠️ خطا در دانلود: {e}")
+                  return None
           
           def clean_text(text):
               if not text:
@@ -73,8 +121,8 @@ jobs:
                       await browser.close()
                       return []
                   
-                  # اسکرول برای لود بیشتر
-                  for _ in range(5):
+                  # اسکرول برای لود بیشتر (مثل اسکریپت اصلی)
+                  for _ in range(8):
                       await page.evaluate("window.scrollTo(0, document.body.scrollHeight)")
                       await asyncio.sleep(2)
                   
@@ -110,7 +158,7 @@ jobs:
                           let views = '0';
                           if (viewsEl) views = viewsEl.innerText;
                           
-                          // عکس‌ها
+                          // عکس‌ها (از background-image)
                           const images = [];
                           const photoWrap = el.querySelector('.tgme_widget_message_photo_wrap');
                           if (photoWrap) {
@@ -119,11 +167,24 @@ jobs:
                               if (match) images.push(match[1]);
                           }
                           
+                          // عکس از تگ img
+                          const imgTag = el.querySelector('.tgme_widget_message_photo img');
+                          if (imgTag && imgTag.src) {
+                              images.push(imgTag.src);
+                          }
+                          
                           // ویدیوها
                           const videos = [];
                           const videoTag = el.querySelector('video');
                           if (videoTag && videoTag.src && !videoTag.src.startsWith('blob:')) {
                               videos.push(videoTag.src);
+                          }
+                          
+                          // ویدیو از data-video
+                          const videoWrap = el.querySelector('.tgme_widget_message_video');
+                          if (videoWrap) {
+                              const dataVideo = videoWrap.getAttribute('data-video');
+                              if (dataVideo) videos.push(dataVideo);
                           }
                           
                           // ری‌اکشن‌ها
@@ -163,7 +224,6 @@ jobs:
               if not dt_str:
                   return ""
               try:
-                  # تبدیل ISO format به شمسی
                   dt = datetime.fromisoformat(dt_str.replace('Z', '+00:00'))
                   jd = jdatetime.datetime.fromgregorian(datetime=dt)
                   return f"{jd.year}/{jd.month}/{jd.day} - {jd.hour:02d}:{jd.minute:02d}"
@@ -171,30 +231,42 @@ jobs:
                   return dt_str
           
           async def main():
-              all_posts = {}
-              
               for channel in CHANNELS:
                   raw_messages = await scrape_channel(channel)
                   
                   posts = []
-                  for msg in raw_messages[:20]:
+                  for msg in raw_messages[:25]:
+                      # دانلود عکس‌ها
+                      downloaded_images = []
+                      for img_url in msg.get('images', []):
+                          if img_url and 'user_photo' not in img_url:
+                              local_path = download_media(img_url, channel, msg['id'], 'photo')
+                              if local_path:
+                                  downloaded_images.append(local_path)
+                      
+                      # دانلود ویدیوها
+                      downloaded_videos = []
+                      for vid_url in msg.get('videos', []):
+                          if vid_url:
+                              local_path = download_media(vid_url, channel, msg['id'], 'video')
+                              if local_path:
+                                  downloaded_videos.append(local_path)
+                      
                       posts.append({
                           "id": msg["id"],
                           "time": convert_time(msg["time"]),
                           "text": clean_text(msg["text"]),
                           "views": msg["views"],
-                          "reactions": msg["reactions"],
-                          "images": msg["images"],
-                          "videos": msg["videos"],
+                          "reactions": msg.get("reactions", []),
+                          "images": downloaded_images,
+                          "videos": downloaded_videos,
                           "gifs": []
                       })
                       
-                      if posts and posts[-1]["images"]:
-                          print(f"      عکس پیدا شد: {len(posts[-1]['images'])}")
-                      if posts and posts[-1]["videos"]:
-                          print(f"      ویدیو پیدا شد: {len(posts[-1]['videos'])}")
-                      if posts and posts[-1]["reactions"]:
-                          print(f"      ری‌اکشن پیدا شد: {len(posts[-1]['reactions'])}")
+                      if downloaded_images:
+                          print(f"      ✅ {len(downloaded_images)} عکس ذخیره شد")
+                      if downloaded_videos:
+                          print(f"      ✅ {len(downloaded_videos)} ویدیو ذخیره شد")
                   
                   output = {
                       "channel": channel,
@@ -202,7 +274,7 @@ jobs:
                       "posts": posts
                   }
                   
-                  with open(f"data/posts/{channel}.json", "w", encoding="utf-8") as f:
+                  with open(POSTS_DIR / f"{channel}.json", "w", encoding="utf-8") as f:
                       json.dump(output, f, ensure_ascii=False, indent=2)
                   
                   print(f"✅ {channel}: {len(posts)} پست ذخیره شد")
