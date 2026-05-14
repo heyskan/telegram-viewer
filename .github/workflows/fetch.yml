@@ -21,7 +21,7 @@ jobs:
       
       - name: نصب کتابخانه‌ها
         run: |
-          pip install requests jdatetime beautifulsoup4
+          pip install requests jdatetime beautifulsoup4 lxml
       
       - name: دریافت پست‌های واقعی از تلگرام
         run: |
@@ -32,7 +32,6 @@ jobs:
           import jdatetime
           
           # ===========================================
-          # کانال‌های خودت رو اینجا بنویس
           CHANNELS = ["rodast_omiddana", "iliaen", "proxy_kafee", "alonews"]
           # ===========================================
           
@@ -41,107 +40,105 @@ jobs:
           def clean_text(text):
               if not text:
                   return ""
-              # حذف HTML تگ‌ها
+              # حذف تگ‌های HTML و نرمال‌سازی فاصله‌ها
               text = re.sub(r'<[^>]+>', ' ', text)
               text = re.sub(r'\s+', ' ', text)
               return text.strip()
+          
+          def fix_date(date_str):
+              """تبدیل تاریخ‌های ناقص مثل '0:12' به تاریخ کامل"""
+              if not date_str:
+                  return ""
+              # اگر فقط ساعت دارد (مثل "0:12")
+              if re.match(r'^\d{1,2}:\d{2}$', date_str):
+                  now = jdatetime.datetime.now()
+                  return f"{now.year}/{now.month}/{now.day} - {date_str}"
+              return date_str
           
           def get_views(views_elem):
               if not views_elem:
                   return "0"
               text = views_elem.text.strip()
               # تبدیل 1.5K به 1500
-              if 'K' in text or 'k' in text:
-                  try:
-                      num = float(re.findall(r'[\d\.]+', text)[0])
+              match = re.search(r'([\d\.]+)(K|k)?', text)
+              if match:
+                  num = float(match.group(1))
+                  if match.group(2) in ('K', 'k'):
                       return str(int(num * 1000))
-                  except:
-                      return text
+                  return str(int(num))
               return text
           
           def extract_reactions(msg):
-              """استخراج ری‌اکشن‌ها از پیام - روش جدید"""
               reactions = []
-              # ری‌اکشن‌ها در div با کلاس tgme_widget_message_reactions
               reactions_div = msg.select_one('.tgme_widget_message_reactions')
               if reactions_div:
-                  reaction_items = reactions_div.select('.tgme_widget_message_reaction')
-                  for react in reaction_items:
+                  for react in reactions_div.select('.tgme_widget_message_reaction'):
                       emoji_elem = react.select_one('.tgme_widget_message_reaction_emoji')
                       count_elem = react.select_one('.tgme_widget_message_reaction_count')
-                      
                       if emoji_elem:
-                          # استخراج ایموجی از text یا data-attribute
-                          emoji = emoji_elem.get('data-emoji', '')
-                          if not emoji:
-                              emoji = emoji_elem.text.strip()
+                          # استخراج ایموجی از text یا data-emoji
+                          emoji = emoji_elem.get('data-emoji', '') or emoji_elem.text.strip()
                           count = count_elem.text.strip() if count_elem else "1"
                           if emoji:
                               reactions.append({"emoji": emoji, "count": count})
               return reactions
           
           def extract_images(msg):
-              """استخراج عکس‌ها از پیام"""
               images = []
-              
-              # روش 1: عکس‌های معمولی
+              # عکس اصلی
               photo_div = msg.select_one('.tgme_widget_message_photo')
               if photo_div:
-                  # لینک عکس با کیفیت بالا از style یا src
+                  # از src تصویر
                   img = photo_div.select_one('img')
-                  if img:
-                      src = img.get('src', '')
-                      # لینک عکس با کیفیت بالا
-                      if src and 'user_photo' not in src and 'emoji' not in src:
-                          # تبدیل به لینک با کیفیت بالا
-                          high_quality = src.replace('//cdn5.telegram-cdn.org', '//cdn5.telesco.pe')
-                          images.append(high_quality)
+                  if img and img.get('src'):
+                      src = img['src']
+                      if 'user_photo' not in src and 'emoji' not in src:
+                          images.append(src.replace('//cdn5.telegram-cdn.org', '//cdn5.telesco.pe'))
                   
-                  # روش جایگزین: از data-zoom
-                  zoom_link = photo_div.get('data-zoom', '')
-                  if zoom_link and 'user_photo' not in zoom_link:
-                      images.append(zoom_link)
+                  # از data-zoom (کیفیت بالا)
+                  zoom = photo_div.get('data-zoom', '')
+                  if zoom and 'user_photo' not in zoom:
+                      images.append(zoom)
               
-              # روش 2: عکس‌های گروهی (گالری)
-              photo_wraps = msg.select('.tgme_widget_message_photo_wrap')
-              for pw in photo_wraps:
+              # عکس‌های گروهی (گالری)
+              for pw in msg.select('.tgme_widget_message_photo_wrap'):
+                  # از background-image
                   style = pw.get('style', '')
-                  # استخراج لینک از background-image
-                  url_match = re.search(r'url\(["\']?([^"\'\)]+)["\']?\)', style)
-                  if url_match:
-                      img_url = url_match.group(1)
+                  match = re.search(r'url\(["\']?([^"\'\)]+)["\']?\)', style)
+                  if match:
+                      img_url = match.group(1)
                       if 'user_photo' not in img_url and 'emoji' not in img_url:
                           images.append(img_url)
+                  
+                  # از data-webp (کیفیت بالا)
+                  webp = pw.get('data-webp', '')
+                  if webp and 'user_photo' not in webp:
+                      images.append(webp)
               
               return list(dict.fromkeys(images))  # حذف تکراری‌ها
           
           def extract_videos(msg):
-              """استخراج ویدیوها از پیام"""
               videos = []
               video_div = msg.select_one('.tgme_widget_message_video')
               if video_div:
-                  video_elem = video_div.select_one('video')
-                  if video_elem:
-                      src = video_elem.get('src', '')
-                      if src:
-                          videos.append(src)
+                  # از تگ video
+                  video = video_div.select_one('video')
+                  if video and video.get('src'):
+                      videos.append(video['src'])
                   
-                  # لینک جایگزین
+                  # از data-video
                   video_link = video_div.get('data-video', '')
                   if video_link:
                       videos.append(video_link)
               return videos
           
           def extract_gifs(msg):
-              """استخراج گیف‌ها (انیمیشن) از پیام"""
               gifs = []
               gif_div = msg.select_one('.tgme_widget_message_animation')
               if gif_div:
-                  video_elem = gif_div.select_one('video')
-                  if video_elem:
-                      src = video_elem.get('src', '')
-                      if src:
-                          gifs.append(src)
+                  video = gif_div.select_one('video')
+                  if video and video.get('src'):
+                      gifs.append(video['src'])
               return gifs
           
           for channel in CHANNELS:
@@ -152,32 +149,34 @@ jobs:
                   headers = {
                       'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
                       'Accept-Language': 'en-US,en;q=0.9',
-                      'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
                   }
                   response = requests.get(url, timeout=30, headers=headers)
                   response.raise_for_status()
                   
-                  soup = BeautifulSoup(response.text, 'html.parser')
+                  soup = BeautifulSoup(response.text, 'lxml')
                   posts = []
                   messages = soup.select('.tgme_widget_message')
                   
-                  print(f"   تعداد پیام‌های پیدا شده: {len(messages)}")
+                  print(f"   یافت شد: {len(messages)} پیام")
                   
-                  for idx, msg in enumerate(messages[:25]):
+                  for msg in messages[:25]:
                       # زمان
                       time_elem = msg.select_one('time')
                       time_str = ""
                       if time_elem:
-                          datetime_attr = time_elem.get('datetime', '')
-                          if datetime_attr:
+                          dt_attr = time_elem.get('datetime', '')
+                          if dt_attr:
                               try:
-                                  dt = datetime.fromisoformat(datetime_attr.replace('Z', '+00:00'))
+                                  dt = datetime.fromisoformat(dt_attr.replace('Z', '+00:00'))
                                   jd = jdatetime.datetime.fromgregorian(datetime=dt)
                                   time_str = f"{jd.year}/{jd.month}/{jd.day} - {jd.hour:02d}:{jd.minute:02d}"
                               except:
                                   time_str = time_elem.text
                           else:
                               time_str = time_elem.text
+                      
+                      # اصلاح تاریخ‌های ناقص
+                      time_str = fix_date(time_str)
                       
                       # متن
                       text_elem = msg.select_one('.tgme_widget_message_text')
@@ -187,19 +186,14 @@ jobs:
                       views_elem = msg.select_one('.tgme_widget_message_views')
                       views = get_views(views_elem)
                       
-                      # ری‌اکشن‌ها
+                      # ری‌اکشن
                       reactions = extract_reactions(msg)
                       
-                      # عکس‌ها
+                      # عکس و ویدیو و گیف
                       images = extract_images(msg)
-                      
-                      # ویدیوها
                       videos = extract_videos(msg)
-                      
-                      # گیف‌ها
                       gifs = extract_gifs(msg)
                       
-                      # فقط پست‌هایی که محتوا دارن ذخیره کن
                       if text or images or videos or gifs:
                           posts.append({
                               "id": len(posts) + 1,
@@ -211,11 +205,11 @@ jobs:
                               "videos": videos,
                               "gifs": gifs
                           })
-                          print(f"   پست {len(posts)}: متن={bool(text)}, عکس={len(images)}, ویدیو={len(videos)}, ری‌اکشن={len(reactions)}")
                       
                       if len(posts) >= 20:
                           break
                   
+                  # ذخیره در فایل
                   output = {
                       "channel": channel,
                       "last_update": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
@@ -226,9 +220,9 @@ jobs:
                       json.dump(output, f, ensure_ascii=False, indent=2)
                   
                   print(f"✅ {channel}: {len(posts)} پست ذخیره شد")
-                  print(f"   - عکس‌ها: {sum(len(p['images']) for p in posts)}")
-                  print(f"   - ویدیوها: {sum(len(p['videos']) for p in posts)}")
-                  print(f"   - ری‌اکشن‌ها: {sum(len(p['reactions']) for p in posts)}")
+                  print(f"   عکس: {sum(len(p['images']) for p in posts)}")
+                  print(f"   ویدیو: {sum(len(p['videos']) for p in posts)}")
+                  print(f"   ری‌اکشن: {sum(len(p['reactions']) for p in posts)}")
                   print("")
                   
               except Exception as e:
@@ -236,22 +230,17 @@ jobs:
                   print("")
           
           # ذخیره لیست کانال‌ها
-          channels_list = {
-              "channels": [
-                  {"id": ch, "name": ch} for ch in CHANNELS
-              ]
-          }
-          
+          channels_list = {"channels": [{"id": ch, "name": ch} for ch in CHANNELS]}
           with open("data/channels.json", "w", encoding="utf-8") as f:
               json.dump(channels_list, f, ensure_ascii=False, indent=2)
           
-          print("\n🎉 همه چیز با موفقیت انجام شد!")
+          print("🎉 همه چیز با موفقیت انجام شد!")
           EOF
       
       - name: ذخیره در گیت‌هاب
         run: |
           git config user.name "github-actions[bot]"
-          git config.user.email "github-actions[bot]@users.noreply.github.com"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
           git add data/
           git commit -m "به‌روزرسانی خودکار پست‌ها" || echo "تغییری وجود ندارد"
           git push
