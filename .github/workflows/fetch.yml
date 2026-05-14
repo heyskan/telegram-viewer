@@ -26,22 +26,22 @@ jobs:
       - name: دریافت پست‌های واقعی از تلگرام
         run: |
           python3 << 'EOF'
-          import json, requests, os, re
+          import json, requests, os, re, base64
           from bs4 import BeautifulSoup
           from datetime import datetime
           import jdatetime
           
           # ===========================================
           # کانال‌های خودت رو اینجا بنویس
-          CHANNELS = ["rodast_omiddana", "iliaen", "iranintltv"]
+          CHANNELS = ["drtel", "bbcpersian", "iroproxy"]
           # ===========================================
           
           os.makedirs("data/posts", exist_ok=True)
+          os.makedirs("data/media", exist_ok=True)
           
           def clean_text(text):
               if not text:
                   return ""
-              # حذف ایموجی‌های اضافی و لینک‌های مزاحم
               text = re.sub(r'\s+', ' ', text)
               return text.strip()
           
@@ -49,11 +49,34 @@ jobs:
               if not views_elem:
                   return "0"
               text = views_elem.text.strip()
-              # تبدیل 1.5K به 1500
               if 'K' in text or 'k' in text:
                   num = float(re.findall(r'[\d\.]+', text)[0])
                   return str(int(num * 1000))
               return text
+          
+          def extract_reactions(msg):
+              """استخراج ری‌اکشن‌ها از پیام"""
+              reactions = []
+              reaction_elems = msg.select('.tgme_widget_message_reaction')
+              
+              for react in reaction_elems:
+                  emoji_elem = react.select_one('.tgme_widget_message_reaction_emoji')
+                  count_elem = react.select_one('.tgme_widget_message_reaction_count')
+                  
+                  if emoji_elem:
+                      emoji = emoji_elem.text.strip()
+                      count = count_elem.text.strip() if count_elem else "1"
+                      reactions.append({
+                          "emoji": emoji,
+                          "count": count
+                      })
+              return reactions
+          
+          def download_media(url, channel, msg_id, media_type):
+              """دانلود عکس یا ویدیو و ذخیره محلی (اختیاری)"""
+              # برای ذخیره لینک اصلی کافیه، نیازی به دانلود نیست
+              # ولی اگه خواستی خود فایل رو هم ذخیره کنی، این تابع رو فعال کن
+              return url
           
           for channel in CHANNELS:
               print(f"📡 در حال دریافت: {channel}")
@@ -68,11 +91,9 @@ jobs:
                   
                   soup = BeautifulSoup(response.text, 'html.parser')
                   posts = []
-                  
-                  # پیدا کردن همه پیام‌ها
                   messages = soup.select('.tgme_widget_message')
                   
-                  for msg in messages[:20]:  # 20 تا پست آخر
+                  for msg in messages[:25]:
                       # زمان
                       time_elem = msg.select_one('time')
                       time_str = ""
@@ -96,6 +117,9 @@ jobs:
                       views_elem = msg.select_one('.tgme_widget_message_views')
                       views = get_views(views_elem)
                       
+                      # ری‌اکشن‌ها
+                      reactions = extract_reactions(msg)
+                      
                       # عکس‌ها
                       images = []
                       photo_div = msg.select_one('.tgme_widget_message_photo')
@@ -103,25 +127,44 @@ jobs:
                           img = photo_div.select_one('img')
                           if img and img.get('src'):
                               img_src = img.get('src')
-                              # فقط عکس‌های واقعی، نه عکس پروفایل
                               if 'user_photo' not in img_src and 'emoji' not in img_src:
-                                  images.append(img_src)
+                                  # لینک عکس با کیفیت بالا
+                                  high_quality = img_src.replace('//cdn5.telegram-cdn.org', '//cdn5.telesco.pe')
+                                  images.append(high_quality)
                       
-                      # فقط پست‌هایی که متن یا عکس دارن ذخیره کن
-                      if text or images:
+                      # ویدیوها
+                      videos = []
+                      video_div = msg.select_one('.tgme_widget_message_video')
+                      if video_div:
+                          video_elem = video_div.select_one('video')
+                          if video_elem and video_elem.get('src'):
+                              video_src = video_elem.get('src')
+                              videos.append(video_src)
+                      
+                      # گیف‌ها (انیمیشن)
+                      gifs = []
+                      gif_div = msg.select_one('.tgme_widget_message_animation')
+                      if gif_div:
+                          gif_elem = gif_div.select_one('video')
+                          if gif_elem and gif_elem.get('src'):
+                              gifs.append(gif_elem.get('src'))
+                      
+                      # فقط پست‌هایی که محتوا دارن ذخیره کن
+                      if text or images or videos or gifs:
                           posts.append({
                               "id": len(posts) + 1,
                               "time": time_str,
                               "text": text,
                               "views": views,
-                              "images": images
+                              "reactions": reactions,
+                              "images": images,
+                              "videos": videos,
+                              "gifs": gifs
                           })
                       
-                      # اگه به 15 پست رسیدیم، بریم بیرون
-                      if len(posts) >= 15:
+                      if len(posts) >= 20:
                           break
                   
-                  # ذخیره در فایل
                   output = {
                       "channel": channel,
                       "last_update": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
@@ -132,6 +175,9 @@ jobs:
                       json.dump(output, f, ensure_ascii=False, indent=2)
                   
                   print(f"✅ {channel}: {len(posts)} پست ذخیره شد")
+                  print(f"   - عکس‌ها: {sum(len(p['images']) for p in posts)}")
+                  print(f"   - ویدیوها: {sum(len(p['videos']) for p in posts)}")
+                  print(f"   - ری‌اکشن‌ها: {sum(len(p['reactions']) for p in posts)}")
                   
               except Exception as e:
                   print(f"❌ خطا در {channel}: {str(e)}")
