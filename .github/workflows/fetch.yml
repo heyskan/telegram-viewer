@@ -21,229 +21,123 @@ jobs:
       
       - name: نصب کتابخانه‌ها
         run: |
-          pip install playwright requests
-          python -m playwright install chromium
-          python -m playwright install-deps chromium
+          pip install requests jdatetime beautifulsoup4
       
       - name: دریافت پست‌های واقعی از تلگرام
         run: |
           python3 << 'EOF'
-          import asyncio
-          import json
-          import os
-          import re
-          import hashlib
-          import traceback
-          from pathlib import Path
+          import json, requests, os, re
+          from bs4 import BeautifulSoup
           from datetime import datetime
-          
-          import requests
-          from playwright.async_api import async_playwright
+          import jdatetime
           
           # ===========================================
           CHANNELS = ["rodast_omiddana", "iliaen", "proxy_kafee", "alonews"]
           # ===========================================
           
-          POSTS_DIR = Path("data/posts")
-          MEDIA_DIR = Path("data/media")
-          POSTS_DIR.mkdir(parents=True, exist_ok=True)
-          MEDIA_DIR.mkdir(parents=True, exist_ok=True)
+          os.makedirs("data/posts", exist_ok=True)
           
-          HEADERS = {
-              "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
-          }
+          def clean_text(text):
+              if not text:
+                  return ""
+              # حذف تگ‌های HTML و نرمال‌سازی
+              text = re.sub(r'<[^>]+>', ' ', text)
+              # فشرده‌سازی فاصله‌ها (چند فاصله به یک فاصله)
+              text = re.sub(r'\s+', ' ', text)
+              return text.strip()
           
-          def is_webm_or_animation(url):
-              if not url:
-                  return True
-              url_lower = url.lower()
-              if url_lower.endswith('.webm') or 'animation' in url_lower:
-                  return True
-              return False
+          def get_views(views_elem):
+              if not views_elem:
+                  return "0"
+              text = views_elem.text.strip()
+              if 'K' in text or 'k' in text:
+                  try:
+                      num = float(re.findall(r'[\d\.]+', text)[0])
+                      return str(int(num * 1000))
+                  except:
+                      return text
+              return text
           
-          def download_media(url, channel_name, post_id, media_type='photo'):
-              if not url or is_webm_or_animation(url):
-                  return None
-              
-              url_hash = hashlib.md5(url.encode()).hexdigest()[:8]
-              
-              try:
-                  resp = requests.get(url, headers=HEADERS, timeout=30)
-                  resp.raise_for_status()
-                  content_type = resp.headers.get('Content-Type', '').lower()
-                  
-                  if 'image/' in content_type:
-                      ext = '.jpg'
-                      if 'png' in content_type:
-                          ext = '.png'
-                      elif 'webp' in content_type:
-                          ext = '.webp'
-                      filename = f"{channel_name}_{post_id}_{url_hash}{ext}"
-                  elif 'video/mp4' in content_type:
-                      filename = f"{channel_name}_{post_id}_{url_hash}.mp4"
-                  else:
-                      return None
-                  
-                  local_path = MEDIA_DIR / filename
-                  if local_path.exists():
-                      return f"data/media/{filename}"
-                  
-                  local_path.write_bytes(resp.content)
-                  print(f"      📥 دانلود شد: {filename}")
-                  return f"data/media/{filename}"
-                  
-              except Exception as e:
-                  print(f"      ⚠️ خطا در دانلود: {e}")
-                  return None
+          def extract_reactions(msg):
+              reactions = []
+              reactions_div = msg.select_one('.tgme_widget_message_reactions')
+              if reactions_div:
+                  for react in reactions_div.select('.tgme_widget_message_reaction'):
+                      emoji_elem = react.select_one('.tgme_widget_message_reaction_emoji')
+                      count_elem = react.select_one('.tgme_widget_message_reaction_count')
+                      if emoji_elem:
+                          emoji = emoji_elem.get('data-emoji', '') or emoji_elem.text.strip()
+                          count = count_elem.text.strip() if count_elem else "1"
+                          if emoji:
+                              reactions.append({"emoji": emoji, "count": count})
+              return reactions
           
-          async def scrape_channel(channel_name):
-              print(f"📡 در حال دریافت: {channel_name}")
-              url = f"https://t.me/s/{channel_name}"
+          def extract_images(msg):
+              images = []
+              photo_div = msg.select_one('.tgme_widget_message_photo')
+              if photo_div:
+                  img = photo_div.select_one('img')
+                  if img and img.get('src'):
+                      src = img['src']
+                      if 'user_photo' not in src and 'emoji' not in src:
+                          images.append(src)
+              return images
+          
+          for channel in CHANNELS:
+              print(f"📡 در حال دریافت: {channel}")
+              url = f"https://t.me/s/{channel}"
               
               try:
-                  async with async_playwright() as p:
-                      browser = await p.chromium.launch(headless=True)
-                      page = await browser.new_page()
-                      
-                      print(f"   🌐 بارگذاری صفحه...")
-                      await page.goto(url, wait_until="domcontentloaded", timeout=45000)
-                      await page.wait_for_timeout(5000)
-                      
-                      for i in range(8):
-                          await page.evaluate("window.scrollTo(0, document.body.scrollHeight)")
-                          await page.wait_for_timeout(2000)
-                          print(f"   اسکرول {i+1}/8")
-                      
-                      html = await page.content()
-                      if 'tgme_widget_message' not in html:
-                          print(f"   ⚠️ ساختار صفحه تغییر کرده! پیامی پیدا نشد.")
-                          await browser.close()
-                          return []
-                      
-                      messages_data = await page.evaluate("""() => {
-                          const messages = [];
-                          const containers = document.querySelectorAll('[data-post]');
-                          
-                          for (const el of containers) {
-                              const dataPost = el.getAttribute('data-post');
-                              if (!dataPost) continue;
-                              const parts = dataPost.split('/');
-                              if (parts.length < 2) continue;
-                              const channel = parts[0];
-                              const postId = parseInt(parts[1]);
-                              if (isNaN(postId)) continue;
-                              
-                              const timeEl = el.querySelector('time');
-                              let timeStr = '';
-                              if (timeEl) {
-                                  timeStr = timeEl.getAttribute('datetime') || timeEl.innerText;
-                              }
-                              
-                              const textEl = el.querySelector('.tgme_widget_message_text');
-                              let text = '';
-                              if (textEl) {
-                                  text = textEl.innerHTML;
-                                  // تبدیل <br> به \n (جاوااسکریپت)
-                                  text = text.replace(/<br\s*\/?>/gi, '\\n');
-                                  // حذف تگ‌های HTML
-                                  text = text.replace(/<[^>]+>/g, '');
-                                  // فشرده‌سازی خطوط خالی تکراری
-                                  text = text.replace(/\\n\\s*\\n/g, '\\n');
-                                  // تبدیل HTML entities
-                                  text = text.replace(/&nbsp;/g, ' ');
-                                  text = text.replace(/&amp;/g, '&');
-                                  text = text.trim();
-                              }
-                              
-                              const viewsEl = el.querySelector('.tgme_widget_message_views');
-                              let views = viewsEl ? viewsEl.innerText : '0';
-                              
-                              const images = [];
-                              const imgTag = el.querySelector('.tgme_widget_message_photo img');
-                              if (imgTag && imgTag.src && !imgTag.src.includes('user_photo')) {
-                                  images.push(imgTag.src);
-                              }
-                              
-                              const videos = [];
-                              const videoTag = el.querySelector('video');
-                              if (videoTag && videoTag.src && !videoTag.src.includes('.webm')) {
-                                  videos.push(videoTag.src);
-                              }
-                              
-                              const reactions = [];
-                              const reactionDivs = el.querySelectorAll('.tgme_widget_message_reaction');
-                              for (const react of reactionDivs) {
-                                  const emojiEl = react.querySelector('.tgme_widget_message_reaction_emoji');
-                                  const countEl = react.querySelector('.tgme_widget_message_reaction_count');
-                                  if (emojiEl) {
-                                      reactions.push({
-                                          emoji: emojiEl.innerText,
-                                          count: countEl ? countEl.innerText : '1'
-                                      });
-                                  }
-                              }
-                              
-                              messages.push({
-                                  id: postId,
-                                  time: timeStr,
-                                  text: text,
-                                  views: views,
-                                  images: images,
-                                  videos: videos,
-                                  reactions: reactions
-                              });
-                          }
-                          
-                          messages.sort((a, b) => b.id - a.id);
-                          return messages;
-                      }""")
-                      
-                      await browser.close()
-                      print(f"   ✅ {len(messages_data)} پیام استخراج شد")
-                      return messages_data
-                      
-              except Exception as e:
-                  print(f"   ❌ خطا در اسکرپ {channel_name}: {str(e)}")
-                  traceback.print_exc()
-                  return []
-          
-          async def main():
-              for channel in CHANNELS:
-                  print(f"\n{'='*50}")
-                  print(f"پردازش کانال: {channel}")
-                  print(f"{'='*50}")
+                  headers = {
+                      'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
+                  }
+                  response = requests.get(url, timeout=30, headers=headers)
+                  response.raise_for_status()
                   
-                  raw_messages = await scrape_channel(channel)
-                  
-                  if not raw_messages:
-                      print(f"   ⚠️ هیچ پیامی برای {channel} یافت نشد")
-                      continue
-                  
+                  soup = BeautifulSoup(response.text, 'html.parser')
                   posts = []
-                  for msg in raw_messages[:30]:
-                      downloaded_images = []
-                      for img_url in msg.get('images', []):
-                          if img_url:
-                              local_path = download_media(img_url, channel, msg['id'], 'photo')
-                              if local_path:
-                                  downloaded_images.append(local_path)
+                  messages = soup.select('.tgme_widget_message')
+                  
+                  for msg in messages[:20]:
+                      # زمان
+                      time_elem = msg.select_one('time')
+                      time_str = ""
+                      if time_elem:
+                          datetime_attr = time_elem.get('datetime', '')
+                          if datetime_attr:
+                              try:
+                                  dt = datetime.fromisoformat(datetime_attr.replace('Z', '+00:00'))
+                                  jd = jdatetime.datetime.fromgregorian(datetime=dt)
+                                  time_str = f"{jd.year}/{jd.month}/{jd.day} - {jd.hour:02d}:{jd.minute:02d}"
+                              except:
+                                  time_str = time_elem.text
+                          else:
+                              time_str = time_elem.text
                       
-                      downloaded_videos = []
-                      for vid_url in msg.get('videos', []):
-                          if vid_url:
-                              local_path = download_media(vid_url, channel, msg['id'], 'video')
-                              if local_path:
-                                  downloaded_videos.append(local_path)
+                      # متن
+                      text_elem = msg.select_one('.tgme_widget_message_text')
+                      text = clean_text(text_elem.text) if text_elem else ""
                       
-                      posts.append({
-                          "id": msg["id"],
-                          "time": msg["time"],
-                          "text": msg["text"],
-                          "views": msg["views"],
-                          "reactions": msg.get("reactions", []),
-                          "images": downloaded_images,
-                          "videos": downloaded_videos
-                      })
+                      # بازدید
+                      views_elem = msg.select_one('.tgme_widget_message_views')
+                      views = get_views(views_elem)
+                      
+                      # عکس
+                      images = extract_images(msg)
+                      
+                      # ری‌اکشن
+                      reactions = extract_reactions(msg)
+                      
+                      if text or images:
+                          posts.append({
+                              "id": len(posts) + 1,
+                              "time": time_str,
+                              "text": text,
+                              "views": views,
+                              "reactions": reactions,
+                              "images": images,
+                              "videos": []
+                          })
                   
                   output = {
                       "channel": channel,
@@ -251,21 +145,19 @@ jobs:
                       "posts": posts
                   }
                   
-                  with open(POSTS_DIR / f"{channel}.json", "w", encoding="utf-8") as f:
+                  with open(f"data/posts/{channel}.json", "w", encoding="utf-8") as f:
                       json.dump(output, f, ensure_ascii=False, indent=2)
                   
                   print(f"✅ {channel}: {len(posts)} پست ذخیره شد")
-                  print(f"   عکس: {sum(len(p['images']) for p in posts)}")
-                  print(f"   ویدیو: {sum(len(p['videos']) for p in posts)}")
-                  print(f"   ری‌اکشن: {sum(len(p['reactions']) for p in posts)}")
-              
-              channels_list = {"channels": [{"id": ch, "name": ch} for ch in CHANNELS]}
-              with open("data/channels.json", "w", encoding="utf-8") as f:
-                  json.dump(channels_list, f, ensure_ascii=False, indent=2)
-              
-              print("\n🎉 همه چیز با موفقیت انجام شد!")
+                  
+              except Exception as e:
+                  print(f"❌ خطا در {channel}: {str(e)}")
           
-          asyncio.run(main())
+          channels_list = {"channels": [{"id": ch, "name": ch} for ch in CHANNELS]}
+          with open("data/channels.json", "w", encoding="utf-8") as f:
+              json.dump(channels_list, f, ensure_ascii=False, indent=2)
+          
+          print("\n🎉 همه چیز با موفقیت انجام شد!")
           EOF
       
       - name: ذخیره در گیت‌هاب
