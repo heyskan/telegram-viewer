@@ -21,7 +21,7 @@ jobs:
       
       - name: نصب کتابخانه‌ها
         run: |
-          pip install playwright requests jdatetime
+          pip install playwright requests
           python -m playwright install chromium
           python -m playwright install-deps chromium
       
@@ -32,13 +32,10 @@ jobs:
           import json
           import os
           import re
-          import time
           import hashlib
           from pathlib import Path
           from datetime import datetime
-          from urllib.parse import urlparse
           
-          import jdatetime
           import requests
           from playwright.async_api import async_playwright
           
@@ -56,40 +53,58 @@ jobs:
               "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
           }
           
+          def is_webm_or_animation(url):
+              """تشخیص فایل‌های webm و انیمیشن (گیف) - نباید ذخیره بشن"""
+              if not url:
+                  return True
+              url_lower = url.lower()
+              # حذف webm و انیمیشن‌ها
+              if url_lower.endswith('.webm'):
+                  return True
+              if 'animation' in url_lower:
+                  return True
+              return False
+          
           def download_media(url, channel_name, post_id, media_type='photo'):
-              """دانلود عکس یا ویدیو و ذخیره در پوشه media"""
+              """دانلود عکس یا ویدیو (فقط mp4 و عکس‌ها)"""
               if not url:
                   return None
               
+              # رد کردن webm و انیمیشن‌ها
+              if is_webm_or_animation(url):
+                  return None
+              
               # تولید نام فایل یکتا
-              ext_map = {'photo': '.jpg', 'video': '.mp4'}
-              ext = ext_map.get(media_type, '.jpg')
-              
-              # استفاده از هش برای نام فایل (مثل اسکریپت اصلی)
               url_hash = hashlib.md5(url.encode()).hexdigest()[:8]
-              filename = f"{channel_name}_{post_id}_{url_hash}{ext}"
-              local_path = MEDIA_DIR / filename
-              
-              # اگه فایل قبلاً دانلود شده، فقط مسیر رو برگردون
-              if local_path.exists():
-                  return f"data/media/{filename}"
               
               try:
                   resp = requests.get(url, headers=HEADERS, timeout=30)
                   resp.raise_for_status()
                   
-                  # اصلاح پسوند بر اساس Content-Type
+                  # تشخیص نوع محتوا از هدرها
                   content_type = resp.headers.get('Content-Type', '').lower()
-                  if 'image/jpeg' in content_type and not filename.endswith('.jpg'):
-                      filename = filename.replace('.jpg', '.jpg')
-                  elif 'image/png' in content_type:
-                      filename = filename.replace('.jpg', '.png')
+                  
+                  # فقط عکس و ویدیوهای واقعی (نه webm)
+                  if 'image/' in content_type:
+                      ext = '.jpg'
+                      if 'png' in content_type:
+                          ext = '.png'
+                      elif 'webp' in content_type:
+                          ext = '.webp'
+                      filename = f"{channel_name}_{post_id}_{url_hash}{ext}"
+                      
                   elif 'video/mp4' in content_type:
-                      filename = filename.replace('.mp4', '.mp4')
-                  elif 'video/webm' in content_type:
-                      filename = filename.replace('.mp4', '.webm')
+                      filename = f"{channel_name}_{post_id}_{url_hash}.mp4"
+                  else:
+                      # سایر فایل‌ها (webm, etc) رو ذخیره نکن
+                      return None
                   
                   local_path = MEDIA_DIR / filename
+                  
+                  # اگه فایل قبلاً دانلود شده، فقط مسیر رو برگردون
+                  if local_path.exists():
+                      return f"data/media/{filename}"
+                  
                   local_path.write_bytes(resp.content)
                   print(f"      📥 دانلود شد: {filename}")
                   return f"data/media/{filename}"
@@ -99,9 +114,10 @@ jobs:
                   return None
           
           def clean_text(text):
+              """حفظ فاصله خطوط و ساختار متن"""
               if not text:
                   return ""
-              text = re.sub(r'\s+', ' ', text)
+              # فقط حذف whitespace‌های اضافی در ابتدا و انتها، حفظ خطوط جدید
               return text.strip()
           
           async def scrape_channel(channel_name):
@@ -121,12 +137,12 @@ jobs:
                       await browser.close()
                       return []
                   
-                  # اسکرول برای لود بیشتر (مثل اسکریپت اصلی)
-                  for _ in range(8):
+                  # اسکرول برای لود بیشتر
+                  for _ in range(10):
                       await page.evaluate("window.scrollTo(0, document.body.scrollHeight)")
                       await asyncio.sleep(2)
                   
-                  # استخراج داده‌ها با جاوااسکریپت داخل مرورگر
+                  # استخراج داده‌ها با جاوااسکریپت
                   messages_data = await page.evaluate("""() => {
                       const messages = [];
                       const containers = document.querySelectorAll('[data-post]');
@@ -140,7 +156,7 @@ jobs:
                           const postId = parseInt(parts[1]);
                           if (isNaN(postId)) return;
                           
-                          // زمان
+                          // زمان (به صورت میلادی)
                           const timeEl = el.querySelector('time');
                           let timeStr = '';
                           if (timeEl) {
@@ -149,42 +165,44 @@ jobs:
                               else timeStr = timeEl.innerText;
                           }
                           
-                          // متن
+                          // متن (حفظ ساختار اصلی)
                           const textEl = el.querySelector('.tgme_widget_message_text');
-                          const text = textEl ? textEl.innerText : '';
+                          let text = '';
+                          if (textEl) {
+                              // استخراج HTML و تبدیل br به newline
+                              text = textEl.innerHTML;
+                              // تبدیل <br> به \n
+                              text = text.replace(/<br\s*\/?>/gi, '\n');
+                              // حذف تگ‌های HTML
+                              text = text.replace(/<[^>]+>/g, '');
+                              // تبدیل HTML entities
+                              text = text.replace(/&nbsp;/g, ' ');
+                              text = text.replace(/&amp;/g, '&');
+                              text = text.replace(/&lt;/g, '<');
+                              text = text.replace(/&gt;/g, '>');
+                              text = text.trim();
+                          }
                           
                           // بازدید
                           const viewsEl = el.querySelector('.tgme_widget_message_views');
                           let views = '0';
                           if (viewsEl) views = viewsEl.innerText;
                           
-                          // عکس‌ها (از background-image)
+                          // عکس‌ها
                           const images = [];
-                          const photoWrap = el.querySelector('.tgme_widget_message_photo_wrap');
-                          if (photoWrap) {
-                              const style = photoWrap.getAttribute('style') || '';
-                              const match = style.match(/url\\(['"]?(.*?)['"]?\\)/);
-                              if (match) images.push(match[1]);
-                          }
-                          
-                          // عکس از تگ img
                           const imgTag = el.querySelector('.tgme_widget_message_photo img');
                           if (imgTag && imgTag.src) {
                               images.push(imgTag.src);
                           }
                           
-                          // ویدیوها
+                          // ویدیوها (فقط mp4، نه webm)
                           const videos = [];
                           const videoTag = el.querySelector('video');
-                          if (videoTag && videoTag.src && !videoTag.src.startsWith('blob:')) {
-                              videos.push(videoTag.src);
-                          }
-                          
-                          // ویدیو از data-video
-                          const videoWrap = el.querySelector('.tgme_widget_message_video');
-                          if (videoWrap) {
-                              const dataVideo = videoWrap.getAttribute('data-video');
-                              if (dataVideo) videos.push(dataVideo);
+                          if (videoTag && videoTag.src) {
+                              const src = videoTag.src;
+                              if (src && !src.includes('.webm')) {
+                                  videos.push(src);
+                              }
                           }
                           
                           // ری‌اکشن‌ها
@@ -212,6 +230,9 @@ jobs:
                           });
                       });
                       
+                      // مرتب‌سازی بر اساس ID (جدیدترین اول)
+                      messages.sort((a, b) => b.id - a.id);
+                      
                       return messages;
                   }""")
                   
@@ -220,22 +241,12 @@ jobs:
                   print(f"   یافت شد: {len(messages_data)} پیام")
                   return messages_data
           
-          def convert_time(dt_str):
-              if not dt_str:
-                  return ""
-              try:
-                  dt = datetime.fromisoformat(dt_str.replace('Z', '+00:00'))
-                  jd = jdatetime.datetime.fromgregorian(datetime=dt)
-                  return f"{jd.year}/{jd.month}/{jd.day} - {jd.hour:02d}:{jd.minute:02d}"
-              except:
-                  return dt_str
-          
           async def main():
               for channel in CHANNELS:
                   raw_messages = await scrape_channel(channel)
                   
                   posts = []
-                  for msg in raw_messages[:25]:
+                  for msg in raw_messages[:30]:  # 30 پست آخر
                       # دانلود عکس‌ها
                       downloaded_images = []
                       for img_url in msg.get('images', []):
@@ -244,29 +255,31 @@ jobs:
                               if local_path:
                                   downloaded_images.append(local_path)
                       
-                      # دانلود ویدیوها
+                      # دانلود ویدیوها (فقط mp4)
                       downloaded_videos = []
                       for vid_url in msg.get('videos', []):
-                          if vid_url:
+                          if vid_url and not vid_url.endswith('.webm'):
                               local_path = download_media(vid_url, channel, msg['id'], 'video')
                               if local_path:
                                   downloaded_videos.append(local_path)
                       
                       posts.append({
                           "id": msg["id"],
-                          "time": convert_time(msg["time"]),
-                          "text": clean_text(msg["text"]),
+                          "time": msg["time"],  # زمان به فرمت میلادی (ISO)
+                          "text": msg["text"],
                           "views": msg["views"],
                           "reactions": msg.get("reactions", []),
                           "images": downloaded_images,
-                          "videos": downloaded_videos,
-                          "gifs": []
+                          "videos": downloaded_videos
                       })
                       
                       if downloaded_images:
                           print(f"      ✅ {len(downloaded_images)} عکس ذخیره شد")
                       if downloaded_videos:
                           print(f"      ✅ {len(downloaded_videos)} ویدیو ذخیره شد")
+                  
+                  # مرتب‌سازی پست‌ها بر اساس ID (جدیدترین اول)
+                  posts.sort(key=lambda x: x['id'], reverse=True)
                   
                   output = {
                       "channel": channel,
@@ -296,7 +309,7 @@ jobs:
       - name: ذخیره در گیت‌هاب
         run: |
           git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git config.user.email "github-actions[bot]@users.noreply.github.com"
           git add data/
           git commit -m "به‌روزرسانی خودکار پست‌ها" || echo "تغییری وجود ندارد"
           git push
