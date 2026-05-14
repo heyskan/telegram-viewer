@@ -33,7 +33,7 @@ jobs:
           
           # ===========================================
           # کانال‌های خودت رو اینجا بنویس
-          CHANNELS = ["rodast_omiddana", "iliaen", "proxy_kafee"]
+          CHANNELS = ["rodast_omiddana", "iliaen", "proxy_kafee", "Ye_Student"]
           # ===========================================
           
           os.makedirs("data/posts", exist_ok=True)
