@@ -2,8 +2,8 @@ name: دریافت پست‌های تلگرام
 
 on:
   schedule:
-    - cron: "*/15 * * * *"  # هر 15 دقیقه یک بار
-  workflow_dispatch:  # دستی هم بشه اجرا کرد
+    - cron: "*/15 * * * *"
+  workflow_dispatch:
 
 permissions:
   contents: write
@@ -19,72 +19,122 @@ jobs:
         with:
           python-version: "3.11"
       
-      - name: نصب کتابخانه‌های مورد نیاز
+      - name: نصب کتابخانه‌ها
         run: |
-          pip install requests jdatetime
+          pip install requests jdatetime beautifulsoup4
       
-      - name: اجرای اسکریپت دریافت پست‌ها
+      - name: دریافت پست‌های واقعی از تلگرام
         run: |
           python3 << 'EOF'
-          import os, json, requests, time
-          import jdatetime
+          import json, requests, os, re
+          from bs4 import BeautifulSoup
           from datetime import datetime
+          import jdatetime
           
-          # لیست کانال‌ها (خودت اینجا اضافه کن)
-          CHANNELS = [
-              "drtel",      # کانال اول
-              "bbcpersian", # کانال دوم
-              "iroproxy"    # کانال سوم - هرچقدر میخوای اضافه کن
-          ]
+          # ===========================================
+          # کانال‌های خودت رو اینجا بنویس
+          CHANNELS = ["drtel", "bbcpersian", "iroproxy"]
+          # ===========================================
           
-          # ساخت پوشه‌های مورد نیاز
           os.makedirs("data/posts", exist_ok=True)
           
-          # تابع تبدیل تاریخ
-          def convert_date(date_str):
-              try:
-                  # این یه تابع ساده است، بعداً کاملش میکنیم
-                  return date_str
-              except:
-                  return date_str
+          def clean_text(text):
+              if not text:
+                  return ""
+              # حذف ایموجی‌های اضافی و لینک‌های مزاحم
+              text = re.sub(r'\s+', ' ', text)
+              return text.strip()
           
-          # برای هر کانال
+          def get_views(views_elem):
+              if not views_elem:
+                  return "0"
+              text = views_elem.text.strip()
+              # تبدیل 1.5K به 1500
+              if 'K' in text or 'k' in text:
+                  num = float(re.findall(r'[\d\.]+', text)[0])
+                  return str(int(num * 1000))
+              return text
+          
           for channel in CHANNELS:
-              print(f"📡 در حال دریافت پست‌های کانال: {channel}")
-              
-              # آدرس صفحه عمومی تلگرام
+              print(f"📡 در حال دریافت: {channel}")
               url = f"https://t.me/s/{channel}"
               
-              # اینجا باید محتوای صفحه رو بگیریم
-              # ولی فعلاً یه فایل نمونه میسازیم
-              
-              # برای تست، یه داده نمونه میسازیم
-              sample_posts = {
-                  "channel": channel,
-                  "last_update": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-                  "posts": [
-                      {
-                          "id": 1,
-                          "time": datetime.now().strftime("%Y/%m/%d - %H:%M"),
-                          "text": f"این یک پست نمونه از کانال {channel} است",
-                          "views": 100,
-                          "images": []
-                      },
-                      {
-                          "id": 2,
-                          "time": datetime.now().strftime("%Y/%m/%d - %H:%M"),
-                          "text": "پست دوم نمونه برای تست",
-                          "views": 50,
-                          "images": []
-                      }
-                  ]
-              }
-              
-              # ذخیره توی فایل
-              with open(f"data/posts/{channel}.json", "w", encoding="utf-8") as f:
-                  json.dump(sample_posts, f, ensure_ascii=False, indent=2)
-              
-              print(f"✅ ذخیره شد: {channel}.json")
+              try:
+                  headers = {
+                      'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
+                  }
+                  response = requests.get(url, timeout=30, headers=headers)
+                  response.raise_for_status()
+                  
+                  soup = BeautifulSoup(response.text, 'html.parser')
+                  posts = []
+                  
+                  # پیدا کردن همه پیام‌ها
+                  messages = soup.select('.tgme_widget_message')
+                  
+                  for msg in messages[:20]:  # 20 تا پست آخر
+                      # زمان
+                      time_elem = msg.select_one('time')
+                      time_str = ""
+                      if time_elem:
+                          datetime_attr = time_elem.get('datetime', '')
+                          if datetime_attr:
+                              try:
+                                  dt = datetime.fromisoformat(datetime_attr.replace('Z', '+00:00'))
+                                  jd = jdatetime.datetime.fromgregorian(datetime=dt)
+                                  time_str = f"{jd.year}/{jd.month}/{jd.day} - {jd.hour:02d}:{jd.minute:02d}"
+                              except:
+                                  time_str = time_elem.text
+                          else:
+                              time_str = time_elem.text
+                      
+                      # متن
+                      text_elem = msg.select_one('.tgme_widget_message_text')
+                      text = clean_text(text_elem.text) if text_elem else ""
+                      
+                      # بازدید
+                      views_elem = msg.select_one('.tgme_widget_message_views')
+                      views = get_views(views_elem)
+                      
+                      # عکس‌ها
+                      images = []
+                      photo_div = msg.select_one('.tgme_widget_message_photo')
+                      if photo_div:
+                          img = photo_div.select_one('img')
+                          if img and img.get('src'):
+                              img_src = img.get('src')
+                              # فقط عکس‌های واقعی، نه عکس پروفایل
+                              if 'user_photo' not in img_src and 'emoji' not in img_src:
+                                  images.append(img_src)
+                      
+                      # فقط پست‌هایی که متن یا عکس دارن ذخیره کن
+                      if text or images:
+                          posts.append({
+                              "id": len(posts) + 1,
+                              "time": time_str,
+                              "text": text,
+                              "views": views,
+                              "images": images
+                          })
+                      
+                      # اگه به 15 پست رسیدیم، بریم بیرون
+                      if len(posts) >= 15:
+                          break
+                  
+                  # ذخیره در فایل
+                  output = {
+                      "channel": channel,
+                      "last_update": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+                      "posts": posts
+                  }
+                  
+                  with open(f"data/posts/{channel}.json", "w", encoding="utf-8") as f:
+                      json.dump(output, f, ensure_ascii=False, indent=2)
+                  
+                  print(f"✅ {channel}: {len(posts)} پست ذخیره شد")
+                  
+              except Exception as e:
+                  print(f"❌ خطا در {channel}: {str(e)}")
           
           # ذخیره لیست کانال‌ها
           channels_list = {
@@ -96,10 +146,10 @@ jobs:
           with open("data/channels.json", "w", encoding="utf-8") as f:
               json.dump(channels_list, f, ensure_ascii=False, indent=2)
           
-          print("🎉 همه چیز با موفقیت انجام شد!")
+          print("\n🎉 همه چیز با موفقیت انجام شد!")
           EOF
       
-      - name: ذخیره تغییرات در گیت‌هاب
+      - name: ذخیره در گیت‌هاب
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
