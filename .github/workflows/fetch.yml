@@ -33,7 +33,7 @@ jobs:
           
           # ===========================================
           # کانال‌های خودت رو اینجا بنویس
-          CHANNELS = ["drtel", "bbcpersian", "iroproxy"]
+          CHANNELS = ["rodast_omiddana", "iliaen", "iranintltv"]
           # ===========================================
           
           os.makedirs("data/posts", exist_ok=True)
