@@ -146,18 +146,13 @@ jobs:
                                   timeStr = timeEl.getAttribute('datetime') || timeEl.innerText;
                               }
                               
-                              // متن (با کاهش فاصله خطوط)
+                              // متن
                               const textEl = el.querySelector('.tgme_widget_message_text');
                               let text = '';
                               if (textEl) {
                                   text = textEl.innerHTML;
-                                  // تبدیل <br> به \n
                                   text = text.replace(/<br\s*\/?>/gi, '\\n');
-                                  // حذف تگ‌های HTML
                                   text = text.replace(/<[^>]+>/g, '');
-                                  // تبدیل خطوط خالی تکراری به یک خط (فشرده‌سازی)
-                                  text = text.replace(/\\n\\s*\\n/g, '\\n');
-                                  // تبدیل HTML entities
                                   text = text.replace(/&nbsp;/g, ' ');
                                   text = text.replace(/&amp;/g, '&');
                                   text = text.trim();
@@ -285,7 +280,7 @@ jobs:
       - name: ذخیره در گیت‌هاب
         run: |
           git config user.name "github-actions[bot]"
-          git config.user.email "github-actions[bot]@users.noreply.github.com"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
           git add data/
           git commit -m "به‌روزرسانی خودکار پست‌ها" || echo "تغییری وجود ندارد"
           git push
