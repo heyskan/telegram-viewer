@@ -44,7 +44,6 @@ jobs:
           CHANNELS = ["rodast_omiddana", "iliaen", "proxy_kafee", "alonews"]
           # ===========================================
           
-          # ساخت پوشه‌ها
           POSTS_DIR = Path("data/posts")
           MEDIA_DIR = Path("data/media")
           POSTS_DIR.mkdir(parents=True, exist_ok=True)
@@ -108,24 +107,19 @@ jobs:
                       
                       print(f"   🌐 بارگذاری صفحه...")
                       await page.goto(url, wait_until="domcontentloaded", timeout=45000)
-                      
-                      # منتظر لود شدن پیام‌ها
                       await page.wait_for_timeout(5000)
                       
-                      # اسکرول برای لود بیشتر
                       for i in range(8):
                           await page.evaluate("window.scrollTo(0, document.body.scrollHeight)")
                           await page.wait_for_timeout(2000)
                           print(f"   اسکرول {i+1}/8")
                       
-                      # دریافت HTML برای دیباگ
                       html = await page.content()
                       if 'tgme_widget_message' not in html:
                           print(f"   ⚠️ ساختار صفحه تغییر کرده! پیامی پیدا نشد.")
                           await browser.close()
                           return []
                       
-                      # استخراج داده‌ها
                       messages_data = await page.evaluate("""() => {
                           const messages = [];
                           const containers = document.querySelectorAll('[data-post]');
@@ -139,44 +133,43 @@ jobs:
                               const postId = parseInt(parts[1]);
                               if (isNaN(postId)) continue;
                               
-                              // زمان
                               const timeEl = el.querySelector('time');
                               let timeStr = '';
                               if (timeEl) {
                                   timeStr = timeEl.getAttribute('datetime') || timeEl.innerText;
                               }
                               
-                              // متن
                               const textEl = el.querySelector('.tgme_widget_message_text');
                               let text = '';
                               if (textEl) {
                                   text = textEl.innerHTML;
+                                  // تبدیل <br> به \n (جاوااسکریپت)
                                   text = text.replace(/<br\s*\/?>/gi, '\\n');
+                                  // حذف تگ‌های HTML
                                   text = text.replace(/<[^>]+>/g, '');
+                                  // فشرده‌سازی خطوط خالی تکراری
+                                  text = text.replace(/\\n\\s*\\n/g, '\\n');
+                                  // تبدیل HTML entities
                                   text = text.replace(/&nbsp;/g, ' ');
                                   text = text.replace(/&amp;/g, '&');
                                   text = text.trim();
                               }
                               
-                              // بازدید
                               const viewsEl = el.querySelector('.tgme_widget_message_views');
                               let views = viewsEl ? viewsEl.innerText : '0';
                               
-                              // عکس‌ها
                               const images = [];
                               const imgTag = el.querySelector('.tgme_widget_message_photo img');
                               if (imgTag && imgTag.src && !imgTag.src.includes('user_photo')) {
                                   images.push(imgTag.src);
                               }
                               
-                              // ویدیوها
                               const videos = [];
                               const videoTag = el.querySelector('video');
                               if (videoTag && videoTag.src && !videoTag.src.includes('.webm')) {
                                   videos.push(videoTag.src);
                               }
                               
-                              // ری‌اکشن‌ها
                               const reactions = [];
                               const reactionDivs = el.querySelectorAll('.tgme_widget_message_reaction');
                               for (const react of reactionDivs) {
@@ -201,7 +194,6 @@ jobs:
                               });
                           }
                           
-                          // مرتب‌سازی بر اساس ID (جدیدترین اول)
                           messages.sort((a, b) => b.id - a.id);
                           return messages;
                       }""")
@@ -267,7 +259,6 @@ jobs:
                   print(f"   ویدیو: {sum(len(p['videos']) for p in posts)}")
                   print(f"   ری‌اکشن: {sum(len(p['reactions']) for p in posts)}")
               
-              # ذخیره لیست کانال‌ها
               channels_list = {"channels": [{"id": ch, "name": ch} for ch in CHANNELS]}
               with open("data/channels.json", "w", encoding="utf-8") as f:
                   json.dump(channels_list, f, ensure_ascii=False, indent=2)
