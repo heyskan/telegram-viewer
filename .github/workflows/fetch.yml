@@ -1,0 +1,108 @@
+name: دریافت پست‌های تلگرام
+
+on:
+  schedule:
+    - cron: "*/15 * * * *"  # هر 15 دقیقه یک بار
+  workflow_dispatch:  # دستی هم بشه اجرا کرد
+
+permissions:
+  contents: write
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v4
+      
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      
+      - name: نصب کتابخانه‌های مورد نیاز
+        run: |
+          pip install requests jdatetime
+      
+      - name: اجرای اسکریپت دریافت پست‌ها
+        run: |
+          python3 << 'EOF'
+          import os, json, requests, time
+          import jdatetime
+          from datetime import datetime
+          
+          # لیست کانال‌ها (خودت اینجا اضافه کن)
+          CHANNELS = [
+              "drtel",      # کانال اول
+              "bbcpersian", # کانال دوم
+              "iroproxy"    # کانال سوم - هرچقدر میخوای اضافه کن
+          ]
+          
+          # ساخت پوشه‌های مورد نیاز
+          os.makedirs("data/posts", exist_ok=True)
+          
+          # تابع تبدیل تاریخ
+          def convert_date(date_str):
+              try:
+                  # این یه تابع ساده است، بعداً کاملش میکنیم
+                  return date_str
+              except:
+                  return date_str
+          
+          # برای هر کانال
+          for channel in CHANNELS:
+              print(f"📡 در حال دریافت پست‌های کانال: {channel}")
+              
+              # آدرس صفحه عمومی تلگرام
+              url = f"https://t.me/s/{channel}"
+              
+              # اینجا باید محتوای صفحه رو بگیریم
+              # ولی فعلاً یه فایل نمونه میسازیم
+              
+              # برای تست، یه داده نمونه میسازیم
+              sample_posts = {
+                  "channel": channel,
+                  "last_update": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+                  "posts": [
+                      {
+                          "id": 1,
+                          "time": datetime.now().strftime("%Y/%m/%d - %H:%M"),
+                          "text": f"این یک پست نمونه از کانال {channel} است",
+                          "views": 100,
+                          "images": []
+                      },
+                      {
+                          "id": 2,
+                          "time": datetime.now().strftime("%Y/%m/%d - %H:%M"),
+                          "text": "پست دوم نمونه برای تست",
+                          "views": 50,
+                          "images": []
+                      }
+                  ]
+              }
+              
+              # ذخیره توی فایل
+              with open(f"data/posts/{channel}.json", "w", encoding="utf-8") as f:
+                  json.dump(sample_posts, f, ensure_ascii=False, indent=2)
+              
+              print(f"✅ ذخیره شد: {channel}.json")
+          
+          # ذخیره لیست کانال‌ها
+          channels_list = {
+              "channels": [
+                  {"id": ch, "name": ch} for ch in CHANNELS
+              ]
+          }
+          
+          with open("data/channels.json", "w", encoding="utf-8") as f:
+              json.dump(channels_list, f, ensure_ascii=False, indent=2)
+          
+          print("🎉 همه چیز با موفقیت انجام شد!")
+          EOF
+      
+      - name: ذخیره تغییرات در گیت‌هاب
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/
+          git commit -m "به‌روزرسانی خودکار پست‌ها" || echo "تغییری وجود ندارد"
+          git push
