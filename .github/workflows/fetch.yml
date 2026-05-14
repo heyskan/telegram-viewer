@@ -26,7 +26,7 @@ jobs:
       - name: دریافت پست‌های واقعی از تلگرام
         run: |
           python3 << 'EOF'
-          import json, requests, os, re, time
+          import json, requests, os, re
           from bs4 import BeautifulSoup
           from datetime import datetime
           import jdatetime
@@ -40,26 +40,14 @@ jobs:
           def clean_text(text):
               if not text:
                   return ""
-              # حذف تگ‌های HTML و نرمال‌سازی فاصله‌ها
               text = re.sub(r'<[^>]+>', ' ', text)
               text = re.sub(r'\s+', ' ', text)
               return text.strip()
-          
-          def fix_date(date_str):
-              """تبدیل تاریخ‌های ناقص مثل '0:12' به تاریخ کامل"""
-              if not date_str:
-                  return ""
-              # اگر فقط ساعت دارد (مثل "0:12")
-              if re.match(r'^\d{1,2}:\d{2}$', date_str):
-                  now = jdatetime.datetime.now()
-                  return f"{now.year}/{now.month}/{now.day} - {date_str}"
-              return date_str
           
           def get_views(views_elem):
               if not views_elem:
                   return "0"
               text = views_elem.text.strip()
-              # تبدیل 1.5K به 1500
               match = re.search(r'([\d\.]+)(K|k)?', text)
               if match:
                   num = float(match.group(1))
@@ -70,75 +58,74 @@ jobs:
           
           def extract_reactions(msg):
               reactions = []
-              reactions_div = msg.select_one('.tgme_widget_message_reactions')
-              if reactions_div:
-                  for react in reactions_div.select('.tgme_widget_message_reaction'):
-                      emoji_elem = react.select_one('.tgme_widget_message_reaction_emoji')
-                      count_elem = react.select_one('.tgme_widget_message_reaction_count')
-                      if emoji_elem:
-                          # استخراج ایموجی از text یا data-emoji
-                          emoji = emoji_elem.get('data-emoji', '') or emoji_elem.text.strip()
-                          count = count_elem.text.strip() if count_elem else "1"
-                          if emoji:
-                              reactions.append({"emoji": emoji, "count": count})
+              # روش جدید: جستجوی مستقیم در کل پیام
+              reaction_spans = msg.find_all('span', class_=re.compile('tgme_widget_message_reaction'))
+              for react in reaction_spans:
+                  emoji = react.find_previous(class_=re.compile('emoji'))
+                  if not emoji:
+                      continue
+                  emoji_text = emoji.get('data-emoji') or emoji.text.strip()
+                  count_span = react.find('span', class_=re.compile('count'))
+                  count = count_span.text.strip() if count_span else "1"
+                  if emoji_text:
+                      reactions.append({"emoji": emoji_text, "count": count})
               return reactions
           
           def extract_images(msg):
               images = []
-              # عکس اصلی
-              photo_div = msg.select_one('.tgme_widget_message_photo')
-              if photo_div:
-                  # از src تصویر
-                  img = photo_div.select_one('img')
-                  if img and img.get('src'):
-                      src = img['src']
-                      if 'user_photo' not in src and 'emoji' not in src:
-                          images.append(src.replace('//cdn5.telegram-cdn.org', '//cdn5.telesco.pe'))
-                  
-                  # از data-zoom (کیفیت بالا)
-                  zoom = photo_div.get('data-zoom', '')
-                  if zoom and 'user_photo' not in zoom:
-                      images.append(zoom)
+              # روش جدید: جستجوی مستقیم لینک عکس
+              # 1. از img داخل پیام
+              for img in msg.find_all('img'):
+                  src = img.get('src', '')
+                  if src and 'user_photo' not in src and 'emoji' not in src:
+                      # تبدیل به لینک با کیفیت بالا
+                      src = src.replace('//cdn5.telegram-cdn.org', '//cdn5.telesco.pe')
+                      images.append(src)
               
-              # عکس‌های گروهی (گالری)
-              for pw in msg.select('.tgme_widget_message_photo_wrap'):
-                  # از background-image
-                  style = pw.get('style', '')
+              # 2. از background-image در style
+              for elem in msg.find_all(style=True):
+                  style = elem['style']
                   match = re.search(r'url\(["\']?([^"\'\)]+)["\']?\)', style)
                   if match:
                       img_url = match.group(1)
                       if 'user_photo' not in img_url and 'emoji' not in img_url:
                           images.append(img_url)
-                  
-                  # از data-webp (کیفیت بالا)
-                  webp = pw.get('data-webp', '')
-                  if webp and 'user_photo' not in webp:
-                      images.append(webp)
+              
+              # 3. از data-zoom
+              for elem in msg.find_all('div', attrs={'data-zoom': True}):
+                  img_url = elem['data-zoom']
+                  if img_url and 'user_photo' not in img_url:
+                      images.append(img_url)
+              
+              # 4. از data-webp
+              for elem in msg.find_all(attrs={'data-webp': True}):
+                  img_url = elem['data-webp']
+                  if img_url and 'user_photo' not in img_url:
+                      images.append(img_url)
               
               return list(dict.fromkeys(images))  # حذف تکراری‌ها
           
           def extract_videos(msg):
               videos = []
-              video_div = msg.select_one('.tgme_widget_message_video')
-              if video_div:
-                  # از تگ video
-                  video = video_div.select_one('video')
-                  if video and video.get('src'):
-                      videos.append(video['src'])
-                  
-                  # از data-video
-                  video_link = video_div.get('data-video', '')
-                  if video_link:
-                      videos.append(video_link)
+              # ویدیوها از تگ video
+              for video in msg.find_all('video'):
+                  src = video.get('src', '')
+                  if src:
+                      videos.append(src)
+              # از data-video
+              for elem in msg.find_all(attrs={'data-video': True}):
+                  video_url = elem['data-video']
+                  if video_url:
+                      videos.append(video_url)
               return videos
           
           def extract_gifs(msg):
               gifs = []
-              gif_div = msg.select_one('.tgme_widget_message_animation')
-              if gif_div:
-                  video = gif_div.select_one('video')
-                  if video and video.get('src'):
-                      gifs.append(video['src'])
+              # گیف‌ها از انیمیشن‌ها
+              for video in msg.find_all('video', class_=re.compile('animation')):
+                  src = video.get('src', '')
+                  if src:
+                      gifs.append(src)
               return gifs
           
           for channel in CHANNELS:
@@ -148,7 +135,6 @@ jobs:
               try:
                   headers = {
                       'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
-                      'Accept-Language': 'en-US,en;q=0.9',
                   }
                   response = requests.get(url, timeout=30, headers=headers)
                   response.raise_for_status()
@@ -175,9 +161,6 @@ jobs:
                           else:
                               time_str = time_elem.text
                       
-                      # اصلاح تاریخ‌های ناقص
-                      time_str = fix_date(time_str)
-                      
                       # متن
                       text_elem = msg.select_one('.tgme_widget_message_text')
                       text = clean_text(text_elem.text) if text_elem else ""
@@ -186,13 +169,11 @@ jobs:
                       views_elem = msg.select_one('.tgme_widget_message_views')
                       views = get_views(views_elem)
                       
-                      # ری‌اکشن
-                      reactions = extract_reactions(msg)
-                      
-                      # عکس و ویدیو و گیف
+                      # عکس، ویدیو، ری‌اکشن
                       images = extract_images(msg)
                       videos = extract_videos(msg)
                       gifs = extract_gifs(msg)
+                      reactions = extract_reactions(msg)
                       
                       if text or images or videos or gifs:
                           posts.append({
@@ -205,11 +186,12 @@ jobs:
                               "videos": videos,
                               "gifs": gifs
                           })
+                          if images:
+                              print(f"      عکس پیدا شد: {len(images)}")
                       
                       if len(posts) >= 20:
                           break
                   
-                  # ذخیره در فایل
                   output = {
                       "channel": channel,
                       "last_update": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
@@ -229,7 +211,6 @@ jobs:
                   print(f"❌ خطا در {channel}: {str(e)}")
                   print("")
           
-          # ذخیره لیست کانال‌ها
           channels_list = {"channels": [{"id": ch, "name": ch} for ch in CHANNELS]}
           with open("data/channels.json", "w", encoding="utf-8") as f:
               json.dump(channels_list, f, ensure_ascii=False, indent=2)
