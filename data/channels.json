@@ -1,0 +1,16 @@
+{
+  "channels": [
+    {
+      "id": "drtel",
+      "name": "drtel"
+    },
+    {
+      "id": "bbcpersian",
+      "name": "bbcpersian"
+    },
+    {
+      "id": "iroproxy",
+      "name": "iroproxy"
+    }
+  ]
+}
