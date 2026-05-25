@@ -1,12 +1,140 @@
 {
   "channel": "proxy_kafee",
-  "last_update": "2026-05-25 20:28:12",
+  "last_update": "2026-05-25 21:46:19",
   "posts": [
+    {
+      "id": 42944,
+      "time": "2026-05-25T21:42:28+00:00",
+      "text": "چیزی نیست توافق شده🫤🫤",
+      "views": "1.21K",
+      "reactions": [],
+      "images": [],
+      "videos": []
+    },
+    {
+      "id": 42943,
+      "time": "2026-05-25T21:41:11+00:00",
+      "text": "🚨 فوری_اسامی 4 کشته شده نیروی دریایی سپاه:\nپاسدار  عباس اسلامی \nپاسدار  قدرت زرنگاری\nپاسدار  عبدالرضاگلزاری\nپاسدار حسین ستوده....",
+      "views": "1.52K",
+      "reactions": [],
+      "images": [],
+      "videos": []
+    },
+    {
+      "id": 42942,
+      "time": "2026-05-25T21:40:28+00:00",
+      "text": "🚨  فعالیت سوخت رسانا همین الان",
+      "views": "1.82K",
+      "reactions": [],
+      "images": [],
+      "videos": []
+    },
+    {
+      "id": 42941,
+      "time": "2026-05-25T21:37:07+00:00",
+      "text": "#گزارش_مردمی 🚨\n\n اصفهانم صدای پدافند شدید میاد",
+      "views": "2.45K",
+      "reactions": [],
+      "images": [],
+      "videos": []
+    },
+    {
+      "id": 42940,
+      "time": "2026-05-25T21:33:22+00:00",
+      "text": "🚨 گزارش هایی از انفجار ها در کرمانشاه و اردبیل شنیده شده است",
+      "views": "2.76K",
+      "reactions": [],
+      "images": [],
+      "videos": []
+    },
+    {
+      "id": 42939,
+      "time": "0:21",
+      "text": "🚨 بندر عباس  نیم ساعت پیش",
+      "views": "2.76K",
+      "reactions": [],
+      "images": [],
+      "videos": [
+        "data/media/proxy_kafee_42939_bfac4a2f.mp4"
+      ]
+    },
+    {
+      "id": 42938,
+      "time": "2026-05-25T21:28:28+00:00",
+      "text": "💗 ترکیبی جدید سرعت موشکی💥🚀\n\nروی ایرانسل تست کردم / بقیه نتا تست شه\n\n{\n  \"remarks\": \"Telegram | @proxy_kafee\",\n\n\"log\": {\n\"access\": \"\",\n\"error\": \"\",\n\"loglevel\": \"info\",\n\"dnsLog\": false\n},\n\"inbounds\": [\n{\n\"tag\": \"in_proxy\",\n\"port\": 1080,\n\"protocol\": \"socks\",\n\"listen\": \"0.0.0.0\",\n\"settings\": {\n\"auth\": \"noauth\",\n\"udp\": true,\n\"userLevel\": 8\n},\n\"sniffing\": {\n\"enabled\": false\n}\n},\n{\n\"tag\": \"http-in\",\n\"port\": 10808,\n\"listen\": \"::\",\n\"protocol\": \"http\"\n}\n],\n\"outbounds\": [\n{\n\"tag\": \"proxy\",\n\"protocol\": \"trojan\",\n\"settings\": {\n\"servers\": [\n{\n\"address\": \"104.18.12.149\",\n\"method\": \"chacha20-poly1305\",\n\"ota\": false,\n\"password\": \"humanity\",\n\"port\": 443,\n\"level\": 8,\n\"flow\": \"\"\n}\n]\n},\n\"streamSettings\": {\n\"network\": \"ws\",\n\"security\": \"tls\",\n\"wsSettings\": {\n\"path\": \"/assignment\",\n\"headers\": {\n\"Host\": \"www.calmloud.com\"\n}\n},\n\"tlsSettings\": {\n\"allowInsecure\": true,\n\"serverName\": \"www.calmloud.com\",\n\"alpn\": [\n\"http/1.1\"\n],\n\"fingerprint\": \"ios\",\n\"show\": false\n},\n\"sockopt\": {\n\"dialerProxy\": \"fragment\",\n\"tcpKeepAliveIdle\": 100,\n\"tcpNoDelay\": true\n}\n},\n\"mux\": {\n\"enabled\": false,\n\"concurrency\": 8\n}\n},\n{\n\"tag\": \"fragment\",\n\"protocol\": \"freedom\",\n\"settings\": {\n\"domainStrategy\": \"AsIs\",\n\"fragment\": {\n\"packets\": \"tlshello\",\n\"length\": \"100-200\",\n\"interval\": \"10-20\"\n}\n},\n\"streamSettings\": {\n\"sockopt\": {\n\"tcpKeepAliveIdle\": 100,\n\"tcpNoDelay\": true\n}\n}\n},\n{\n\"tag\": \"direct\",\n\"protocol\": \"freedom\",\n\"settings\": {\n\"domainStrategy\": \"UseIp\"\n}\n},\n{\n\"tag\": \"blackhole\",\n\"protocol\": \"blackhole\",\n\"settings\": {}\n}\n],\n\"dns\": {\n\"servers\": [\n\"8.8.8.8\"\n]\n},\n\"routing\": {\n\"domainStrategy\": \"UseIp\",\n\"rules\": [],\n\"balancers\": []\n}\n}\n\n\nترکیبی با سایفون وصله ✅\n\n\nآموزش ترکیبی سایفون\n\nری اکشن فراموش نکنید",
+      "views": "3.06K",
+      "reactions": [],
+      "images": [],
+      "videos": []
+    },
+    {
+      "id": 42937,
+      "time": "2026-05-25T21:26:31+00:00",
+      "text": "🚨 #صدای مردم\nمن بابلسرم صدای انفجار میاد\n\nتوافق ینی 🫤🫤",
+      "views": "3.06K",
+      "reactions": [],
+      "images": [],
+      "videos": []
+    },
+    {
+      "id": 42936,
+      "time": "2026-05-25T21:25:00+00:00",
+      "text": "🚨 🚨زیرنویس صداوسیما و تایید صدای انفجار در بندرعباس",
+      "views": "3.28K",
+      "reactions": [],
+      "images": [],
+      "videos": []
+    },
+    {
+      "id": 42935,
+      "time": "2026-05-25T21:21:04+00:00",
+      "text": "🚨🚨 دودی که از سمت فرودگاه بندرعباس بلند شده",
+      "views": "3.5K",
+      "reactions": [],
+      "images": [],
+      "videos": []
+    },
+    {
+      "id": 42934,
+      "time": "2026-05-25T21:20:24+00:00",
+      "text": "🔴 #گزارش_مردمی | 23:59⏰\nصدای انفجار های در اندیمشک و شهرکرد هم بنابر گزارش های محلی شنیده شد",
+      "views": "3.63K",
+      "reactions": [],
+      "images": [],
+      "videos": []
+    },
+    {
+      "id": 42933,
+      "time": "2026-05-25T21:18:40+00:00",
+      "text": "پس کو این توافق 🫤",
+      "views": "3.46K",
+      "reactions": [],
+      "images": [],
+      "videos": []
+    },
+    {
+      "id": 42932,
+      "time": "2026-05-25T20:59:43+00:00",
+      "text": "🟠🚨| فووووریی/هم اکنون فعالیت پدافند بندرعباس",
+      "views": "4.4K",
+      "reactions": [],
+      "images": [],
+      "videos": []
+    },
+    {
+      "id": 42931,
+      "time": "2026-05-25T20:36:16+00:00",
+      "text": "❌  طبق گزارش کاربران ، اینترنت ملی (روبیکا و بله و...) دچار اختلال گسترده‌ای است\n\nالان همینم قطع میکنن...😂\n\n\nخواهید دید که چه خواهد شد",
+      "views": "5.26K",
+      "reactions": [],
+      "images": [],
+      "videos": []
+    },
     {
       "id": 42930,
       "time": "2026-05-25T20:11:24+00:00",
       "text": "| وزیر ارتباطات و فناوری اطلاعات:\n\nبازگشایی اینترنت پیام‌آور اعتماد و ثبات کشور است\n\n@proxy_kafee",
-      "views": "1.26K",
+      "views": "5.96K",
       "reactions": [],
       "images": [],
       "videos": []
@@ -15,7 +143,7 @@
       "id": 42929,
       "time": "2026-05-25T20:09:40+00:00",
       "text": "💗 یه ترکیبی جدیده دیگه سرعتی🚀\n\nسریع وصل میشه خصوصا روی ایرانسل\n\n{\n  \"remarks\": \"Telegram | @proxy_kafee\",\n\n\"log\": {\n\"access\": \"\",\n\"error\": \"\",\n\"loglevel\": \"info\",\n\"dnsLog\": false\n},\n\"inbounds\": [\n{\n\"tag\": \"in_proxy\",\n\"port\": 1080,\n\"protocol\": \"socks\",\n\"listen\": \"0.0.0.0\",\n\"settings\": {\n\"auth\": \"noauth\",\n\"udp\": true,\n\"userLevel\": 8\n},\n\"sniffing\": {\n\"enabled\": false\n}\n},\n{\n\"tag\": \"http-in\",\n\"port\": 10808,\n\"listen\": \"::\",\n\"protocol\": \"http\"\n}\n],\n\"outbounds\": [\n{\n\"tag\": \"proxy\",\n\"protocol\": \"trojan\",\n\"settings\": {\n\"servers\": [\n{\n\"address\": \"188.114.98.0\",\n\"method\": \"chacha20-poly1305\",\n\"ota\": false,\n\"password\": \"humanity\",\n\"port\": 443,\n\"level\": 8,\n\"flow\": \"\"\n}\n]\n},\n\"streamSettings\": {\n\"network\": \"ws\",\n\"security\": \"tls\",\n\"wsSettings\": {\n\"path\": \"/assignment\",\n\"headers\": {\n\"Host\": \"www.calmloud.com\"\n}\n},\n\"tlsSettings\": {\n\"allowInsecure\": true,\n\"serverName\": \"www.calmloud.com\",\n\"alpn\": [\n\"http/1.1\"\n],\n\"fingerprint\": \"ios\",\n\"show\": false\n},\n\"sockopt\": {\n\"dialerProxy\": \"fragment\",\n\"tcpKeepAliveIdle\": 100,\n\"tcpNoDelay\": true\n}\n},\n\"mux\": {\n\"enabled\": false,\n\"concurrency\": 8\n}\n},\n{\n\"tag\": \"fragment\",\n\"protocol\": \"freedom\",\n\"settings\": {\n\"domainStrategy\": \"AsIs\",\n\"fragment\": {\n\"packets\": \"tlshello\",\n\"length\": \"100-200\",\n\"interval\": \"10-20\"\n}\n},\n\"streamSettings\": {\n\"sockopt\": {\n\"tcpKeepAliveIdle\": 100,\n\"tcpNoDelay\": true\n}\n}\n},\n{\n\"tag\": \"direct\",\n\"protocol\": \"freedom\",\n\"settings\": {\n\"domainStrategy\": \"UseIp\"\n}\n},\n{\n\"tag\": \"blackhole\",\n\"protocol\": \"blackhole\",\n\"settings\": {}\n}\n],\n\"dns\": {\n\"servers\": [\n\"8.8.8.8\"\n]\n},\n\"routing\": {\n\"domainStrategy\": \"UseIp\",\n\"rules\": [],\n\"balancers\": []\n}\n}\n\nتست کنید روی همه‌ی اینترنت ها\n\nترکیبی با سایفون وصله ✅\n\n\nآموزش ترکیبی سایفون\n\nری اکشن فراموش نکنید",
-      "views": "1.45K",
+      "views": "5.67K",
       "reactions": [],
       "images": [],
       "videos": []
@@ -24,7 +152,7 @@
       "id": 42928,
       "time": "2026-05-25T19:33:52+00:00",
       "text": "🚨اسرا.ئیل: \n\nعملیات بی‌سابقه و گسترده علیه لبنان با نام «پیکان های آتش» بزودی آغاز خواهد شد",
-      "views": "3.16K",
+      "views": "6.18K",
       "reactions": [],
       "images": [],
       "videos": []
@@ -33,7 +161,7 @@
       "id": 42927,
       "time": "2026-05-25T19:17:46+00:00",
       "text": "*\n🔴نورالدین الدغیر، خبرنگار الجزیره:\n\nاحتمال داره اسرائیل پیش از هر توافق آمریکا و جمهوری اسلامی، دست به یک عملیات نظامی بزرگ در لبنان بزنه.\n\nممکنه شاهد بازگشت جنگ به منطقه باشیم.",
-      "views": "3.84K",
+      "views": "6.5K",
       "reactions": [],
       "images": [],
       "videos": []
@@ -42,7 +170,7 @@
       "id": 42926,
       "time": "2026-05-25T18:47:47+00:00",
       "text": "vless://388a6c57-87e7-420b-afe2-b3eb670fd7da@8.6.112.0:80?path=%2F%2B%40ProxyVPN11&security=&encryption=none&host=vip.yaml7.ggff.net&type=ws#proxy_kafee\n\nترکیبی با سایفون وصله ✅\n\n\nآموزش ترکیبی سایفون\n\nری اکشن فراموش نکنید",
-      "views": "4.59K",
+      "views": "6.94K",
       "reactions": [],
       "images": [],
       "videos": []
@@ -51,133 +179,7 @@
       "id": 42925,
       "time": "2026-05-25T18:20:09+00:00",
       "text": "🔴 رسایی، نماینده مجلس: اینترنت قرار نیست وصل شود\n\nحمید رسایی، نماینده مجلس، در واکنش به اخبار منتشرشده درباره بازگشایی اینترنت اعلام کرده که پزشکیان نیز می‌داند امکان وصل شدن اینترنت در شرایط فعلی وجود ندارد.\n\nاو گفته اینترنت قرار نیست وصل شود و از کاربران خواسته تحت تأثیر فضاسازی و گمانه‌زنی‌های رسانه‌ای قرار نگیرند.\n\nتو یه روز سه اخبار متفاوت🫪",
-      "views": "5.59K",
-      "reactions": [],
-      "images": [],
-      "videos": []
-    },
-    {
-      "id": 42924,
-      "time": "2026-05-25T17:28:57+00:00",
-      "text": "با طرح بازگشایی اینترنت بین‌الملل مخالفت شد.\n\nگفتم که اینا گوه میخورن",
-      "views": "6.21K",
-      "reactions": [],
-      "images": [],
-      "videos": []
-    },
-    {
-      "id": 42923,
-      "time": "2026-05-25T17:11:06+00:00",
-      "text": "❤️‍🔥 یه ترکیبی جدیده دیگه سرعتی🚀\n\nسریع وصل میشه خصوصا روی ایرانسل\n\n{\n  \"remarks\": \"Telegram | @proxy_kafee\",\n\n\"log\": {\n\"access\": \"\",\n\"error\": \"\",\n\"loglevel\": \"info\",\n\"dnsLog\": false\n},\n\"inbounds\": [\n{\n\"tag\": \"in_proxy\",\n\"port\": 1080,\n\"protocol\": \"socks\",\n\"listen\": \"0.0.0.0\",\n\"settings\": {\n\"auth\": \"noauth\",\n\"udp\": true,\n\"userLevel\": 8\n},\n\"sniffing\": {\n\"enabled\": false\n}\n},\n{\n\"tag\": \"http-in\",\n\"port\": 10808,\n\"listen\": \"::\",\n\"protocol\": \"http\"\n}\n],\n\"outbounds\": [\n{\n\"tag\": \"proxy\",\n\"protocol\": \"trojan\",\n\"settings\": {\n\"servers\": [\n{\n\"address\": \"188.114.98.0\",\n\"method\": \"chacha20-poly1305\",\n\"ota\": false,\n\"password\": \"humanity\",\n\"port\": 443,\n\"level\": 8,\n\"flow\": \"\"\n}\n]\n},\n\"streamSettings\": {\n\"network\": \"ws\",\n\"security\": \"tls\",\n\"wsSettings\": {\n\"path\": \"/assignment\",\n\"headers\": {\n\"Host\": \"www.calmloud.com\"\n}\n},\n\"tlsSettings\": {\n\"allowInsecure\": true,\n\"serverName\": \"www.calmloud.com\",\n\"alpn\": [\n\"http/1.1\"\n],\n\"fingerprint\": \"ios\",\n\"show\": false\n},\n\"sockopt\": {\n\"dialerProxy\": \"fragment\",\n\"tcpKeepAliveIdle\": 100,\n\"tcpNoDelay\": true\n}\n},\n\"mux\": {\n\"enabled\": false,\n\"concurrency\": 8\n}\n},\n{\n\"tag\": \"fragment\",\n\"protocol\": \"freedom\",\n\"settings\": {\n\"domainStrategy\": \"AsIs\",\n\"fragment\": {\n\"packets\": \"tlshello\",\n\"length\": \"100-200\",\n\"interval\": \"10-20\"\n}\n},\n\"streamSettings\": {\n\"sockopt\": {\n\"tcpKeepAliveIdle\": 100,\n\"tcpNoDelay\": true\n}\n}\n},\n{\n\"tag\": \"direct\",\n\"protocol\": \"freedom\",\n\"settings\": {\n\"domainStrategy\": \"UseIp\"\n}\n},\n{\n\"tag\": \"blackhole\",\n\"protocol\": \"blackhole\",\n\"settings\": {}\n}\n],\n\"dns\": {\n\"servers\": [\n\"8.8.8.8\"\n]\n},\n\"routing\": {\n\"domainStrategy\": \"UseIp\",\n\"rules\": [],\n\"balancers\": []\n}\n}\n\nتست کنید روی همه‌ی اینترنت ها\n\nترکیبی با سایفون وصله ✅\n\n\nآموزش ترکیبی سایفون\n\nری اکشن فراموش نکنید",
-      "views": "6.23K",
-      "reactions": [],
-      "images": [],
-      "videos": []
-    },
-    {
-      "id": 42922,
-      "time": "2026-05-25T16:38:57+00:00",
-      "text": "چخبره 😳",
-      "views": "6.5K",
-      "reactions": [],
-      "images": [],
-      "videos": []
-    },
-    {
-      "id": 42921,
-      "time": "2026-05-25T16:37:29+00:00",
-      "text": "🚨 \nپیام مردم\nمیدان انقلاب جنگ بود انگار ماشین زرهی اومده بود و خون ریخته بود هول و هوش ساعت ۷ و ۲ ۳ دقیقه",
-      "views": "6.6K",
-      "reactions": [],
-      "images": [],
-      "videos": []
-    },
-    {
-      "id": 42920,
-      "time": "2026-05-25T16:36:15+00:00",
-      "text": "🚨درود\nپیام مردم \n\nساعت ۷ تقریبا داشتیم از میدون انقلاب با ماشین رد می‌شدیم جلومونو گرفتن گفتن مسیر بستس از دور دیدم انگار چند تا جنازه رو زمین بود پرچم عراق هم بغلشون بود",
-      "views": "6.47K",
-      "reactions": [],
-      "images": [],
-      "videos": []
-    },
-    {
-      "id": 42919,
-      "time": "2026-05-25T14:20:42+00:00",
-      "text": "😈 ترکیبی تست شده سرعت خوب🚀\n\nیکم قطع و وصلی داره ولی سرعتیه🔥\n\n{\n  \"remarks\": \"Telegram | @proxy_kafee\",\n\n  \"log\": {\n    \"access\": \"\",\n    \"error\": \"\",\n    \"loglevel\": \"info\",\n    \"dnsLog\": false\n  },\n  \"inbounds\": [\n    {\n      \"tag\": \"in_proxy\",\n      \"port\": 1080,\n      \"protocol\": \"socks\",\n      \"listen\": \"0.0.0.0\",\n      \"settings\": {\n        \"auth\": \"noauth\",\n        \"udp\": true,\n        \"userLevel\": 8\n      },\n      \"sniffing\": {\n        \"enabled\": false\n      }\n    },\n    {\n      \"tag\": \"http-in\",\n      \"port\": 10808,\n      \"listen\": \"::\",\n      \"protocol\": \"http\"\n    }\n  ],\n  \"outbounds\": [\n    {\n      \"tag\": \"proxy\",\n      \"protocol\": \"trojan\",\n      \"settings\": {\n        \"servers\": [\n          {\n            \"address\": \"188.114.96.4\",\n            \"method\": \"chacha20-poly1305\",\n            \"ota\": false,\n            \"password\": \"e913bfe4-92e1-4434-aee4-3b39bd2da2c9\",\n            \"port\": 443,\n            \"level\": 8,\n            \"flow\": \"\"\n          }\n        ]\n      },\n      \"streamSettings\": {\n        \"network\": \"ws\",\n        \"security\": \"tls\",\n        \"wsSettings\": {\n          \"path\": \"/?ed=2048\",\n          \"headers\": {\n            \"Host\": \"wild-wave-aaa0.malzyamua.workers.dev\"\n          }\n        },\n        \"tlsSettings\": {\n          \"allowInsecure\": true,\n          \"serverName\": \"wild-wave-aaa0.malzyamua.workers.dev\",\n          \"fingerprint\": \"ios\",\n          \"show\": false\n        },\n        \"sockopt\": {\n          \"dialerProxy\": \"fragment\",\n          \"tcpKeepAliveIdle\": 100,\n          \"tcpNoDelay\": true\n        }\n      },\n      \"mux\": {\n        \"enabled\": false,\n        \"concurrency\": 8\n      }\n    },\n    {\n      \"tag\": \"fragment\",\n      \"protocol\": \"freedom\",\n      \"settings\": {\n        \"domainStrategy\": \"AsIs\",\n        \"fragment\": {\n          \"packets\": \"tlshello\",\n          \"length\": \"100-200\",\n          \"interval\": \"10-20\"\n        }\n      },\n      \"streamSettings\": {\n        \"sockopt\": {\n          \"tcpKeepAliveIdle\": 100,\n          \"tcpNoDelay\": true\n        }\n      }\n    },\n    {\n      \"tag\": \"direct\",\n      \"protocol\": \"freedom\",\n      \"settings\": {\n        \"domainStrategy\": \"UseIp\"\n      }\n    },\n    {\n      \"tag\": \"blackhole\",\n      \"protocol\": \"blackhole\",\n      \"settings\": {}\n    }\n  ],\n  \"dns\": {\n    \"servers\": [\n      \"8.8.8.8\"\n    ]\n  },\n  \"routing\": {\n    \"domainStrategy\": \"UseIp\",\n    \"rules\": [],\n    \"balancers\": []\n  }\n}\n\n\nترکیبی با سایفون وصله ✅\n\n\nآموزش ترکیبی سایفون\n\nری اکشن فراموش نکنید",
-      "views": "7.12K",
-      "reactions": [],
-      "images": [],
-      "videos": []
-    },
-    {
-      "id": 42918,
-      "time": "2026-05-25T14:19:29+00:00",
-      "text": "😈",
-      "views": "6.73K",
-      "reactions": [],
-      "images": [],
-      "videos": []
-    },
-    {
-      "id": 42917,
-      "time": "2026-05-25T14:16:27+00:00",
-      "text": "— شیر و خورشید.👑\n\nIP: 104.103.64.7\nCDN: bbe-getimage.akamaized.net\n\n\n@proxy_kafee",
-      "views": "6.63K",
-      "reactions": [],
-      "images": [],
-      "videos": []
-    },
-    {
-      "id": 42916,
-      "time": "2026-05-25T13:10:46+00:00",
-      "text": "{\"remarks\":\"Telegram | @proxy_kafee\",\"_comment\":{\"remark\":\"Telegram | @ProxyEliteVPN\"},\"log\":{\"access\":\"\",\"error\":\"\",\"loglevel\":\"info\",\"dnsLog\":false},\"inbounds\":[{\"tag\":\"in_proxy\",\"port\":1080,\"protocol\":\"socks\",\"listen\":\"0.0.0.0\",\"settings\":{\"auth\":\"noauth\",\"udp\":true,\"userLevel\":8},\"sniffing\":{\"enabled\":false}},{\"tag\":\"http-in\",\"port\":10808,\"listen\":\"::\",\"protocol\":\"http\"}],\"outbounds\":[{\"tag\":\"proxy\",\"protocol\":\"trojan\",\"settings\":{\"servers\":[{\"address\":\"104.20.42.250\",\"method\":\"chacha20-poly1305\",\"ota\":false,\"password\":\"42564cc2-00a5-430a-a61d-b844b15b7b08\",\"port\":443,\"level\":8,\"flow\":\"\"}]},\"streamSettings\":{\"network\":\"ws\",\"security\":\"tls\",\"wsSettings\":{\"path\":\"/\",\"headers\":{\"Host\":\"little-wave-e1c9.testfor1.workers.dev\"}},\"tlsSettings\":{\"allowInsecure\":true,\"serverName\":\"little-wave-e1c9.testfor1.workers.dev\",\"alpn\":[\"http/1.1\"],\"fingerprint\":\"ios\",\"show\":false},\"sockopt\":{\"dialerProxy\":\"fragment\",\"tcpKeepAliveIdle\":100,\"tcpNoDelay\":true}},\"mux\":{\"enabled\":false,\"concurrency\":8}},{\"tag\":\"fragment\",\"protocol\":\"freedom\",\"settings\":{\"domainStrategy\":\"AsIs\",\"fragment\":{\"packets\":\"tlshello\",\"length\":\"100-200\",\"interval\":\"10-20\"}},\"streamSettings\":{\"sockopt\":{\"tcpKeepAliveIdle\":100,\"tcpNoDelay\":true}}},{\"tag\":\"direct\",\"protocol\":\"freedom\",\"settings\":{\"domainStrategy\":\"UseIp\"}},{\"tag\":\"blackhole\",\"protocol\":\"blackhole\",\"settings\":{}}],\"dns\":{\"servers\":[\"8.8.8.8\"]},\"routing\":{\"domainStrategy\":\"UseIp\",\"rules\":[],\"balancers\":[]}}\n\n\nترکیبی با سایفون وصله ✅\n\n\nآموزش ترکیبی سایفون\n\nری اکشن فراموش نکنید",
-      "views": "6.79K",
-      "reactions": [],
-      "images": [],
-      "videos": []
-    },
-    {
-      "id": 42915,
-      "time": "2026-05-25T12:37:04+00:00",
-      "text": "مطمئن باشید جنگ\n\nنا امید نباشید",
-      "views": "6.92K",
-      "reactions": [],
-      "images": [],
-      "videos": []
-    },
-    {
-      "id": 42914,
-      "time": "2026-05-25T12:36:31+00:00",
-      "text": "🚨 ترامپ به مجری فاکس‌نیوز: \n«آیا واقعاً فکر می‌کنید که من بعد از همه آن حرف‌هایی که زده‌ام درباره اینکه ایران هرگز به سلاح هسته‌ای دست نخواهد یافت، رئیس‌جمهور بشوم و بعد فقط پول نقد به آنها بدهم؟»",
-      "views": "6.8K",
-      "reactions": [],
-      "images": [],
-      "videos": []
-    },
-    {
-      "id": 42913,
-      "time": "2026-05-25T12:30:50+00:00",
-      "text": "{\n\"_comment\": {\n\"remark\": \"  | @proxy_kafee\"\n},\n\"log\": {\n\"access\": \"\",\n\"error\": \"\",\n\"loglevel\": \"info\",\n\"dnsLog\": false\n},\n\"inbounds\": [\n{\n\"tag\": \"in_proxy\",\n\"port\": 1080,\n\"protocol\": \"socks\",\n\"listen\": \"0.0.0.0\",\n\"settings\": {\n\"auth\": \"noauth\",\n\"udp\": true,\n\"userLevel\": 8\n},\n\"sniffing\": {\n\"enabled\": false\n}\n},\n{\n\"tag\": \"http-in\",\n\"port\": 10808,\n\"listen\": \"::\",\n\"protocol\": \"http\"\n}\n],\n\"outbounds\": [\n{\n\"tag\": \"proxy\",\n\"protocol\": \"trojan\",\n\"settings\": {\n\"servers\": [\n{\n\"address\": \"104.20.42.250\",\n\"method\": \"chacha20-poly1305\",\n\"ota\": false,\n\"password\": \"humanity\",\n\"port\": 443,\n\"level\": 8,\n\"flow\": \"\"\n}\n]\n},\n\"streamSettings\": {\n\"network\": \"ws\",\n\"security\": \"tls\",\n\"wsSettings\": {\n\"path\": \"/assignment\",\n\"headers\": {\n\"Host\": \"www.calmloud.com\"\n}\n},\n\"tlsSettings\": {\n\"allowInsecure\": true,\n\"serverName\": \"www.calmloud.com\",\n\"alpn\": [\n\"http/1.1\"\n],\n\"fingerprint\": \"ios\",\n\"show\": false\n},\n\"sockopt\": {\n\"dialerProxy\": \"fragment\",\n\"tcpKeepAliveIdle\": 100,\n\"tcpNoDelay\": true\n}\n},\n\"mux\": {\n\"enabled\": false,\n\"concurrency\": 8\n}\n},\n{\n\"tag\": \"fragment\",\n\"protocol\": \"freedom\",\n\"settings\": {\n\"domainStrategy\": \"AsIs\",\n\"fragment\": {\n\"packets\": \"tlshello\",\n\"length\": \"100-200\",\n\"interval\": \"10-20\"\n}\n},\n\"streamSettings\": {\n\"sockopt\": {\n\"tcpKeepAliveIdle\": 100,\n\"tcpNoDelay\": true\n}\n}\n},\n{\n\"tag\": \"direct\",\n\"protocol\": \"freedom\",\n\"settings\": {\n\"domainStrategy\": \"UseIp\"\n}\n},\n{\n\"tag\": \"blackhole\",\n\"protocol\": \"blackhole\",\n\"settings\": {}\n}\n],\n\"dns\": {\n\"servers\": [\n\"8.8.8.8\"\n]\n},\n\"routing\": {\n\"domainStrategy\": \"UseIp\",\n\"rules\": [],\n\"balancers\": []\n}\n}\n\n\nترکیبی با سایفون وصله ✅\n\n\nآموزش ترکیبی سایفون\n\nری اکشن فراموش نکنید",
-      "views": "6.94K",
-      "reactions": [],
-      "images": [],
-      "videos": []
-    },
-    {
-      "id": 42912,
-      "time": "2026-05-25T12:27:55+00:00",
-      "text": "حالا یه چیز جالب بگم، هربار اینترنت رو قطع کردن و دوباره وصل کردن، هربار هم زمان قطعی بیشتر شده هم با یه مرحله فیلترینگ جدیدتر وصل کردن. — اگه خاطرتون باشه قبل جنگ ۱۲ روزه هم Vpn رایگانا جواب میدادن تک و توک اما بعد جنگ دیگه جز کانفیگ‌ها سرویس‌های رایگان زیادی کانکت نمی‌شدن، به‌نظرم این اتفاق برای عادت دادن مردم به محدودیت و آروم آروم به خفا و قطعی کامل بردنه.",
-      "views": "6.61K",
-      "reactions": [],
-      "images": [],
-      "videos": []
-    },
-    {
-      "id": 42911,
-      "time": "2026-05-25T12:02:22+00:00",
-      "text": "trojan://humanity@104.20.42.250:443?path=%2Fassignment&security=tls&alpn=http%2F1.1&insecure=1&host=www.calmloud.com&type=ws&allowInsecure=1&sni=www.calmloud.com#@proxy_kafee\n\nترکیبی با سایفون وصله ✅\n\n\nآموزش ترکیبی سایفون\n\nری اکشن فراموش نکنید",
-      "views": "6.45K",
+      "views": "7.47K",
       "reactions": [],
       "images": [],
       "videos": []
