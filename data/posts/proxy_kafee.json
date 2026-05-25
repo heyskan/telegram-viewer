@@ -1,12 +1,12 @@
 {
   "channel": "proxy_kafee",
-  "last_update": "2026-05-25 22:46:02",
+  "last_update": "2026-05-25 23:49:45",
   "posts": [
     {
       "id": 42951,
       "time": "2026-05-25T22:33:16+00:00",
       "text": "🚨 🔴کانال 14 اسرائیل: \"سلام خامنه‌ای کوچیکه\"",
-      "views": "1.5K",
+      "views": "2.96K",
       "reactions": [],
       "images": [],
       "videos": []
@@ -15,7 +15,7 @@
       "id": 42950,
       "time": "2026-05-25T22:06:48+00:00",
       "text": "🚨 حمله دیروز بوده و ترامپ هم این تصویر را منتشر کرده بود",
-      "views": "3.24K",
+      "views": "4.25K",
       "reactions": [],
       "images": [],
       "videos": []
@@ -24,7 +24,7 @@
       "id": 42949,
       "time": "2026-05-25T21:56:43+00:00",
       "text": "🚨 تا این لحظه خبر تایید شده\nفرودگاه بندرعباس انفجار داشتیم\nدو قایق تندرو توسط جنگنده های آمریکا زده شدن و چهار  سپاه پاسداران مورد هدف قرار گرفتند",
-      "views": "4.02K",
+      "views": "4.92K",
       "reactions": [],
       "images": [],
       "videos": []
@@ -33,7 +33,7 @@
       "id": 42947,
       "time": "2026-05-25T21:50:03+00:00",
       "text": "🚨  ترامپ:\nاورانیوم غنی‌شده (گرد هسته‌ای!) یا باید فورا به ایالات متحده تحویل داده شود تا به کشور منتقل و نابود گردد، یا ترجیحا با هماهنگی و همکاری جمهوری اسلامی ایران، همان‌جا در محل یا در مکانی دیگر که قابل قبول باشد، نابود شود؛ به‌طوری که کمیسیون انرژی اتمی یا نهاد معادل آن، شاهد این فرایند و رویداد باشد.",
-      "views": "4.45K",
+      "views": "5.28K",
       "reactions": [],
       "images": [],
       "videos": []
@@ -42,7 +42,7 @@
       "id": 42946,
       "time": "2026-05-25T21:48:41+00:00",
       "text": "🚨 سلام\nآسمون غرب تهران پر از پهباده",
-      "views": "4.46K",
+      "views": "5.23K",
       "reactions": [],
       "images": [],
       "videos": []
@@ -51,7 +51,7 @@
       "id": 42945,
       "time": "2026-05-25T21:47:25+00:00",
       "text": "💗 ترکیبی / سرعتش از قبلیا بهتر❤️‍🔥❤️‍🔥\n\nروی همه نت‌ها کار میکنه😑💯\n\n{\n  \"dns\": {\n    \"tag\": \"dns-module\",\n    \"servers\": [\n      \"https://1.1.1.1/dns-query\",\n      \"https://9.9.9.9/dns-query\",\n      {\n        \"tag\": \"domestic-dns\",\n        \"address\": \"localhost\",\n        \"domains\": [\n          \"api.navad.org\",\n          \"regexp:.*\\\\.ir$\"\n        ],\n        \"skipFallback\": true\n      }\n    ],\n    \"queryStrategy\": \"UseIPv4\"\n  },\n  \"log\": {\n    \"loglevel\": \"none\"\n  },\n  \"routing\": {\n    \"rules\": [\n      {\n        \"type\": \"field\",\n        \"inboundTag\": [\n          \"dns-in\"\n        ],\n        \"outboundTag\": \"dns-out\"\n      },\n      {\n        \"type\": \"field\",\n        \"inboundTag\": [\n          \"domestic-dns\"\n        ],\n        \"outboundTag\": \"direct\"\n      },\n      {\n        \"type\": \"field\",\n        \"inboundTag\": [\n          \"dns-module\"\n        ],\n        \"outboundTag\": \"proxy\"\n      },\n      {\n        \"type\": \"field\",\n        \"domain\": [\n          \"api.navad.org\",\n          \"regexp:.*\\\\.ir$\"\n        ],\n        \"outboundTag\": \"direct\"\n      },\n      {\n        \"ip\": [\n          \"10.0.0.0/8\",\n          \"172.16.0.0/12\",\n          \"192.168.0.0/16\",\n          \"169.254.0.0/16\",\n          \"224.0.0.0/4\",\n          \"255.255.255.255\",\n          \"127.0.0.1\"\n        ],\n        \"outboundTag\": \"direct\"\n      },\n      {\n        \"port\": 443,\n        \"type\": \"field\",\n        \"network\": \"udp\",\n        \"outboundTag\": \"blocked\"\n      },\n      {\n        \"port\": 53,\n        \"type\": \"field\",\n        \"outboundTag\": \"dns-out\"\n      }\n    ],\n    \"domainStrategy\": \"AsIs\"\n  },\n  \"inbounds\": [\n    {\n      \"tag\": \"socks\",\n      \"port\": 10808,\n      \"listen\": \"127.0.0.1\",\n      \"protocol\": \"socks\",\n      \"settings\": {\n        \"udp\": true,\n        \"auth\": \"noauth\",\n        \"userLevel\": 8\n      },\n      \"sniffing\": {\n        \"enabled\": true,\n        \"routeOnly\": false,\n        \"destOverride\": [\n          \"tls\",\n          \"http\",\n          \"quic\"\n        ]\n      }\n    },\n    {\n      \"tag\": \"http\",\n      \"port\": 10809,\n      \"listen\": \"127.0.0.1\",\n      \"protocol\": \"http\",\n      \"settings\": {\n        \"userLevel\": 8\n      },\n      \"sniffing\": {\n        \"enabled\": true,\n        \"routeOnly\": false,\n        \"destOverride\": [\n          \"http\",\n          \"tls\",\n          \"quic\"\n        ]\n      }\n    },\n    {\n      \"tag\": \"dns-in\",\n      \"port\": 10853,\n      \"listen\": \"127.0.0.1\",\n      \"protocol\": \"dokodemo-door\",\n      \"settings\": {\n        \"port\": 53,\n        \"address\": \"1.1.1.1\",\n        \"network\": \"tcp,udp\"\n      }\n    }\n  ],\n  \"outbounds\": [\n    {\n      \"protocol\": \"shadowsocks\",\n      \"tag\": \"proxy\",\n      \"settings\": {\n        \"servers\": [\n          {\n            \"address\": \"87.107.83.61\",\n            \"port\": 443,\n            \"password\": \"uUjcpgVvHbz7kpqtBQcQ6ttwUIB_NF0L\",\n            \"method\": \"aes-256-gcm\"\n          }\n        ]\n      }\n    },\n    {\n      \"tag\": \"direct\",\n      \"protocol\": \"freedom\"\n    },\n    {\n      \"tag\": \"dns-out\",\n      \"protocol\": \"dns\"\n    },\n    {\n      \"tag\": \"blocked\",\n      \"protocol\": \"blackhole\"\n    }\n  ],\n  \"remarks\": \"Telegram | @proxy_kafee\"\n}\n\n\nترکیبی با سایفون وصله ✅\n\n\nآموزش ترکیبی سایفون\n\nری اکشن فراموش نکنید",
-      "views": "4.42K",
+      "views": "5.19K",
       "reactions": [],
       "images": [],
       "videos": []
@@ -60,7 +60,7 @@
       "id": 42944,
       "time": "2026-05-25T21:42:28+00:00",
       "text": "چیزی نیست توافق شده🫤🫤",
-      "views": "4.66K",
+      "views": "5.33K",
       "reactions": [],
       "images": [],
       "videos": []
@@ -69,7 +69,7 @@
       "id": 42943,
       "time": "2026-05-25T21:41:11+00:00",
       "text": "🚨 فوری_اسامی 4 کشته شده نیروی دریایی سپاه:\nپاسدار  عباس اسلامی \nپاسدار  قدرت زرنگاری\nپاسدار  عبدالرضاگلزاری\nپاسدار حسین ستوده....",
-      "views": "4.89K",
+      "views": "5.56K",
       "reactions": [],
       "images": [],
       "videos": []
@@ -78,7 +78,7 @@
       "id": 42942,
       "time": "2026-05-25T21:40:28+00:00",
       "text": "🚨  فعالیت سوخت رسانا همین الان",
-      "views": "4.8K",
+      "views": "5.41K",
       "reactions": [],
       "images": [],
       "videos": []
@@ -87,7 +87,7 @@
       "id": 42941,
       "time": "2026-05-25T21:37:07+00:00",
       "text": "#گزارش_مردمی 🚨\n\n اصفهانم صدای پدافند شدید میاد",
-      "views": "4.86K",
+      "views": "5.4K",
       "reactions": [],
       "images": [],
       "videos": []
@@ -96,7 +96,7 @@
       "id": 42940,
       "time": "2026-05-25T21:33:22+00:00",
       "text": "🚨 گزارش هایی از انفجار ها در کرمانشاه و اردبیل شنیده شده است",
-      "views": "5.04K",
+      "views": "5.51K",
       "reactions": [],
       "images": [],
       "videos": []
@@ -105,7 +105,7 @@
       "id": 42939,
       "time": "0:21",
       "text": "🚨 بندر عباس  نیم ساعت پیش",
-      "views": "5.09K",
+      "views": "5.6K",
       "reactions": [],
       "images": [],
       "videos": [
@@ -116,7 +116,7 @@
       "id": 42938,
       "time": "2026-05-25T21:28:28+00:00",
       "text": "💗 ترکیبی جدید سرعت موشکی💥🚀\n\nروی ایرانسل تست کردم / بقیه نتا تست شه\n\n{\n  \"remarks\": \"Telegram | @proxy_kafee\",\n\n\"log\": {\n\"access\": \"\",\n\"error\": \"\",\n\"loglevel\": \"info\",\n\"dnsLog\": false\n},\n\"inbounds\": [\n{\n\"tag\": \"in_proxy\",\n\"port\": 1080,\n\"protocol\": \"socks\",\n\"listen\": \"0.0.0.0\",\n\"settings\": {\n\"auth\": \"noauth\",\n\"udp\": true,\n\"userLevel\": 8\n},\n\"sniffing\": {\n\"enabled\": false\n}\n},\n{\n\"tag\": \"http-in\",\n\"port\": 10808,\n\"listen\": \"::\",\n\"protocol\": \"http\"\n}\n],\n\"outbounds\": [\n{\n\"tag\": \"proxy\",\n\"protocol\": \"trojan\",\n\"settings\": {\n\"servers\": [\n{\n\"address\": \"104.18.12.149\",\n\"method\": \"chacha20-poly1305\",\n\"ota\": false,\n\"password\": \"humanity\",\n\"port\": 443,\n\"level\": 8,\n\"flow\": \"\"\n}\n]\n},\n\"streamSettings\": {\n\"network\": \"ws\",\n\"security\": \"tls\",\n\"wsSettings\": {\n\"path\": \"/assignment\",\n\"headers\": {\n\"Host\": \"www.calmloud.com\"\n}\n},\n\"tlsSettings\": {\n\"allowInsecure\": true,\n\"serverName\": \"www.calmloud.com\",\n\"alpn\": [\n\"http/1.1\"\n],\n\"fingerprint\": \"ios\",\n\"show\": false\n},\n\"sockopt\": {\n\"dialerProxy\": \"fragment\",\n\"tcpKeepAliveIdle\": 100,\n\"tcpNoDelay\": true\n}\n},\n\"mux\": {\n\"enabled\": false,\n\"concurrency\": 8\n}\n},\n{\n\"tag\": \"fragment\",\n\"protocol\": \"freedom\",\n\"settings\": {\n\"domainStrategy\": \"AsIs\",\n\"fragment\": {\n\"packets\": \"tlshello\",\n\"length\": \"100-200\",\n\"interval\": \"10-20\"\n}\n},\n\"streamSettings\": {\n\"sockopt\": {\n\"tcpKeepAliveIdle\": 100,\n\"tcpNoDelay\": true\n}\n}\n},\n{\n\"tag\": \"direct\",\n\"protocol\": \"freedom\",\n\"settings\": {\n\"domainStrategy\": \"UseIp\"\n}\n},\n{\n\"tag\": \"blackhole\",\n\"protocol\": \"blackhole\",\n\"settings\": {}\n}\n],\n\"dns\": {\n\"servers\": [\n\"8.8.8.8\"\n]\n},\n\"routing\": {\n\"domainStrategy\": \"UseIp\",\n\"rules\": [],\n\"balancers\": []\n}\n}\n\n\nترکیبی با سایفون وصله ✅\n\n\nآموزش ترکیبی سایفون\n\nری اکشن فراموش نکنید",
-      "views": "4.89K",
+      "views": "5.3K",
       "reactions": [],
       "images": [],
       "videos": []
@@ -125,7 +125,7 @@
       "id": 42937,
       "time": "2026-05-25T21:26:31+00:00",
       "text": "🚨 #صدای مردم\nمن بابلسرم صدای انفجار میاد\n\nتوافق ینی 🫤🫤",
-      "views": "4.87K",
+      "views": "5.24K",
       "reactions": [],
       "images": [],
       "videos": []
@@ -134,7 +134,7 @@
       "id": 42936,
       "time": "2026-05-25T21:25:00+00:00",
       "text": "🚨 🚨زیرنویس صداوسیما و تایید صدای انفجار در بندرعباس",
-      "views": "5.04K",
+      "views": "5.42K",
       "reactions": [],
       "images": [],
       "videos": []
@@ -143,7 +143,7 @@
       "id": 42935,
       "time": "2026-05-25T21:21:04+00:00",
       "text": "🚨🚨 دودی که از سمت فرودگاه بندرعباس بلند شده",
-      "views": "5.29K",
+      "views": "5.73K",
       "reactions": [],
       "images": [],
       "videos": []
@@ -152,7 +152,7 @@
       "id": 42934,
       "time": "2026-05-25T21:20:24+00:00",
       "text": "🔴 #گزارش_مردمی | 23:59⏰\nصدای انفجار های در اندیمشک و شهرکرد هم بنابر گزارش های محلی شنیده شد",
-      "views": "4.95K",
+      "views": "5.29K",
       "reactions": [],
       "images": [],
       "videos": []
@@ -161,7 +161,7 @@
       "id": 42933,
       "time": "2026-05-25T21:18:40+00:00",
       "text": "پس کو این توافق 🫤",
-      "views": "4.85K",
+      "views": "5.2K",
       "reactions": [],
       "images": [],
       "videos": []
@@ -170,7 +170,7 @@
       "id": 42932,
       "time": "2026-05-25T20:59:43+00:00",
       "text": "🟠🚨| فووووریی/هم اکنون فعالیت پدافند بندرعباس",
-      "views": "5.63K",
+      "views": "5.94K",
       "reactions": [],
       "images": [],
       "videos": []
@@ -179,7 +179,7 @@
       "id": 42931,
       "time": "2026-05-25T20:36:16+00:00",
       "text": "❌  طبق گزارش کاربران ، اینترنت ملی (روبیکا و بله و...) دچار اختلال گسترده‌ای است\n\nالان همینم قطع میکنن...😂\n\n\nخواهید دید که چه خواهد شد",
-      "views": "6.38K",
+      "views": "6.65K",
       "reactions": [],
       "images": [],
       "videos": []
