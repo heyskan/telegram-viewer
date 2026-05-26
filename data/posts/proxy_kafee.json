@@ -1,12 +1,93 @@
 {
   "channel": "proxy_kafee",
-  "last_update": "2026-05-26 10:40:12",
+  "last_update": "2026-05-26 13:42:26",
   "posts": [
+    {
+      "id": 42982,
+      "time": "2026-05-26T13:36:33+00:00",
+      "text": "💗 ترکیبی جدید تست شده روی ایرانسل \n\n1 دقیقه صبر بدید وصل میشه👌\n\nvless://ccd1da99-2c30-4667-be3f-84cb63d419c7@snappfood.ir:80?path=%2Fmargbaramperialism&security=none&encryption=none&host=wss.arciman.ir&type=ws#Telegram%20%7C%20%40proxy_kafee\n\nسرعتش هم خوبه استفاده کنید💯\n\nترکیبی با سایفون وصله ✅\n\n\nآموزش ترکیبی سایفون\n\nری اکشن فراموش نکنید",
+      "views": "835",
+      "reactions": [],
+      "images": [],
+      "videos": []
+    },
+    {
+      "id": 42981,
+      "time": "2026-05-26T13:31:31+00:00",
+      "text": "🌐 نت بلاکس در ادامه افزود :\n\n\n\nاین دست آورد انقلابی را به تمام هموطنان غیور ایران تبریک می‌گویم",
+      "views": "1.7K",
+      "reactions": [],
+      "images": [],
+      "videos": []
+    },
+    {
+      "id": 42980,
+      "time": "2026-05-26T13:08:32+00:00",
+      "text": "خب دیگه واقعاً داره وصل میشه کم کم.",
+      "views": "3.11K",
+      "reactions": [],
+      "images": [],
+      "videos": []
+    },
+    {
+      "id": 42979,
+      "time": "2026-05-26T13:03:17+00:00",
+      "text": "https://t.me/proxy?server=87.248.129.199&port=25565&secret=79e344818749bd7ac519130220c25d09\n\nhttps://t.me/proxy?server=87.248.129.4&port=8443&secret=EERighJJvXrFGRMCIMJdCQ==\n\nhttps://t.me/proxy?server=87.248.129.5&port=8443&secret=EERighJJvXrFGRMCIMJdCQ==\n\nhttps://t.me/proxy?server=91.107.182.200&port=8443&secret=dd104462821249bd7ac519130220c25d09\n\nمتصل به وای فای\n@proxy_kafee",
+      "views": "3.47K",
+      "reactions": [],
+      "images": [],
+      "videos": []
+    },
+    {
+      "id": 42978,
+      "time": "2026-05-26T12:57:52+00:00",
+      "text": "💗 ترکیبی تست شده بزنید وصله😑\n\n{\"log\":{\"access\":\"\",\"error\":\"\",\"loglevel\":\"info\",\"dnsLog\":false},\"inbounds\":[{\"tag\":\"in_proxy\",\"port\":1080,\"protocol\":\"socks\",\"listen\":\"0.0.0.0\",\"settings\":{\"auth\":\"noauth\",\"udp\":true,\"userLevel\":8},\"sniffing\":{\"enabled\":false}},{\"tag\":\"http-in\",\"port\":10808,\"listen\":\"::\",\"protocol\":\"http\"}],\"outbounds\":[{\"tag\":\"proxy\",\"protocol\":\"trojan\",\"settings\":{\"servers\":[{\"address\":\"172.67.155.199\",\"method\":\"chacha20-poly1305\",\"ota\":false,\"password\":\"humanity\",\"port\":443,\"level\":8,\"flow\":\"\"}]},\"streamSettings\":{\"network\":\"ws\",\"security\":\"tls\",\"wsSettings\":{\"path\":\"/assignment\",\"headers\":{\"Host\":\"www.calmloud.com\"}},\"tlsSettings\":{\"allowInsecure\":true,\"serverName\":\"www.calmloud.com\",\"alpn\":[\"http/1.1\"],\"fingerprint\":\"ios\",\"show\":false},\"sockopt\":{\"dialerProxy\":\"fragment\",\"tcpKeepAliveIdle\":100,\"tcpNoDelay\":true}},\"mux\":{\"enabled\":false,\"concurrency\":8}},{\"tag\":\"fragment\",\"protocol\":\"freedom\",\"settings\":{\"domainStrategy\":\"AsIs\",\"fragment\":{\"packets\":\"tlshello\",\"length\":\"100-200\",\"interval\":\"10-20\"}},\"streamSettings\":{\"sockopt\":{\"tcpKeepAliveIdle\":100,\"tcpNoDelay\":true}}},{\"tag\":\"direct\",\"protocol\":\"freedom\",\"settings\":{\"domainStrategy\":\"UseIp\"}},{\"tag\":\"blackhole\",\"protocol\":\"blackhole\",\"settings\":{}}],\"remarks\":\"Telegram | @proxy_kafee\",\"dns\":{\"servers\":[\"8.8.8.8\"]},\"routing\":{\"domainStrategy\":\"UseIp\",\"rules\":[],\"balancers\":[]}}\n\nسرعتش هم خوبه استفاده کنید💯\n\nترکیبی با سایفون وصله ✅\n\n\nآموزش ترکیبی سایفون\n\nری اکشن فراموش نکنید",
+      "views": "3.6K",
+      "reactions": [],
+      "images": [],
+      "videos": []
+    },
+    {
+      "id": 42976,
+      "time": "2026-05-26T12:08:11+00:00",
+      "text": "کلودفلر باز شده واسه همین با همچین سرعتی وصله🔥 تا نبستنش هرچی دانلود دارید بزنید🤩",
+      "views": "5.19K",
+      "reactions": [],
+      "images": [],
+      "videos": []
+    },
+    {
+      "id": 42975,
+      "time": "2026-05-26T11:54:16+00:00",
+      "text": "💗 ترکیبی جدید سرعت بالا🔥🚀  بدون ترکیب و عادی هم میتونید تست کنید  vless://6202b230-417c-4d8e-b624-0f71afa9c75d@104.16.80.73:2096?path=%2F&security=tls&encryption=none&insecure=1&host=sni.111000.indevs.in&type=ws&allowInsecure=1&sni=sni.111000.indevs.in#Te…",
+      "views": "5.56K",
+      "reactions": [],
+      "images": [],
+      "videos": []
+    },
+    {
+      "id": 42974,
+      "time": "2026-05-26T11:41:46+00:00",
+      "text": "🚨 جمهوری اسلامی به قطر و پاکستان گفته تا پول واریز نشود مذاکره نخواهد کرد",
+      "views": "5.9K",
+      "reactions": [],
+      "images": [],
+      "videos": []
+    },
+    {
+      "id": 42973,
+      "time": "2026-05-26T11:18:06+00:00",
+      "text": "💗 ترکیبی جدید سرعت بالا🔥🚀\n\nبدون ترکیب و عادی هم میتونید تست کنید\n\nvless://6202b230-417c-4d8e-b624-0f71afa9c75d@104.16.80.73:2096?path=%2F&security=tls&encryption=none&insecure=1&host=sni.111000.indevs.in&type=ws&allowInsecure=1&sni=sni.111000.indevs.in#Telegram%20%7C%20%40proxy_kafee\n\nروی همه اینترنت ها اوکی هست\n\nترکیبی با سایفون وصله ✅\n\n\nآموزش ترکیبی سایفون\n\nری اکشن فراموش نکنید",
+      "views": "6.35K",
+      "reactions": [],
+      "images": [],
+      "videos": []
+    },
     {
       "id": 42972,
       "time": "2026-05-26T10:25:47+00:00",
       "text": "🔴تسنیم :\nدیوان عدالت اداری فعلاً جلوی اجرای مصوبه تشکیل «ستاد ویژه ساماندهی و راهبری فضای مجازی کشور» رو گرفت؛\n\nطبق اعلام دیوان، تا وقتی پرونده‌ها و شکایت‌ها کامل بررسی نشن، هیچ‌کدوم از تصمیم‌ها و مصوبه‌های این ستاد اعتبار اجرایی ندارن و قابل اجرا نیستن.\n\n+یعنی یه‌جورایی تصمیمی که دیروز واسه بازکردن اینترنت بین‌الملل گرفتن، سرش گرد شد.\n\n@proxy_kafee",
-      "views": "1.33K",
+      "views": "6.84K",
       "reactions": [],
       "images": [],
       "videos": []
@@ -15,7 +96,7 @@
       "id": 42970,
       "time": "2026-05-26T09:45:49+00:00",
       "text": "🚨 دیشب پس برخی مخاطبان ما اشتباه نگفتم خبرگزاری سپاه نیز تایید کرده..\nدیشب در بابلسر، قم و اصفهان را دیشب مخاطبان زیادی بهم گفتن صدای انفجار شنیدن..",
-      "views": "3.28K",
+      "views": "7.16K",
       "reactions": [],
       "images": [],
       "videos": []
@@ -24,7 +105,7 @@
       "id": 42969,
       "time": "2026-05-26T09:40:18+00:00",
       "text": "💗ترکیبی تازه نفس و پایدار😑\n\nروی ایرانسل تست کردم / بقیه ‌نت‌ها تست شه\n\n{\n  \"remarks\": \"Telegram | @proxy_kafee\",\n\n\"log\": {\n\"access\": \"\",\n\"error\": \"\",\n\"loglevel\": \"info\",\n\"dnsLog\": false\n},\n\"inbounds\": [\n{\n\"tag\": \"in_proxy\",\n\"port\": 1080,\n\"protocol\": \"socks\",\n\"listen\": \"0.0.0.0\",\n\"settings\": {\n\"auth\": \"noauth\",\n\"udp\": true,\n\"userLevel\": 8\n},\n\"sniffing\": {\n\"enabled\": false\n}\n},\n{\n\"tag\": \"http-in\",\n\"port\": 10808,\n\"listen\": \"::\",\n\"protocol\": \"http\"\n}\n],\n\"outbounds\": [\n{\n\"tag\": \"proxy\",\n\"protocol\": \"trojan\",\n\"settings\": {\n\"servers\": [\n{\n\"address\": \"172.64.152.23\",\n\"method\": \"chacha20-poly1305\",\n\"ota\": false,\n\"password\": \"humanity\",\n\"port\": 443,\n\"level\": 8,\n\"flow\": \"\"\n}\n]\n},\n\"streamSettings\": {\n\"network\": \"ws\",\n\"security\": \"tls\",\n\"wsSettings\": {\n\"path\": \"/assignment\",\n\"headers\": {\n\"Host\": \"www.calmloud.com\"\n}\n},\n\"tlsSettings\": {\n\"allowInsecure\": true,\n\"serverName\": \"www.calmloud.com\",\n\"alpn\": [\n\"http/1.1\"\n],\n\"fingerprint\": \"ios\",\n\"show\": false\n},\n\"sockopt\": {\n\"dialerProxy\": \"fragment\",\n\"tcpKeepAliveIdle\": 100,\n\"tcpNoDelay\": true\n}\n},\n\"mux\": {\n\"enabled\": false,\n\"concurrency\": 8\n}\n},\n{\n\"tag\": \"fragment\",\n\"protocol\": \"freedom\",\n\"settings\": {\n\"domainStrategy\": \"AsIs\",\n\"fragment\": {\n\"packets\": \"tlshello\",\n\"length\": \"100-200\",\n\"interval\": \"10-20\"\n}\n},\n\"streamSettings\": {\n\"sockopt\": {\n\"tcpKeepAliveIdle\": 100,\n\"tcpNoDelay\": true\n}\n}\n},\n{\n\"tag\": \"direct\",\n\"protocol\": \"freedom\",\n\"settings\": {\n\"domainStrategy\": \"UseIp\"\n}\n},\n{\n\"tag\": \"blackhole\",\n\"protocol\": \"blackhole\",\n\"settings\": {}\n}\n],\n\"dns\": {\n\"servers\": [\n\"8.8.8.8\"\n]\n},\n\"routing\": {\n\"domainStrategy\": \"UseIp\",\n\"rules\": [],\n\"balancers\": []\n}\n}\n\n\n\nوصل شیرو خورشید ویتوری\n\nترکیبی با سایفون وصله ✅\n\n\nآموزش ترکیبی سایفون\n\nری اکشن فراموش نکنید",
-      "views": "3.3K",
+      "views": "6.39K",
       "reactions": [],
       "images": [],
       "videos": []
@@ -33,7 +114,7 @@
       "id": 42964,
       "time": "2026-05-26T09:21:18+00:00",
       "text": "👽 آموزش اتصال با فیلترشکن مهسا\n\n😯مراحل رو با MahsaNG انجام بدید\n\n😯 اگر برنامه رو ندارید:\nhttps://uplod.ir/urlfu2uuf2sp/MahsaNG_v16.zip.htm\n\n🔸از منوی برنامه ، روی Get EMS Config بزنید، کانفیگ دریافت کنید\n\n🔸دوتا کانفیگ ترکیبی میبینید یکی رو انتخاب کنید.\nفقط از دو تای بالا استفاده کنیدکه نوشته ترکیبی \n\n🔸توی برنامه MahsaNg قسمت تنظیمات سایفون Protocol رو روی Auto بذارید و Aggressive رو ON کنید و Save بزنید\n\n🔸دکمه psiphon-after از منوی F رو روشن کنید و Save بزنید\n\n🔸نیازی به روشن کردن فرگمنت از منوی F نیست\n\n🔸دکمه M پایین صفحه سمت راست رو روشن کنید و 30 ثانیه صبر کنید تا متصل بشه پینگ بگیرید\n@proxy_kafee",
-      "views": "3.77K",
+      "views": "6.36K",
       "reactions": [],
       "images": [],
       "videos": []
@@ -42,7 +123,7 @@
       "id": 42963,
       "time": "2026-05-26T09:01:54+00:00",
       "text": "{\n  \"remarks\": \"@proxy_kafee\",\n\n\"log\": {\n\"access\": \"\",\n\"error\": \"\",\n\"loglevel\": \"info\",\n\"dnsLog\": false\n},\n\"inbounds\": [\n{\n\"tag\": \"in_proxy\",\n\"port\": 1080,\n\"protocol\": \"socks\",\n\"listen\": \"0.0.0.0\",\n\"settings\": {\n\"auth\": \"noauth\",\n\"udp\": true,\n\"userLevel\": 8\n},\n\"sniffing\": {\n\"enabled\": false\n}\n},\n{\n\"tag\": \"http-in\",\n\"port\": 10808,\n\"listen\": \"::\",\n\"protocol\": \"http\"\n}\n],\n\"outbounds\": [\n{\n\"tag\": \"proxy\",\n\"protocol\": \"trojan\",\n\"settings\": {\n\"servers\": [\n{\n\"address\": \"104.18.13.149\",\n\"method\": \"chacha20-poly1305\",\n\"ota\": false,\n\"password\": \"humanity\",\n\"port\": 443,\n\"level\": 8,\n\"flow\": \"\"\n}\n]\n},\n\"streamSettings\": {\n\"network\": \"ws\",\n\"security\": \"tls\",\n\"wsSettings\": {\n\"path\": \"/assignment\",\n\"headers\": {\n\"Host\": \"www.multiplydose.com\"\n}\n},\n\"tlsSettings\": {\n\"allowInsecure\": true,\n\"serverName\": \"www.multiplydose.com\",\n\"alpn\": [\n\"http/1.1\"\n],\n\"fingerprint\": \"ios\",\n\"show\": false\n},\n\"sockopt\": {\n\"dialerProxy\": \"fragment\",\n\"tcpKeepAliveIdle\": 100,\n\"tcpNoDelay\": true\n}\n},\n\"mux\": {\n\"enabled\": false,\n\"concurrency\": 8\n}\n},\n{\n\"tag\": \"fragment\",\n\"protocol\": \"freedom\",\n\"settings\": {\n\"domainStrategy\": \"AsIs\",\n\"fragment\": {\n\"packets\": \"tlshello\",\n\"length\": \"100-200\",\n\"interval\": \"10-20\"\n}\n},\n\"streamSettings\": {\n\"sockopt\": {\n\"tcpKeepAliveIdle\": 100,\n\"tcpNoDelay\": true\n}\n}\n},\n{\n\"tag\": \"direct\",\n\"protocol\": \"freedom\",\n\"settings\": {\n\"domainStrategy\": \"UseIp\"\n}\n},\n{\n\"tag\": \"blackhole\",\n\"protocol\": \"blackhole\",\n\"settings\": {}\n}\n],\n\"dns\": {\n\"servers\": [\n\"8.8.8.8\"\n]\n},\n\"routing\": {\n\"domainStrategy\": \"UseIp\",\n\"rules\": [],\n\"balancers\": []\n}\n}\n\nوصل شیرو خورشید ویتوری\n\nترکیبی با سایفون وصله ✅\n\n\nآموزش ترکیبی سایفون\n\nری اکشن فراموش نکنید",
-      "views": "3.75K",
+      "views": "5.86K",
       "reactions": [],
       "images": [],
       "videos": []
@@ -51,7 +132,7 @@
       "id": 42962,
       "time": "2026-05-26T08:54:01+00:00",
       "text": "دوستان دلتون خوش به برگشت اینترنت نکنید تو این شرایط برنمیگردونن چون شرایط خوبی نیست  این وعده های تو خالی همیشه شنیدیم 😊🙏 دلخوش به این مقدار نباشیم",
-      "views": "4.03K",
+      "views": "6.11K",
       "reactions": [],
       "images": [],
       "videos": []
@@ -60,81 +141,7 @@
       "id": 42961,
       "time": "2026-05-26T08:38:11+00:00",
       "text": "ظاهراً صفحه مربوط به درخواست و خرید اینترنت پرو از سایت همراه اول حذف شده :)\n\nفقط اون کسایی که خریدن 😂\n\nکامنت باز",
-      "views": "4.54K",
-      "reactions": [],
-      "images": [],
-      "videos": []
-    },
-    {
-      "id": 42959,
-      "time": "2026-05-26T07:58:31+00:00",
-      "text": "🙅‍♂️ ترکیبی جدید برای WiFi هست\n\nss://YWVzLTI1Ni1nY206cXcyQndlcXdlM1A2OTdHMmVy@185.60.137.65:16541#Telegram%20%7C%20%40proxy_kafee\n\nسرعتش بد نیست در حد WiFi🥰\n\nترکیبی با سایفون وصله ✅\n\n\nآموزش ترکیبی سایفون\n\nری اکشن فراموش نکنید",
-      "views": "5.12K",
-      "reactions": [],
-      "images": [],
-      "videos": []
-    },
-    {
-      "id": 42958,
-      "time": "2026-05-26T06:27:39+00:00",
-      "text": "✈️ ترکیبی تازه نفس سرعت بهتر🔥🚀\n\n{\n  \"remarks\": \"Telegram | @proxy_kafee\",\n\n\"log\": {\n\"access\": \"\",\n\"error\": \"\",\n\"loglevel\": \"info\",\n\"dnsLog\": false\n},\n\"inbounds\": [\n{\n\"tag\": \"in_proxy\",\n\"port\": 1080,\n\"protocol\": \"socks\",\n\"listen\": \"0.0.0.0\",\n\"settings\": {\n\"auth\": \"noauth\",\n\"udp\": true,\n\"userLevel\": 8\n},\n\"sniffing\": {\n\"enabled\": false\n}\n},\n{\n\"tag\": \"http-in\",\n\"port\": 10808,\n\"listen\": \"::\",\n\"protocol\": \"http\"\n}\n],\n\"outbounds\": [\n{\n\"tag\": \"proxy\",\n\"protocol\": \"trojan\",\n\"settings\": {\n\"servers\": [\n{\n\"address\": \"104.18.31.78\",\n\"method\": \"chacha20-poly1305\",\n\"ota\": false,\n\"password\": \"humanity\",\n\"port\": 443,\n\"level\": 8,\n\"flow\": \"\"\n}\n]\n},\n\"streamSettings\": {\n\"network\": \"ws\",\n\"security\": \"tls\",\n\"wsSettings\": {\n\"path\": \"/assignment\",\n\"headers\": {\n\"Host\": \"www.calmloud.com\"\n}\n},\n\"tlsSettings\": {\n\"allowInsecure\": true,\n\"serverName\": \"www.calmloud.com\",\n\"alpn\": [\n\"http/1.1\"\n],\n\"fingerprint\": \"ios\",\n\"show\": false\n},\n\"sockopt\": {\n\"dialerProxy\": \"fragment\",\n\"tcpKeepAliveIdle\": 100,\n\"tcpNoDelay\": true\n}\n},\n\"mux\": {\n\"enabled\": false,\n\"concurrency\": 8\n}\n},\n{\n\"tag\": \"fragment\",\n\"protocol\": \"freedom\",\n\"settings\": {\n\"domainStrategy\": \"AsIs\",\n\"fragment\": {\n\"packets\": \"tlshello\",\n\"length\": \"100-200\",\n\"interval\": \"10-20\"\n}\n},\n\"streamSettings\": {\n\"sockopt\": {\n\"tcpKeepAliveIdle\": 100,\n\"tcpNoDelay\": true\n}\n}\n},\n{\n\"tag\": \"direct\",\n\"protocol\": \"freedom\",\n\"settings\": {\n\"domainStrategy\": \"UseIp\"\n}\n},\n{\n\"tag\": \"blackhole\",\n\"protocol\": \"blackhole\",\n\"settings\": {}\n}\n],\n\"dns\": {\n\"servers\": [\n\"8.8.8.8\"\n]\n},\n\"routing\": {\n\"domainStrategy\": \"UseIp\",\n\"rules\": [],\n\"balancers\": []\n}\n}\n\n\nترکیبی با سایفون وصله ✅\n\n\nآموزش ترکیبی سایفون\n\nری اکشن فراموش نکنید",
-      "views": "5.87K",
-      "reactions": [],
-      "images": [],
-      "videos": []
-    },
-    {
-      "id": 42957,
-      "time": "0:50",
-      "text": "آموزش تصویری اپلیکیشن مهسا\n\n@proxy_kafee😑",
-      "views": "5.93K",
-      "reactions": [],
-      "images": [],
-      "videos": [
-        "data/media/proxy_kafee_42957_a4224b32.mp4"
-      ]
-    },
-    {
-      "id": 42955,
-      "time": "2026-05-26T05:40:25+00:00",
-      "text": "#ارسالی این روش رو تست کردم فوق العاده است بذارید کانال\n\nاگر کلاینت MahsaNG رو دارید انجام بدید وصل میشه\nلینک داخلی\n\nاز منوی برنامه مهسا ان جی، روی Get EMS Config بزنید، کانفیگ دریافت کنید\n\nدو عدد کانفیگ ترکیبی مشاهده میکنید یکی رو انتخاب کنید. (بالای برنامه اضافه میشه اون دوتا کانفیگ. باید حتما یکی از اون دوتارو انتخاب کنید)\nتوی برنامه مهسا قسمت تنظیمات سایفون Protocol رو روی Auto بذارید و Aggressive رو ON کنید و Save بزنید\nدکمه psiphon-after از منوی F رو روشن کنید و Save بزنید\nنیازی به روشن کردن فرگمنت از منوی F نیست\n\nدکمه M پایین صفحه سمت راست رو روشن کنید و 30 ثانیه صبر کنید تا متصل بشه. پینگ بگیرید و از کانفیگ رایگان لذت ببرید\n\n@proxy_kafee",
-      "views": "5.9K",
-      "reactions": [],
-      "images": [],
-      "videos": []
-    },
-    {
-      "id": 42954,
-      "time": "2026-05-26T05:16:19+00:00",
-      "text": "عصبانیت رسانه شهرداری تهران از مصوبه‌ای که اینترنت را برای همه مردم می‌خواهد\n\nروزنامه همشهری نوشت:\n🔹اولاً اصل تشکیل این ستاد ویژه فضای مجازی محل اشکال جدی است؛ چراکه با احکام صریح امام شهید و دیگر قوانین بالادستی، ازجمله قانون اساسی، مصوبات مجلس، شورای‌عالی امنیت ملی و شورای‌عالی فضای مجازی مغایرت دارد.\n🔹رهبر شهید انقلاب صراحتاً در سال۱۳۹۰ فرمودند مرجع «سیاستگذاری، تصمیم‌گیری، مدیریت و هماهنگی» در فضای مجازی، شورای‌عالی فضای مجازی است. در سال ۱۳۹۴ نیز مجدداً تأکید کردند شوراها و ساختارهای موازی با شورای‌عالی فضای مجازی باید منحل شوند، نه اینکه ساختار موازی جدید ایجاد شود.\n🔹تصمیم دیروز درباره تعیین زمان برای بازشدن اینترنت، بدعتی دیگر بر همان بدعت است. این تصمیم، خلاف صریح مصوبه شورای‌عالی امنیت ملی است و از جهت محتوایی نیز بسیار نادرست است؛ موجب اخلال در فرماندهی واحد در شرایط جنگی می‌شود، مردم را دچار تشویش و سردرگمی می‌کند و به دشمن پیام اختلاف و چندصدایی در مدیریت بحران می‌دهد.\n🔹فراموش نکنیم محدودیت اینترنت، تصمیمی امنیتی در شرایط جنگی برای صیانت از مردم است. مردم به اندازه کافی در تنگنای شرایط جنگی هستند. نباید با تصمیم‌های نادرست، فشار روانی و سردرگمی را بیشتر کرد. امروز زمان همدلی با مردم، وحدت فرماندهی و اقدام هماهنگ در سطح حکمرانی است؛ نه چندصدایی و تصمیمات موازی.\n🔹بله اینستاگرام.\n\nگفتم ... گرد",
-      "views": "6.23K",
-      "reactions": [],
-      "images": [],
-      "videos": []
-    },
-    {
-      "id": 42953,
-      "time": "2026-05-26T04:35:24+00:00",
-      "text": "من جلوتر از هر خبری که اعلام کنند اخبار پوشش دادم لذت ببرید 😑",
-      "views": "6.74K",
-      "reactions": [],
-      "images": [],
-      "videos": []
-    },
-    {
-      "id": 42952,
-      "time": "2026-05-26T04:29:16+00:00",
-      "text": "🚨خبرگزاری ان بی سی:\nآمریکا حملاتی به جنوب ایران انجام داد.",
-      "views": "6.86K",
-      "reactions": [],
-      "images": [],
-      "videos": []
-    },
-    {
-      "id": 42951,
-      "time": "2026-05-25T22:33:16+00:00",
-      "text": "🚨 🔴کانال 14 اسرائیل: \"سلام خامنه‌ای کوچیکه\"",
-      "views": "9.9K",
+      "views": "6.44K",
       "reactions": [],
       "images": [],
       "videos": []
