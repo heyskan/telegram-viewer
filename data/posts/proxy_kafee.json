@@ -1,12 +1,66 @@
 {
   "channel": "proxy_kafee",
-  "last_update": "2026-05-27 17:47:50",
+  "last_update": "2026-05-27 20:14:01",
   "posts": [
+    {
+      "id": 43078,
+      "time": "2026-05-27T20:04:02+00:00",
+      "text": "میگن گوگل پلی رفع فیلتر شده \n+من تست کردم بالا میاره ولی دانلود نمیکنه\nتا باز آپدیت کنید",
+      "views": "2.28K",
+      "reactions": [],
+      "images": [],
+      "videos": []
+    },
+    {
+      "id": 43077,
+      "time": "2026-05-27T18:35:24+00:00",
+      "text": "🛜🛜 کانفیگ پرسرعت برای ایرانسل / رایتل\n\n🚨 اگه قطع شد یه بار خاموش روشن کن\n\n{\"remarks\":\"Telegram | @proxy_kafee\",\"log\":{\"loglevel\":\"warning\"},\"inbounds\":[{\"tag\":\"socks\",\"port\":10808,\"protocol\":\"socks\",\"settings\":{\"auth\":\"noauth\",\"udp\":true,\"userLevel\":8},\"sniffing\":{\"enabled\":true,\"destOverride\":[\"http\",\"tls\",\"fakedns\",\"fakedns\"],\"routeOnly\":false}},{\"tag\":\"dns-in\",\"port\":10853,\"protocol\":\"dokodemo-door\",\"listen\":\"127.0.0.1\",\"settings\":{\"address\":\"1.1.1.1\",\"port\":53,\"network\":\"tcp,udp\"}}],\"outbounds\":[{\"tag\":\"proxy\",\"protocol\":\"vless\",\"settings\":{\"vnext\":[{\"address\":\"snapp.ir\",\"port\":2052,\"users\":[{\"id\":\"babfefd4-42e9-437e-a03f-2358a967c3af\",\"level\":8,\"encryption\":\"none\"}]}]},\"streamSettings\":{\"network\":\"ws\",\"wsSettings\":{\"path\":\"/\",\"headers\":{\"Host\":\"cfcpanel.namasha.top\"}}},\"mux\":{\"enabled\":false,\"concurrency\":-1,\"xudpConcurrency\":8,\"xudpProxyUDP443\":\"\"}},{\"tag\":\"direct\",\"protocol\":\"freedom\",\"settings\":{\"domainStrategy\":\"UseIP\"},\"mux\":{\"enabled\":false,\"concurrency\":8,\"xudpConcurrency\":8,\"xudpProxyUDP443\":\"\"}},{\"tag\":\"block\",\"protocol\":\"blackhole\",\"settings\":{\"response\":{\"type\":\"http\"}},\"mux\":{\"enabled\":false,\"concurrency\":8,\"xudpConcurrency\":8,\"xudpProxyUDP443\":\"\"}},{\"tag\":\"dns-out\",\"protocol\":\"dns\",\"mux\":{\"enabled\":false,\"concurrency\":8,\"xudpConcurrency\":8,\"xudpProxyUDP443\":\"\"}}],\"dns\":{\"servers\":[{\"address\":\"fakedns\",\"domains\":[\"geosite:cn\"]},\"1.1.1.1\"],\"hosts\":{\"domain:googleapis.cn\":\"googleapis.com\",\"dns.alidns.com\":[\"223.5.5.5\",\"223.6.6.6\",\"2400:3200::1\",\"2400:3200:baba::1\"],\"one.one.one.one\":[\"1.1.1.1\",\"1.0.0.1\",\"2606:4700:4700::1111\",\"2606:4700:4700::1001\"],\"dot.pub\":[\"1.12.12.12\",\"120.53.53.53\"],\"dns.google\":[\"8.8.8.8\",\"8.8.4.4\",\"2001:4860:4860::8888\",\"2001:4860:4860::8844\"],\"dns.quad9.net\":[\"9.9.9.9\",\"149.112.112.112\",\"2620:fe::fe\",\"2620:fe::9\"],\"common.dot.dns.yandex.net\":[\"77.88.8.8\",\"77.88.8.1\",\"2a02:6b8::feed:0ff\",\"2a02:6b8:0:1::feed:0ff\"]}},\"routing\":{\"domainStrategy\":\"IPIfNonMatch\",\"rules\":[{\"type\":\"field\",\"outboundTag\":\"dns-out\",\"inboundTag\":[\"dns-in\"]},{\"type\":\"field\",\"ip\":[\"1.1.1.1\"],\"outboundTag\":\"proxy\",\"port\":\"53\"},{\"type\":\"field\",\"ip\":[\"223.5.5.5\"],\"outboundTag\":\"direct\",\"port\":\"53\"},{\"type\":\"field\",\"outboundTag\":\"dns-out\",\"inboundTag\":[\"dns-in\"]},{\"type\":\"field\",\"ip\":[\"1.1.1.1\"],\"outboundTag\":\"proxy\",\"port\":\"53\"},{\"type\":\"field\",\"ip\":[\"223.5.5.5\"],\"outboundTag\":\"direct\",\"port\":\"53\"}]},\"fakedns\":[{\"ipPool\":\"198.18.0.0/15\",\"poolSize\":10000}]}\n\nترکیبی با سایفون وصله ✅\n\n\nآموزش ترکیبی سایفون\n\nری اکشن فراموش نکنید",
+      "views": "9.51K",
+      "reactions": [],
+      "images": [],
+      "videos": []
+    },
+    {
+      "id": 43076,
+      "time": "2026-05-27T18:22:43+00:00",
+      "text": "کانفیگ ویژه نپسترنت مخصوص اینترنت ملی همه اپراتورها رایگان پر سرعت عالی🔥\n\n🚦دانلود از گوگل پلی استوری\n\n📲دانلود برای آیفون\n\n🖥دانلود اپلیکیشن Npv\n\n🎸@proxy_kafee🎸",
+      "views": "10.8K",
+      "reactions": [],
+      "images": [],
+      "videos": []
+    },
+    {
+      "id": 43075,
+      "time": "2026-05-27T18:09:27+00:00",
+      "text": "@proxy_kafee🌞👑.ovpn",
+      "views": "11K",
+      "reactions": [],
+      "images": [],
+      "videos": []
+    },
+    {
+      "id": 43074,
+      "time": "2026-05-27T18:08:29+00:00",
+      "text": "کانفیگ open vpn 😈\n\nدانلود فایل برنامه open vpn\n\nحتما آپدیت کنید از گوگل پلی ❤️‍🔥",
+      "views": "11.4K",
+      "reactions": [],
+      "images": [],
+      "videos": []
+    },
+    {
+      "id": 43073,
+      "time": "2026-05-27T18:06:51+00:00",
+      "text": "کانفیگ sing box جدید \n📱دانلود برنامه sing box\n\nلینک گیت هاب \n\n@singbox1",
+      "views": "11.2K",
+      "reactions": [],
+      "images": [],
+      "videos": []
+    },
     {
       "id": 43072,
       "time": "2026-05-27T17:13:39+00:00",
       "text": "🚨 ترامپ:\nآنها شروع به دادن چیزهایی که باید به ما بدهند کرده‌اند. اگر این کار را بکنند، عالی است.\nاگر نکنند، هگستث آنها را تمام خواهد کرد.",
-      "views": "4.92K",
+      "views": "14K",
       "reactions": [],
       "images": [],
       "videos": []
@@ -15,7 +69,7 @@
       "id": 43071,
       "time": "2026-05-27T17:06:41+00:00",
       "text": "دلم نمیخواد باز آفلاین بشید کاش هیچوقت فیلتری وجود نداشت 🚶",
-      "views": "5.81K",
+      "views": "14K",
       "reactions": [],
       "images": [],
       "videos": []
@@ -24,7 +78,7 @@
       "id": 43070,
       "time": "2026-05-27T17:03:31+00:00",
       "text": "اصلا وضعیت اینترنت خوب نیست",
-      "views": "6.49K",
+      "views": "14.2K",
       "reactions": [],
       "images": [],
       "videos": []
@@ -33,7 +87,7 @@
       "id": 43069,
       "time": "2026-05-27T16:31:17+00:00",
       "text": "https://t.me/proxy?server=ui.geodns.info.&port=4455&secret=7nnjRIGHSb16xRkTAiDCXQk%3D@proxy_kafee\n\nhttps://t.me/proxy?server=tg.capycore.ru&port=443&secret=27ebe852539fb8ec5f327c73262bb721@proxy_kafee\n\nپروکسی 😊\n\n@proxy_kafee",
-      "views": "8.63K",
+      "views": "15.6K",
       "reactions": [],
       "images": [],
       "videos": []
@@ -42,7 +96,7 @@
       "id": 43068,
       "time": "2026-05-27T16:07:41+00:00",
       "text": "https://t.me/proxy?server=87.248.129.129&port=15&secret=ee1603010200010001fc030386e24c3add63646e2e79656b74616e65742e636f6d&@proxy_kafee\n\n🟨 پروکسی متصل برای ایرانسل / رایتل\n\nhttps://t.me/proxy?server=mt.corph.ru&port=443&secret=dd2ed7517b077ef414e24b106e0729335d\n\ntg://proxy?server=tg.capycore.ru&port=443&secret=27ebe852539fb8ec5f327c73262bb72\n\n@proxy_kafee😑",
-      "views": "9.88K",
+      "views": "15.8K",
       "reactions": [],
       "images": [],
       "videos": []
@@ -51,7 +105,7 @@
       "id": 43067,
       "time": "0:20",
       "text": "|🎂|\nمیرقصم به ساز خودم\n«تولدم مبارک»\nتنها آرزوم اینه ایرانی آزاد آباد داشته باشیم \nودل هممون خوش \n🦦🎂🤎\n\njoker 🃏",
-      "views": "10.9K",
+      "views": "15.6K",
       "reactions": [],
       "images": [],
       "videos": [
@@ -62,7 +116,7 @@
       "id": 43066,
       "time": "2026-05-27T15:30:14+00:00",
       "text": "کانفیگ open vpn 😈\n\nدانلود فایل برنامه open vpn\n\nحتما آپدیت کنید از گوگل پلی ❤️‍🔥",
-      "views": "10.7K",
+      "views": "14.8K",
       "reactions": [],
       "images": [],
       "videos": []
@@ -71,7 +125,7 @@
       "id": 43065,
       "time": "2026-05-27T15:23:33+00:00",
       "text": "https://t.me/proxy?server=ui.geodns.info.&port=4455&secret=7nnjRIGHSb16xRkTAiDCXQk%3D@proxy_kafee\n\n\n#پروکسی\n@proxy_kafee",
-      "views": "10.9K",
+      "views": "15K",
       "reactions": [],
       "images": [],
       "videos": []
@@ -80,7 +134,7 @@
       "id": 43063,
       "time": "2026-05-27T14:55:35+00:00",
       "text": "https://t.me/proxy?server=87.248.129.205&port=25565&secret=79e344818749bd7ac519130220c25d09@proxy_kafee\n\nپروکسی 😈\n\n@proxy_kafee",
-      "views": "12.4K",
+      "views": "16.3K",
       "reactions": [],
       "images": [],
       "videos": []
@@ -89,7 +143,7 @@
       "id": 43062,
       "time": "2026-05-27T14:47:59+00:00",
       "text": "https://t.me/proxy?server=tg.capycore.ru&port=443&secret=27ebe852539fb8ec5f327c73262bb721&@proxy_kafee\n\nپروکسی متصل 😑\n\n@proxy_kafee",
-      "views": "12.3K",
+      "views": "16K",
       "reactions": [],
       "images": [],
       "videos": []
@@ -98,7 +152,7 @@
       "id": 43061,
       "time": "2026-05-27T14:32:39+00:00",
       "text": "کانفیگ sing box جدید \n📱دانلود برنامه sing box\n\nلینک گیت هاب \n\n@singbox1",
-      "views": "12.6K",
+      "views": "15.8K",
       "reactions": [],
       "images": [],
       "videos": []
@@ -107,7 +161,7 @@
       "id": 43060,
       "time": "2026-05-27T14:18:52+00:00",
       "text": "کانفیگ sing box جدید \n📱دانلود برنامه sing box\n\nلینک گیت هاب \n\n@singbox1",
-      "views": "12K",
+      "views": "15.3K",
       "reactions": [],
       "images": [],
       "videos": []
@@ -116,43 +170,7 @@
       "id": 43056,
       "time": "2026-05-27T14:06:56+00:00",
       "text": "کانفیگ open vpn 😈\n\nدانلود فایل برنامه open vpn\n\nحتما آپدیت کنید از گوگل پلی ❤️‍🔥",
-      "views": "13.6K",
-      "reactions": [],
-      "images": [],
-      "videos": []
-    },
-    {
-      "id": 43055,
-      "time": "2026-05-27T13:58:22+00:00",
-      "text": "کانفیگ sing box جدید \n📱دانلود برنامه sing box\n\nلینک گیت هاب \n\n@singbox1",
-      "views": "13.2K",
-      "reactions": [],
-      "images": [],
-      "videos": []
-    },
-    {
-      "id": 43054,
-      "time": "2026-05-27T13:39:25+00:00",
-      "text": "AM TUNNEL LITE VPN\n\n😑آموزش وصل شدن\n\n@proxy_kafee",
-      "views": "13.9K",
-      "reactions": [],
-      "images": [],
-      "videos": []
-    },
-    {
-      "id": 43053,
-      "time": "2026-05-27T12:55:24+00:00",
-      "text": "⭕ طبق گزارش جدید نت‌بلاکس و مطابق تصویر نمودار اینترنت ایران ، اینترنت برخلاف وعده‌های دولت ، به سطح قبل از دی‌ماه برنگشته و فیلترینگ شدیدتری نسبت به اون زمان روش اعمال شده!\n\n❌  سرعته کم ، اتصال ناپایدار ، یکپارچه نبودن اتصال در اپراتور‌های مختلف و... از مشکلات جدی اینترنت به ظاهر بین المللی کنونی است!",
-      "views": "16.3K",
-      "reactions": [],
-      "images": [],
-      "videos": []
-    },
-    {
-      "id": 43052,
-      "time": "2026-05-27T12:49:39+00:00",
-      "text": "vless://c54f7285-92f8-4554-a592-cab6eef2a7e8@varzesh3.com:8080?path=%2F&security=none&encryption=none&host=cfcpanel.namasha.top&type=ws#Gold-%40proxy_kafee\nvless://ae0dd58e-e222-40bf-84ae-365a97532737@104.16.63.25:443?path=%2Fhelp%2Fjumping&security=tls&encryption=none&insecure=0&host=pagescm.freen6.de5.net&fp=chrome&type=ws&allowInsecure=0&sni=pagescm.freen6.de5.net#NOOSHABE%20%40proxy_kafee\n#ویتوری \n\n@proxy_kafee",
-      "views": "15.1K",
+      "views": "16.8K",
       "reactions": [],
       "images": [],
       "videos": []
