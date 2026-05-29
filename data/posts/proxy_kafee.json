@@ -1,12 +1,39 @@
 {
   "channel": "proxy_kafee",
-  "last_update": "2026-05-29 01:30:54",
+  "last_update": "2026-05-29 05:54:14",
   "posts": [
+    {
+      "id": 43158,
+      "time": "2026-05-29T05:04:39+00:00",
+      "text": "{\"remarks\":\"🍀@proxy_kafee\",\"log\":{\"loglevel\":\"warning\"},\"inbounds\":[{\"tag\":\"socks\",\"port\":10808,\"protocol\":\"socks\",\"settings\":{\"auth\":\"noauth\",\"udp\":true,\"userLevel\":8},\"sniffing\":{\"enabled\":true,\"destOverride\":[\"http\",\"tls\"],\"routeOnly\":false}}],\"outbounds\":[{\"tag\":\"proxy\",\"protocol\":\"vless\",\"settings\":{\"vnext\":[{\"address\":\"45.130.125.69\",\"port\":443,\"users\":[{\"id\":\"e258977b-e413-4718-a3af-02d75492c349\",\"level\":8,\"encryption\":\"none\"}]}]},\"streamSettings\":{\"network\":\"ws\",\"security\":\"tls\",\"wsSettings\":{\"path\":\"/\",\"headers\":{\"Host\":\"jp.aniua.qzz.io\"}},\"tlsSettings\":{\"allowInsecure\":false,\"serverName\":\"jp.aniua.qzz.io\",\"show\":false}},\"mux\":{\"enabled\":false,\"concurrency\":-1,\"xudpConcurrency\":8,\"xudpProxyUDP443\":\"\"}},{\"tag\":\"direct\",\"protocol\":\"freedom\",\"settings\":{\"domainStrategy\":\"UseIP\"},\"mux\":{\"enabled\":false,\"concurrency\":8,\"xudpConcurrency\":8,\"xudpProxyUDP443\":\"\"}},{\"tag\":\"block\",\"protocol\":\"blackhole\",\"settings\":{\"response\":{\"type\":\"http\"}},\"mux\":{\"enabled\":false,\"concurrency\":8,\"xudpConcurrency\":8,\"xudpProxyUDP443\":\"\"}}],\"dns\":{\"servers\":[\"1.1.1.1\"],\"hosts\":{\"domain:googleapis.cn\":\"googleapis.com\",\"dns.alidns.com\":[\"223.5.5.5\",\"223.6.6.6\",\"2400:3200::1\",\"2400:3200:baba::1\"],\"one.one.one.one\":[\"1.1.1.1\",\"1.0.0.1\",\"2606:4700:4700::1111\",\"2606:4700:4700::1001\"],\"dot.pub\":[\"1.12.12.12\",\"120.53.53.53\"],\"dns.google\":[\"8.8.8.8\",\"8.8.4.4\",\"2001:4860:4860::8888\",\"2001:4860:4860::8844\"],\"dns.quad9.net\":[\"9.9.9.9\",\"149.112.112.112\",\"2620:fe::fe\",\"2620:fe::9\"],\"common.dot.dns.yandex.net\":[\"77.88.8.8\",\"77.88.8.1\",\"2a02:6b8::feed:0ff\",\"2a02:6b8:0:1::feed:0ff\"]}},\"routing\":{\"domainStrategy\":\"IPIfNonMatch\",\"rules\":[{\"type\":\"field\",\"ip\":[\"1.1.1.1\"],\"outboundTag\":\"proxy\",\"port\":\"53\"},{\"type\":\"field\",\"ip\":[\"223.5.5.5\"],\"outboundTag\":\"direct\",\"port\":\"53\"}]}}\n#ویتوری #v2box\n@proxy_kafee",
+      "views": "2.13K",
+      "reactions": [],
+      "images": [],
+      "videos": []
+    },
+    {
+      "id": 43157,
+      "time": "2026-05-29T04:15:07+00:00",
+      "text": "کانفیگ ویژه نپسترنت مخصوص اینترنت ملی همه اپراتورها رایگان پر سرعت عالی🔥\n\n🚦دانلود از گوگل پلی استوری\n\n📲دانلود برای آیفون\n\n🖥دانلود اپلیکیشن Npv\n\n🎸@proxy_kafee🎸",
+      "views": "3.46K",
+      "reactions": [],
+      "images": [],
+      "videos": []
+    },
+    {
+      "id": 43156,
+      "time": "2026-05-29T04:03:50+00:00",
+      "text": "https://t.me/proxy?server=87.248.129.210&port=4455&secret=ee1603010200010001fc030386e24c3add626973636f7474692e79656b74616e65742e636f6d@proxy_kafee\n\nپروکسی متصل 💗\n\n@proxy_kafee",
+      "views": "3.56K",
+      "reactions": [],
+      "images": [],
+      "videos": []
+    },
     {
       "id": 43155,
       "time": "2026-05-28T23:09:38+00:00",
       "text": "trojan://WXgoPIGPSr@2.27.23.226:5231?security=reality&pbk=ksyeiEzHremNnFa1kqsHJkIEXQqPZ3CPQvU65WaMNWM&headerType=none&type=tcp&sni=www.icloud.com&sid=02#%40proxy_kafee\nss://YWVzLTEyOC1nY206c2hhZG93c29ja3M@156.146.38.170:443#%40proxy_kafee%F0%9F%9A%80\nss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTprMWRCT21PQjRvcWk3VW1wMzdhMWJR@82.38.31.194:8080#%40proxy_kafee%F0%9F%8C%9C\nss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTprMWRCT21PQjRvcWk3VW1wMzdhMWJR@82.38.31.205:8080#%40proxy_kafee%F0%9F%A9%B5\nvmess://eyJhZGQiOiIxNzIuMTA0LjgwLjY2IiwiYWlkIjoiMCIsImFscG4iOiIiLCJmcCI6IiIsImhvc3QiOiIiLCJpZCI6IjA0NjIxYmFlLWFiMzYtMTFlYy1iOTA5LTAyNDJhYzEyMDAwMiIsImluc2VjdXJlIjoiMCIsIm5ldCI6InRjcCIsInBhdGgiOiIvIiwicG9ydCI6IjIyMzI0IiwicHMiOiJAcHJveHlfa2FmZWXwn6aBIiwic2N5IjoiYXV0byIsInNuaSI6IiIsInRscyI6IiIsInR5cGUiOiJub25lIiwidiI6IjIifQ==\nss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTprMWRCT21PQjRvcWk3VW1wMzdhMWJR@82.38.31.176:8080#%40proxy_kafee%F0%9F%91%91\nss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTp6RExtZVdSc2ZjRmRLVDFUcHkwMnhvZEVUb3FDbGRUeHZaY1JvUElaWnRCZG5JRUw@89.44.197.181:31348#%40proxy_kafee%F0%9F%92%A4\nss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTp1WXBvN2RFSjJtTGR0SGJr@20.87.107.99:443#%40proxy_kafee%F0%9F%8D%B7%F0%9F%A7%91%E2%80%8D%F0%9F%92%BB\n\nتمام اپراتور ها \n#ویتوری \n@proxy_kafee",
-      "views": "3.46K",
+      "views": "7.6K",
       "reactions": [],
       "images": [],
       "videos": []
@@ -15,7 +42,7 @@
       "id": 43154,
       "time": "2026-05-28T22:55:11+00:00",
       "text": "کانفیگ ویژه نپسترنت مخصوص اینترنت ملی همه اپراتورها رایگان پر سرعت عالی🔥\n\n🚦دانلود از گوگل پلی استوری\n\n📲دانلود برای آیفون\n\n🖥دانلود اپلیکیشن Npv\n\n🎸@proxy_kafee🎸",
-      "views": "4.41K",
+      "views": "8.25K",
       "reactions": [],
       "images": [],
       "videos": []
@@ -24,7 +51,7 @@
       "id": 43150,
       "time": "2026-05-28T22:44:46+00:00",
       "text": "کانفیگ open vpn 😈\n\nدانلود فایل برنامه open vpn\n\nحتما آپدیت کنید از گوگل پلی ❤️‍🔥\n\nخطا retry داد ۴ الی ۵ بزنید روی retry وصل میشه 🌹",
-      "views": "4.6K",
+      "views": "7.96K",
       "reactions": [],
       "images": [],
       "videos": []
@@ -33,7 +60,7 @@
       "id": 43149,
       "time": "2026-05-28T22:06:42+00:00",
       "text": "ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTprMWRCT21PQjRvcWk3VW1wMzdhMWJR@82.38.31.208:8080#%F0%9F%AB%9C91%40proxy_kafee\nvless://256c5f48-4908-4255-83d1-c86cb58f22b4@fr.denditop.site:443?security=reality&encryption=none&pbk=wgoLhL4pRP0y6fu6He4qW_ElohCM_ANWJF3HEoUhNz4&headerType=none&type=tcp&flow=xtls-rprx-vision&sni=fr.denditop.site&sid=9c2378562188c3cb#%F0%9F%AB%9C92%40proxy_kafee\nvless://04ae1b04-86a0-4bbf-bfb7-2132d10a6b8e@downlod.musicribvar.com:2010?mode=gun&security=none&encryption=none&type=grpc#%F0%9F%AB%9C93%40proxy_kafee\nvless://89c1e31c-b927-433f-b3cb-2286fb4289d9@panel.testspeedpro.ir:2052?path=%2F&security=none&encryption=none&type=ws#%F0%9F%AB%9C95%40proxy_kafee\nvless://534cbbe2-cc36-4f2d-8fb0-90410e7148c9@147.45.145.127:443?security=reality&encryption=none&pbk=tWRR3W8jBAQKBUujLzL7Xri3WXy3F08OxHYrkSOnlAc&headerType=none&type=tcp&sni=yahoo.com&sid=52a6#%F0%9F%AB%9C97%40proxy_kafee\ntrojan://WXgoPIGPSr@2.27.23.226:5231?security=reality&pbk=ksyeiEzHremNnFa1kqsHJkIEXQqPZ3CPQvU65WaMNWM&headerType=none&type=tcp&sni=www.icloud.com&sid=02#%F0%9F%AB%9C98%40proxy_kafee\nss://YWVzLTEyOC1nY206c2hhZG93c29ja3M@156.146.38.170:443#%F0%9F%AB%9C99%40proxy_kafee\nvless://b7725d23-840a-4f8e-993c-69b40424cfc0@91.218.143.194:43798?security=reality&encryption=none&pbk=W3aiFnhZRvZuZP0Zyfy7888t-NbHc0RmMEyFa7fYShU&headerType=none&type=tcp&sni=yahoo.com&sid=f71c22#%F0%9F%AB%9C100%40proxy_kafee\nvless://e5cc16a6-ea42-46b2-82ae-ad2157e1641b@dx.mmhh.eu.cc:443?path=%2Ffp%3Drandom&security=tls&encryption=none&insecure=0&host=hhlfy.twiladaphne.ndjp.net&type=ws&allowInsecure=0&sni=hhlfy.twiladaphne.ndjp.net#1%F0%9F%AB%9C%40proxy_kafee\nvless://dc8eccdb-ecfa-435f-9ac1-5dc4882e7b51@162.19.228.119:80?path=%2Fhttp%23Telegram%40V2ray_Alpha%2F%3Fed%3D2560&security=none&encryption=none&host=google.com&type=ws#2%F0%9F%AB%9C%40proxy_kafee\nvless://416560bf-9ebb-4a43-96b6-e353e3d3572a@45.140.204.121:443?security=reality&encryption=none&pbk=MYU0vSA5rfofPjIwynqoPsr60F_swjCHCDX0yJPKwT0&headerType=none&type=tcp&sni=yahoo.com&sid=08bf#3%F0%9F%AB%9C%40proxy_kafee\ntrojan://humanity@165.215.250.14:443?path=%2Fassignment&security=tls&alpn=http%2F1.1&insecure=0&host=www.ignitelimit.com&type=ws&allowInsecure=0&sni=www.ignitelimit.com#4%F0%9F%AB%9C%40proxy_kafee\nvmess://eyJhZGQiOiJ1ay5jb25uZnVsbC5vcmciLCJhaWQiOiIwIiwiYWxwbiI6Imh0dHAvMS4xIiwiZnAiOiIiLCJob3N0IjoiIiwiaWQiOiJkNjRkNTJiMS0xNDRmLTRiY2UtYTZkNy0xMzI0ZGUxODdiMWIiLCJpbnNlY3VyZSI6IjAiLCJuZXQiOiJ0Y3AiLCJwYXRoIjoiIiwicG9ydCI6IjIwNTMiLCJwcyI6IjXwn6ucQHByb3h5X2thZmVlIiwic2N5IjoiYXV0byIsInNuaSI6InVrLmNvbm5mdWxsLm9yZyIsInRscyI6InRscyIsInR5cGUiOiJub25lIiwidiI6IjIifQ==\n\n#ویتوری \n@proxy_kafee",
-      "views": "6.29K",
+      "views": "9.24K",
       "reactions": [],
       "images": [],
       "videos": []
@@ -42,7 +69,7 @@
       "id": 43148,
       "time": "2026-05-28T21:50:42+00:00",
       "text": "https://t.me/proxy?server=lte.opsna.ru&port=8443&secret=dd68050e7062d628eb2beaf6dadf7837ed@proxy_kafee\n\nhttps://t.me/proxy?server=tg.capycore.ru&port=443&secret=27ebe852539fb8ec5f327c73262bb721@proxy_kafee\n#پروکسی \n@proxy_kafee",
-      "views": "7.19K",
+      "views": "9.77K",
       "reactions": [],
       "images": [],
       "videos": []
@@ -51,7 +78,7 @@
       "id": 43146,
       "time": "2026-05-28T21:34:34+00:00",
       "text": "کانفیگ open vpn 😈\n\nدانلود فایل برنامه open vpn\n\nحتما آپدیت کنید از گوگل پلی ❤️‍🔥\n\nخطا retry داد ۴ الی ۵ بزنید روی retry وصل میشه 🌹",
-      "views": "8.19K",
+      "views": "10.5K",
       "reactions": [],
       "images": [],
       "videos": []
@@ -60,7 +87,7 @@
       "id": 43145,
       "time": "2026-05-28T20:40:27+00:00",
       "text": "https://t.me/proxy?server=tg.capycore.ru&port=443&secret=27ebe852539fb8ec5f327c73262bb721@proxy_kafee\n\nپروکسی متصل ✅\n\n@proxy_kafee",
-      "views": "10.9K",
+      "views": "12.8K",
       "reactions": [],
       "images": [],
       "videos": []
@@ -78,7 +105,7 @@
       "id": 43142,
       "time": "2026-05-28T20:33:06+00:00",
       "text": "BD NET VPN.apk",
-      "views": "11K",
+      "views": "12.8K",
       "reactions": [],
       "images": [],
       "videos": []
@@ -87,7 +114,7 @@
       "id": 43140,
       "time": "2026-05-28T19:59:09+00:00",
       "text": "کانفیگ open vpn 😈\n\nدانلود فایل برنامه open vpn\n\nحتما آپدیت کنید از گوگل پلی ❤️‍🔥\n\nخطا retry داد ۴ الی ۵ بزنید روی retry وصل میشه 🌹",
-      "views": "11.4K",
+      "views": "12.7K",
       "reactions": [],
       "images": [],
       "videos": []
@@ -96,7 +123,7 @@
       "id": 43139,
       "time": "2026-05-28T19:40:55+00:00",
       "text": "92.123.102.155\n23.55.163.80\n23.53.40.27\n2.18.67.68\n164.138.17.122\n138.201.54.122\n23.44.201.216\n23.50.131.39\n2.22.89.45\n23.33.210.58\n23.216.77.17\n184.51.252.148\n23.55.161.171\n63.141.252.203\n23.216.77.31\n50.7.4.243\n23.58.223.193\n2.16.168.107\n23.2.13.201\n2.16.1.219\n184.25.102.152\n2.18.79.115\n23.2.13.185\n2.18.67.68\n23.220.112.171\n23.53.11.203\n23.2.13.187\n184.25.54.8\n23.219.36.105\n23.219.36.110\n23.54.14.158\n23.45.111.83\n184.25.53.128\n23.45.106.33\n23.53.11.134\n23.44.51.81\n23.50.131.39\n23.60.174.65\n23.2.13.155\n104.126.37.129\n2.19.122.216\n2.19.103.74\n184.24.18.243\n2.19.99.15\n184.31.213.40\n2.18.42.8\n2.20.153.64\n184.28.160.208\n2.19.179.48\n2.20.159.174\n2.19.221.244\n184.30.108.33\n184.29.186.193\n184.24.70.236\n184.27.64.98\n184.30.72.232\n2.17.74.20\n184.28.206.121\n2.17.26.165\n184.27.77.106\n184.28.243.66\n184.26.66.133\n184.27.0.26\n184.26.131.172\n184.24.53.231\n2.20.250.55\n184.30.207.45\n184.29.102.253\n184.24.220.87\n184.28.128.75\n2.18.155.206\n184.31.68.18\n2.23.252.253\n184.29.243.58\n2.23.59.44\n2.17.235.72\n2.20.27.27\n2.18.126.227\n184.24.177.76\n2.18.103.129\n184.28.58.234\n184.26.197.156\n23.50.131.39\n23.60.174.65\n23.2.13.155\n104.126.37.129\n2.16.168.107\n23.2.13.201\n2.16.1.219\n184.25.102.152\n2.18.79.115\n23.2.13.185\n2.18.67.68\n23.220.112.171\n23.53.11.203\n23.2.13.187\n184.25.54.8\n23.219.36.105\n23.219.36.110\n23.54.14.158\n23.45.111.83\n184.25.53.128\n23.45.106.33\n23.53.11.134\n23.44.51.81\n46.202.30.255\n185.207.197.94\n185.207.198.99\n66.225.252.63\n23.215.0.206\n\n\n \n🗄🗄🗄🗄🗄🗄🗄🗄🗄🗄\nآیپی های تست شده برای متود جدید سایفون❤️ \n\nهمشو باهم وارد کنید داخل برنامه 🔥\n\nآموزش سایفون😟\n\nدانلود سایفون🦸‍♀️\n\nدانلود با نت داخلی😬\n\nبرطرف کردن مشکل اتصال😒\n\n@proxy_kafee",
-      "views": "12.8K",
+      "views": "14.2K",
       "reactions": [],
       "images": [],
       "videos": []
@@ -105,25 +132,7 @@
       "id": 43138,
       "time": "2026-05-28T19:17:20+00:00",
       "text": "کانفیگ open vpn 😈\n\nدانلود فایل برنامه open vpn\n\nحتما آپدیت کنید از گوگل پلی ❤️‍🔥\n\nخطا retry داد ۴ الی ۵ بزنید روی retry وصل میشه 🌹",
-      "views": "15.4K",
-      "reactions": [],
-      "images": [],
-      "videos": []
-    },
-    {
-      "id": 43137,
-      "time": "2026-05-28T18:21:23+00:00",
-      "text": "پروکسی نت ملی 💧\n\nhttps://t.me/proxy?server=tg.capycore.ru&port=443&secret=27ebe852539fb8ec5f327c73262bb721\n\nhttps://t.me/proxy?server=hh87.salarjavidan.online&port=8991&secret=f41d30c2e0ca3895ca053b26d98af5b3\n\nhttps://t.me/proxy?server=199.247.21.45&port=8991&secret=f41d30c2e0ca3895ca053b26d98af5b3\n\n\nبرای اتصال به پروکسی ها 30 ثانیه تا 5 دقیقه صبر کنید ⏰\n\nتمامی پروکسی ها تست شده ✅\n\nچنل ما را حمایت کنید ❤️‍🔥\n\n@proxy_kafee",
-      "views": "15K",
-      "reactions": [],
-      "images": [],
-      "videos": []
-    },
-    {
-      "id": 43135,
-      "time": "2026-05-28T18:18:48+00:00",
-      "text": "کانفیگ open vpn 😈\n\nدانلود فایل برنامه open vpn\n\nحتما آپدیت کنید از گوگل پلی ❤️‍🔥\n\nخطا retry داد ۴ الی ۵ بزنید روی retry وصل میشه 🌹",
-      "views": "13.9K",
+      "views": "16.8K",
       "reactions": [],
       "images": [],
       "videos": []
