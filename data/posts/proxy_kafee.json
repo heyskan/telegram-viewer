@@ -1,12 +1,30 @@
 {
   "channel": "proxy_kafee",
-  "last_update": "2026-06-06 10:25:14",
+  "last_update": "2026-06-06 11:54:49",
   "posts": [
+    {
+      "id": 43569,
+      "time": "2026-06-06T11:06:11+00:00",
+      "text": "ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTprMWRCT21PQjRvcWk3VW1wMzdhMWJR@82.38.31.176:8080#%F0%9F%87%B3%F0%9F%87%B1%20proxy_kafee\n\n#ویتوری #v2box \n\n@proxy_kafee",
+      "views": "2.62K",
+      "reactions": [],
+      "images": [],
+      "videos": []
+    },
+    {
+      "id": 43568,
+      "time": "2026-06-06T10:34:11+00:00",
+      "text": "طبق گزارش‌ نت بلاکس، توی پاکستان قطعی اینترنت به وجود اومده و دسترسی خیلی از کاربرا محدود یا قطع شده\nبا این حال حدود ۱۶ درصد هنوز به اینترنت وصل هستن.",
+      "views": "4.96K",
+      "reactions": [],
+      "images": [],
+      "videos": []
+    },
     {
       "id": 43567,
       "time": "2026-06-06T09:55:51+00:00",
       "text": "vless://e3115c84-266b-4c46-b3f2-16cc3263d555@151.101.193.57:80?encryption=none&type=ws&path=%2F&host=superip2.global.ssl.fastly.net#%F0%9D%97%9D%F0%9D%97%BC%F0%9D%97%B6%F0%9D%97%BB%20%E2%9E%A0%20%40proxy_kafee%205\n\n\nvless://e3115c84-266b-4c46-b3f2-16cc3263d555@speedtest.net:80?encryption=none&type=ws&path=%2F&host=pinghub.global.ssl.fastly.net#%F0%9D%97%9D%F0%9D%97%BC%F0%9D%97%B6%F0%9D%97%BB%20%E2%9E%A0%20%40proxy_kafee%204\n\n\n\nvless://e3115c84-266b-4c46-b3f2-16cc3263d555@45.130.125.160:2082?encryption=none&type=httpupgrade&path=%2F&host=bulgarrbustan.primenet4.shop#%F0%9D%97%9D%F0%9D%97%BC%F0%9D%97%B6%F0%9D%97%BB%20%E2%9E%A0%20%40proxy_kafee%203\n\n\nvless://e3115c84-266b-4c46-b3f2-16cc3263d555@45.130.125.160:2082?encryption=none&type=httpupgrade&path=%2F&host=bustancloudd.primenet3.shop#%F0%9D%97%9D%F0%9D%97%BC%F0%9D%97%B6%F0%9D%97%BB%20%E2%9E%A0%20%40proxy_kafee%202\n\n\nvless://e3115c84-266b-4c46-b3f2-16cc3263d555@85.234.73.125:13278?encryption=none&type=grpc&security=reality&serviceName=xyz&authority=yahoo.com&mode=gun&fp=chrome&allowInsecure=1&pbk=lZhnPs3mM0yaBLd2jWaQoX3DVaXz4l-t9SdKr0vUy1U&sid=fb8e0edb66000f28&spx=%2F#%F0%9D%97%9D%F0%9D%97%BC%F0%9D%97%B6%F0%9D%97%BB%20%E2%9E%A0%20%40proxy_kafee%201\n#ویتوری #v2box \n@proxy_kafee",
-      "views": "1.8K",
+      "views": "6.23K",
       "reactions": [],
       "images": [],
       "videos": []
@@ -15,7 +33,7 @@
       "id": 43566,
       "time": "0:38",
       "text": "⏺داش چی کشیدی به مام بگو 🐸\n\n\nپروکسی ⚡ پروکسی ⚡ پروکسی ⚡\nپروکسی ⚡ پروکسی ⚡ پروکسی ⚡\n\n@proxy_kafee",
-      "views": "3.81K",
+      "views": "7.48K",
       "reactions": [],
       "images": [],
       "videos": [
@@ -26,7 +44,7 @@
       "id": 43565,
       "time": "2026-06-06T09:08:22+00:00",
       "text": "🔥دانلود برنامه از گوگل پلی 🔥\n🔥دانلود اپلیکیشن wg👋\n\n🥳(آموزش گذاشتن فایل در برنامه) 😪اول ذخیره کنید بعد داخل برنامه اجرا کنید\n\n👍اگر وصل نشد رو اینجا کلیک کنید 🥊\n\n\n@proxy_kafee",
-      "views": "4.24K",
+      "views": "7.33K",
       "reactions": [],
       "images": [],
       "videos": []
@@ -35,7 +53,7 @@
       "id": 43564,
       "time": "2026-06-06T08:38:32+00:00",
       "text": "{\"remarks\":\"🇸🇬@proxy_kafee\",\"log\":{\"loglevel\":\"warning\"},\"inbounds\":[{\"tag\":\"socks\",\"port\":10808,\"protocol\":\"socks\",\"settings\":{\"auth\":\"noauth\",\"udp\":true,\"userLevel\":8},\"sniffing\":{\"enabled\":true,\"destOverride\":[\"http\",\"tls\"],\"routeOnly\":false}}],\"outbounds\":[{\"tag\":\"proxy\",\"protocol\":\"vmess\",\"settings\":{\"vnext\":[{\"address\":\"sg1.niekotin.de\",\"port\":80,\"users\":[{\"id\":\"391bcfae-70f7-4c8b-b567-48451ecab23d\",\"security\":\"auto\",\"level\":8}]}]},\"streamSettings\":{\"network\":\"ws\",\"security\":\"none\",\"wsSettings\":{\"path\":\"/vmess\",\"headers\":{\"Host\":\"sg1.niekotin.de\"}}},\"mux\":{\"enabled\":false,\"concurrency\":-1,\"xudpConcurrency\":8,\"xudpProxyUDP443\":\"\"}},{\"tag\":\"direct\",\"protocol\":\"freedom\",\"settings\":{\"domainStrategy\":\"UseIP\"},\"mux\":{\"enabled\":false,\"concurrency\":8,\"xudpConcurrency\":8,\"xudpProxyUDP443\":\"\"}},{\"tag\":\"block\",\"protocol\":\"blackhole\",\"settings\":{\"response\":{\"type\":\"http\"}},\"mux\":{\"enabled\":false,\"concurrency\":8,\"xudpConcurrency\":8,\"xudpProxyUDP443\":\"\"}}],\"dns\":{\"servers\":[\"1.1.1.1\"],\"hosts\":{\"domain:googleapis.cn\":\"googleapis.com\",\"dns.alidns.com\":[\"223.5.5.5\",\"223.6.6.6\",\"2400:3200::1\",\"2400:3200:baba::1\"],\"one.one.one.one\":[\"1.1.1.1\",\"1.0.0.1\",\"2606:4700:4700::1111\",\"2606:4700:4700::1001\"],\"dot.pub\":[\"1.12.12.12\",\"120.53.53.53\"],\"dns.google\":[\"8.8.8.8\",\"8.8.4.4\",\"2001:4860:4860::8888\",\"2001:4860:4860::8844\"],\"dns.quad9.net\":[\"9.9.9.9\",\"149.112.112.112\",\"2620:fe::fe\",\"2620:fe::9\"],\"common.dot.dns.yandex.net\":[\"77.88.8.8\",\"77.88.8.1\",\"2a02:6b8::feed:0ff\",\"2a02:6b8:0:1::feed:0ff\"]}},\"routing\":{\"domainStrategy\":\"IPIfNonMatch\",\"rules\":[{\"type\":\"field\",\"ip\":[\"1.1.1.1\"],\"outboundTag\":\"proxy\",\"port\":\"53\"},{\"type\":\"field\",\"ip\":[\"223.5.5.5\"],\"outboundTag\":\"direct\",\"port\":\"53\"}]}}\n\n\n#ویتوری #v2box \n@proxy_kafee",
-      "views": "5K",
+      "views": "7.67K",
       "reactions": [],
       "images": [],
       "videos": []
@@ -44,7 +62,7 @@
       "id": 43563,
       "time": "2026-06-06T07:45:02+00:00",
       "text": "🩸🩸🩸🩸❓➖🩸🅰️🩸🩸🩸\n\ntg://proxy?server=94.130.163.60&port=443&secret=dd104462821249bd7ac519130220c25d09@proxy_kafee\n\nhttps://t.me/proxy?server=195.254.165.20&port=8080&secret=dd79e7010200010007f0030386e24c3add@proxy_kafee\n\ntg://proxy?server=213.133.102.106&port=443&secret=dd104462821249bd7ac519130220c25d09@proxy_kafee\n\n\n@proxy_kafee",
-      "views": "7.75K",
+      "views": "10.4K",
       "reactions": [],
       "images": [],
       "videos": []
@@ -53,7 +71,7 @@
       "id": 43562,
       "time": "2026-06-06T07:43:09+00:00",
       "text": "کانفیگ open vpn 😈\n\nدانلود فایل برنامه open vpn\n\nحتما آپدیت کنید از گوگل پلی ❤️‍🔥\n\nخطا retry داد ۴ الی ۵ بزنید روی retry وصل میشه 🌹",
-      "views": "6.18K",
+      "views": "8.15K",
       "reactions": [],
       "images": [],
       "videos": []
@@ -62,7 +80,7 @@
       "id": 43561,
       "time": "2026-06-06T07:08:02+00:00",
       "text": "کانفیگ sing box جدید \n📱دانلود برنامه sing box\n\nلینک گیت هاب \n\n@singbox1\n\nهمه اپراتورها",
-      "views": "6.49K",
+      "views": "8.19K",
       "reactions": [],
       "images": [],
       "videos": []
@@ -71,7 +89,7 @@
       "id": 43560,
       "time": "2026-06-06T07:02:41+00:00",
       "text": "-----BEGIN ARGO VPN BRIDGE BLOCK-----\neNoNzNtOwyAYAOB34XqJ2nkIS3qFdYITJHO0a7xhHW1+erKsjLVm7+7uv3x/6Gzc\nCfoOrR4W6FdPTa+PaIXMxELR4vtDxM8HQp9pncCGsDnPWJRnFASwsI/UMk8b0O2j\n30d4pBCgWOPpePP8Vc6ljGO0QCeoOj16Z27tZ7IjVBKtP4L6ttaWl05zaRs3kaS9\n1IIO7mtry2W581tWgBgkrfi7xV65WjyJzdpXfB5+7sxL5VKNg0rfUsODGjOpjaF9\njK7/LxNH4w==\n-----END ARGO VPN BRIDGE BLOCK-----\n\n(اگر وصل نشد کلیردیتا کنید بعد از پل استفاده کنید و اگه پل از کار افتاد یا وصل نشد طبق آموزش پل از بگیرید)\nحالت شبکه عمومی هم متصله\n🥰پل آرگو وی پی ان‌متصل\n\nدانلود برنامه آرگو 🥰\n\n@proxy_kafee",
-      "views": "6.67K",
+      "views": "8.4K",
       "reactions": [],
       "images": [],
       "videos": []
@@ -80,7 +98,7 @@
       "id": 43559,
       "time": "2026-06-06T04:05:45+00:00",
       "text": "vless://491bd18b-c1d1-4ec4-94d2-e1a13193d4da@vpn.smartrahand.com:2026?headertype=none&type=tcp#@proxy_kafee\nvless://97de1f85-5f2c-4446-8507-b437125623a2@62.60.245.10:443?security=reality&type=tcp&headerType=&path=&host=www.amazon.com&sni=www.amazon.com&fp=chrome&pbk=mNPCrTF4rKb_SRmOH-9-IBs5ihK6Pn4SH29iZtKmiX0&sid=abcd1234#@proxy_kafee\nvless://97de1f85-5f2c-4446-8507-b437125623a2@193.29.224.214:443?security=reality&type=tcp&headerType=&path=&host=&sni=www.cloudflare.com&fp=chrome&pbk=mNPCrTF4rKb_SRmOH-9-IBs5ihK6Pn4SH29iZtKmiX0&sid=abcd1234#@proxy_kafee\nvless://97de1f85-5f2c-4446-8507-b437125623a2@62.60.245.10:443?security=reality&type=tcp&headerType=&path=&host=yahoo.com&sni=yahoo.com&fp=chrome&pbk=mNPCrTF4rKb_SRmOH-9-IBs5ihK6Pn4SH29iZtKmiX0&sid=abcd1234#@proxy_kafee\nvless://97de1f85-5f2c-4446-8507-b437125623a2@62.60.156.223:443?security=reality&type=tcp&headerType=&path=&host=yahoo.com&sni=yahoo.com&fp=chrome&pbk=mNPCrTF4rKb_SRmOH-9-IBs5ihK6Pn4SH29iZtKmiX0&sid=abcd1234#@proxy_kafee\nvless://97de1f85-5f2c-4446-8507-b437125623a2@62.60.245.10:443?security=reality&type=tcp&headerType=&path=&host=addons.mozilla.org&sni=addons.mozilla.org&fp=chrome&pbk=mNPCrTF4rKb_SRmOH-9-IBs5ihK6Pn4SH29iZtKmiX0&sid=abcd1234#@proxy_kafee\nvless://97de1f85-5f2c-4446-8507-b437125623a2@138.124.51.165:443?security=reality&type=tcp&headerType=&path=&host=&sni=www.amazon.com&fp=chrome&pbk=mNPCrTF4rKb_SRmOH-9-IBs5ihK6Pn4SH29iZtKmiX0&sid=abcd1234#@proxy_kafee\nvless://97de1f85-5f2c-4446-8507-b437125623a2@62.60.245.10:443?security=reality&type=tcp&headerType=&path=&host=www.cloudflare.com&sni=www.cloudflare.com&fp=chrome&pbk=mNPCrTF4rKb_SRmOH-9-IBs5ihK6Pn4SH29iZtKmiX0&sid=abcd1234#@proxy_kafee\nvless://97de1f85-5f2c-4446-8507-b437125623a2@212.43.159.142:443?security=reality&type=tcp&headerType=&path=&host=yahoo.com&sni=yahoo.com&fp=chrome&pbk=mNPCrTF4rKb_SRmOH-9-IBs5ihK6Pn4SH29iZtKmiX0&sid=abcd1234#@proxy_kafee\nvless://97de1f85-5f2c-4446-8507-b437125623a2@212.43.159.142:443?security=reality&type=tcp&headerType=&path=&host=&sni=yahoo.com&fp=chrome&pbk=mNPCrTF4rKb_SRmOH-9-IBs5ihK6Pn4SH29iZtKmiX0&sid=abcd1234#@proxy_kafee\nvless://97de1f85-5f2c-4446-8507-b437125623a2@62.60.245.10:443?security=reality&type=tcp&headerType=&path=&host=cdn.jsdelivr.net&sni=cdn.jsdelivr.net&fp=chrome&pbk=mNPCrTF4rKb_SRmOH-9-IBs5ihK6Pn4SH29iZtKmiX0&sid=abcd1234#@proxy_kafee\nvless://97de1f85-5f2c-4446-8507-b437125623a2@62.60.245.10:443?security=reality&type=tcp&headerType=&path=&host=update.googleapis.com&sni=update.googleapis.com&fp=chrome&pbk=mNPCrTF4rKb_SRmOH-9-IBs5ihK6Pn4SH29iZtKmiX0&sid=abcd1234#@proxy_kafee\nvless://97de1f85-5f2c-4446-8507-b437125623a2@62.60.245.10:443?security=reality&type=tcp&headerType=&path=&host=dl.google.com&sni=dl.google.com&fp=chrome&pbk=mNPCrTF4rKb_SRmOH-9-IBs5ihK6Pn4SH29iZtKmiX0&sid=abcd1234#@proxy_kafee\nvless://97de1f85-5f2c-4446-8507-b437125623a2@62.60.245.10:443?security=reality&type=tcp&headerType=&path=&host=www.apple.com&sni=www.apple.com&fp=chrome&pbk=mNPCrTF4rKb_SRmOH-9-IBs5ihK6Pn4SH29iZtKmiX0&sid=abcd1234#@proxy_kafee\nvless://97de1f85-5f2c-4446-8507-b437125623a2@62.60.245.10:443?security=reality&type=tcp&headerType=&path=&host=&sni=dl.google.com&fp=chrome&pbk=mNPCrTF4rKb_SRmOH-9-IBs5ihK6Pn4SH29iZtKmiX0&sid=abcd1234#@proxy_kafee\n#ویتوری #v2box \n\n@proxy_kafee",
-      "views": "8.55K",
+      "views": "9.67K",
       "reactions": [],
       "images": [],
       "videos": []
@@ -89,7 +107,7 @@
       "id": 43558,
       "time": "2026-06-06T04:00:30+00:00",
       "text": "‼️ظاهرا تو جزیره خارک صدای توافق شنیده شد.",
-      "views": "8.52K",
+      "views": "9.61K",
       "reactions": [],
       "images": [],
       "videos": []
@@ -98,7 +116,7 @@
       "id": 43557,
       "time": "2026-06-05T22:01:32+00:00",
       "text": "کانفیگ sing box جدید \n📱دانلود برنامه sing box\n\nلینک گیت هاب \n\n@singbox1\n\nهمه اپراتورها",
-      "views": "10.4K",
+      "views": "11.4K",
       "reactions": [],
       "images": [],
       "videos": []
@@ -107,7 +125,7 @@
       "id": 43556,
       "time": "2026-06-05T21:49:32+00:00",
       "text": "vless://b4a00211-ae46-49bc-8f36-0c4425eb7e86@151.101.108.223:443?encryption=none&type=ws&security=tls&path=%2F&host=nesfsheshab.global.ssl.fastly.net&sni=default.ssl.fastly.net&alpn=h3%2Ch2%2Chttp%2F1.1&fp=chrome&allowInsecure=1#%40proxy_kafee%DA%86%D9%86%D9%84%E2%80%8C%D8%AA%D9%84%DA%AF%D8%B1%D8%A7%D9%85%D9%85%D9%88%D9%86\n\n\nvless://b4a00211-ae46-49bc-8f36-0c4425eb7e86@199.232.78.158:443?encryption=none&type=ws&security=tls&path=%2F&host=nesfsheshab.global.ssl.fastly.net&sni=default.ssl.fastly.net&alpn=h3%2Ch2%2Chttp%2F1.1&fp=chrome&allowInsecure=1#%40proxy_kafee\n%DA%86%D9%86%D9%84%E2%80%8C%D8%AA%D9%84%DA%AF%D8%B1%D8%A7%D9%85%D9%85%D9%88%D9%86\n\n\nvless://98c9f668-1f2f-4a6d-bd7a-606fab0ac035@151.101.108.223:443?encryption=none&type=ws&security=tls&path=%2F&host=jookeji.global.ssl.fastly.net&sni=default.ssl.fastly.net&alpn=h3&fp=chrome&allowInsecure=1#%40proxy_kafee%DA%86%D9%86%D9%84%E2%80%8C%D8%AA%D9%84%DA%AF%D8%B1%D8%A7%D9%85%D9%85%D9%88%D9%86\n#ویتوری #v2box \n@proxy_kafee",
-      "views": "10.7K",
+      "views": "11.7K",
       "reactions": [],
       "images": [],
       "videos": []
@@ -116,7 +134,7 @@
       "id": 43552,
       "time": "2026-06-05T21:47:13+00:00",
       "text": "کانفیگ open vpn 😈\n\nدانلود فایل برنامه open vpn\n\nحتما آپدیت کنید از گوگل پلی ❤️‍🔥\n\nخطا retry داد ۴ الی ۵ بزنید روی retry وصل میشه 🌹",
-      "views": "10.9K",
+      "views": "12K",
       "reactions": [],
       "images": [],
       "videos": []
@@ -125,7 +143,7 @@
       "id": 43551,
       "time": "2026-06-05T20:43:37+00:00",
       "text": "vless://c838bbcc-db6b-4663-bc22-18db4dc62847@151.101.108.223:443?encryption=none&type=ws&security=tls&path=%2F&host=Fijji.global.ssl.fastly.net&sni=default.ssl.fastly.net&allowInsecure=1#%40proxy_kafee%DA%86%D9%86%D9%84%E2%80%8C%D8%AA%D9%84%DA%AF%D8%B1%D8%A7%D9%85%D9%85%D9%88%D9%86\n\ntrojan://ertpzfsl7w4kqvk4@151.101.108.223:443?type=ws&security=tls&path=%2FTELEGRAM_NUFiLTER&host=nleiyajji.global.ssl.fastly.net&sni=default.ssl.fastly.net&allowInsecure=1#%40proxy_kafee%DA%86%D9%86%D9%84%E2%80%8C%D8%AA%D9%84%DA%AF%D8%B1%D8%A7%D9%85%D9%85%D9%88%D9%86\n\n\nvless://3f88bde3-effd-4a49-bfa2-19fa4d0e1cc5@151.101.108.223:443?encryption=none&type=ws&security=tls&path=%2F&host=fancii.global.ssl.fastly.net&sni=default.ssl.fastly.net&allowInsecure=1#%40proxy_kafee%DA%86%D9%86%D9%84%E2%80%8C%D8%AA%D9%84%DA%AF%D8%B1%D8%A7%D9%85%D9%85%D9%88%D9%86\n\n@proxy_kafee",
-      "views": "11.8K",
+      "views": "12.7K",
       "reactions": [],
       "images": [],
       "videos": []
@@ -134,25 +152,7 @@
       "id": 43550,
       "time": "2026-06-05T17:10:35+00:00",
       "text": "-----BEGIN ARGO VPN BRIDGE BLOCK-----\neNoVzM1ugjAAAOB36XUmFpSZmnjgz9BOa5BNkXhpu44UpBCKIJq9u3r+ku8Betka\nVWuwtCagYeOlZr9gCeRIBlEhyG3acx9/4jJUG5/cs5TYWYrVThGLpUQLve9Y4hTc\nhm8f+IxAXNSQBhSBCTAq16y7tvJVbsMfH3uH5jylvfutBEHnKfMSxFiz73h5z8zR\nq/xNtIjLLyzKItKuCt32L068Ob2drmJUMhhMeIwdbeJ1tbA6S1awQXXxcQly57QC\n/0+q0URf\n-----END ARGO VPN BRIDGE BLOCK-----\n\n(اگر وصل نشد کلیردیتا کنید بعد از پل استفاده کنید و اگه پل از کار افتاد یا وصل نشد طبق آموزش پل از بگیرید)\nحالت شبکه عمومی هم متصله\n🥰پل آرگو وی پی ان‌متصل\n\nدانلود برنامه آرگو 🥰\n\n@proxy_kafee",
-      "views": "14.7K",
-      "reactions": [],
-      "images": [],
-      "videos": []
-    },
-    {
-      "id": 43549,
-      "time": "2026-06-05T17:01:13+00:00",
-      "text": "🔥دانلود برنامه از گوگل پلی 🔥\n🔥دانلود اپلیکیشن wg👋\n\n🥳(آموزش گذاشتن فایل در برنامه) 😪اول ذخیره کنید بعد داخل برنامه اجرا کنید\n\n👍اگر وصل نشد رو اینجا کلیک کنید 🥊\n\n\n@proxy_kafee",
-      "views": "13.6K",
-      "reactions": [],
-      "images": [],
-      "videos": []
-    },
-    {
-      "id": 43548,
-      "time": "2026-06-05T16:46:52+00:00",
-      "text": "vless://ada2c821-5c83-4dba-96ec-a5174e54ae4d@iranfuture.xyz:80?security=reality&encryption=none&pbk=FMlzIKco2rBLro2OaFKjaKSC1PQnlvFRJBsiVJ_bB0s&headerType=none&fp=chrome&spx=%2F24wq3pkPNi1rGkI&type=tcp&flow=xtls-rprx-vision&sni=www.yahoo.com&sid=82d7#Iran%20Future%20-%20%40proxy_kafee\n\n@proxy_kafee",
-      "views": "13.9K",
+      "views": "15.2K",
       "reactions": [],
       "images": [],
       "videos": []
