@@ -1,12 +1,102 @@
 {
   "channel": "proxy_kafee",
-  "last_update": "2026-06-11 03:42:59",
+  "last_update": "2026-06-11 08:28:31",
   "posts": [
+    {
+      "id": 44003,
+      "time": "2026-06-11T08:21:58+00:00",
+      "text": "💎 فیلترشکن VPN Master (اندروید)\n\n⚡️نسخه اندروید 1.1.3   \n\n🗣برای اینترنت بین‌الملل محدود طبقاتی جدید، این VPN عملکرد خوبی برای ایرانسل همراه اول رایتل شاتل و سایر اپراتور به مناطق سرعت خوبی داره سرور موجود هم داره\n\n👈وارد VPN Master Free Server سروری که میخواید انتخاب کنید.\n\nبرنامه های تست شده با سرعت مطلوب👇\n🔥اینستاگرام\n🔥تلگرام\n🔥یوتیوپ\n🔥گوگل پلی استوری\n\nلینک دانلود گوگل پلی استوری\n\n🔥@proxy_kafee🔥",
+      "views": "523",
+      "reactions": [],
+      "images": [],
+      "videos": []
+    },
+    {
+      "id": 44001,
+      "time": "2026-06-11T07:37:33+00:00",
+      "text": "{\"remarks\":\"🇩🇪 @proxy_kafee\",\"log\":{\"loglevel\":\"warning\"},\"inbounds\":[{\"tag\":\"socks\",\"port\":10808,\"protocol\":\"socks\",\"settings\":{\"auth\":\"noauth\",\"udp\":true,\"userLevel\":8},\"sniffing\":{\"enabled\":true,\"destOverride\":[\"http\",\"tls\"],\"routeOnly\":false}}],\"outbounds\":[{\"tag\":\"proxy\",\"protocol\":\"vless\",\"settings\":{\"vnext\":[{\"address\":\"151.101.0.1\",\"port\":80,\"users\":[{\"id\":\"0058c215-ab1e-400c-a403-b5b2fda7e846\",\"level\":8,\"encryption\":\"none\"}]}]},\"streamSettings\":{\"network\":\"ws\",\"wsSettings\":{\"path\":\"/\",\"headers\":{\"Host\":\"max-gb1.global.ssl.fastly.net\"}}},\"mux\":{\"enabled\":false,\"concurrency\":-1,\"xudpConcurrency\":8,\"xudpProxyUDP443\":\"\"}},{\"tag\":\"direct\",\"protocol\":\"freedom\",\"settings\":{\"domainStrategy\":\"UseIP\"},\"mux\":{\"enabled\":false,\"concurrency\":8,\"xudpConcurrency\":8,\"xudpProxyUDP443\":\"\"}},{\"tag\":\"block\",\"protocol\":\"blackhole\",\"settings\":{\"response\":{\"type\":\"http\"}},\"mux\":{\"enabled\":false,\"concurrency\":8,\"xudpConcurrency\":8,\"xudpProxyUDP443\":\"\"}}],\"dns\":{\"servers\":[\"1.1.1.1\"],\"hosts\":{\"domain:googleapis.cn\":\"googleapis.com\",\"dns.alidns.com\":[\"223.5.5.5\",\"223.6.6.6\",\"2400:3200::1\",\"2400:3200:baba::1\"],\"one.one.one.one\":[\"1.1.1.1\",\"1.0.0.1\",\"2606:4700:4700::1111\",\"2606:4700:4700::1001\"],\"dot.pub\":[\"1.12.12.12\",\"120.53.53.53\"],\"dns.google\":[\"8.8.8.8\",\"8.8.4.4\",\"2001:4860:4860::8888\",\"2001:4860:4860::8844\"],\"dns.quad9.net\":[\"9.9.9.9\",\"149.112.112.112\",\"2620:fe::fe\",\"2620:fe::9\"],\"common.dot.dns.yandex.net\":[\"77.88.8.8\",\"77.88.8.1\",\"2a02:6b8::feed:0ff\",\"2a02:6b8:0:1::feed:0ff\"]}},\"routing\":{\"domainStrategy\":\"IPIfNonMatch\",\"rules\":[{\"type\":\"field\",\"ip\":[\"1.1.1.1\"],\"outboundTag\":\"proxy\",\"port\":\"53\"},{\"type\":\"field\",\"ip\":[\"223.5.5.5\"],\"outboundTag\":\"direct\",\"port\":\"53\"},{\"type\":\"field\",\"ip\":[\"1.1.1.1\"],\"outboundTag\":\"proxy\",\"port\":\"53\"},{\"type\":\"field\",\"ip\":[\"223.5.5.5\"],\"outboundTag\":\"direct\",\"port\":\"53\"}]}}\n\n#ویتوری #v2box \n@proxy_kafee",
+      "views": "2.84K",
+      "reactions": [],
+      "images": [],
+      "videos": []
+    },
+    {
+      "id": 44000,
+      "time": "2026-06-11T07:20:30+00:00",
+      "text": "کانفیگ ویژه نپسترنت مخصوص اینترنت ملی همه اپراتورها رایگان پر سرعت عالی🔥\n\n🚦دانلود از گوگل پلی استوری\n\n📲دانلود برای آیفون\n\n🖥دانلود اپلیکیشن Npv\n\n🎸@proxy_kafee🎸",
+      "views": "3.72K",
+      "reactions": [],
+      "images": [],
+      "videos": []
+    },
+    {
+      "id": 43999,
+      "time": "2026-06-11T07:08:47+00:00",
+      "text": "vless://d39664df-5bc0-4f49-9894-8f03b4150082@germany-vip.soft26.ir:8443?mode=auto&path=%2F&security=reality&encryption=none&pbk=QLamtir13xwzyWVlPRN3C7lw_fhSBU7X4H3A8zAl5Fg&fp=chrome&type=xhttp&sni=www.yahoo.com&sid=6f3192#T.me%2Fproxy_kafee%20%E2%9A%A1%F0%9F%9A%80\n\n@proxy_kafee",
+      "views": "4.08K",
+      "reactions": [],
+      "images": [],
+      "videos": []
+    },
+    {
+      "id": 43998,
+      "time": "2026-06-11T07:05:53+00:00",
+      "text": "vless://8dc7722c-2767-4eea-a28b-2f8daacc07e3@151.115.166.221:8880?mode=gun&security=&encryption=none&type=grpc#Servers7%20%F0%9F%87%AE%F0%9F%87%B9%20%40\nvless://931729a8-3c20-4841-89a1-f18dc9ce0a6f@46.229.243.130:8443?security=tls&encryption=none&insecure=0&headerType=none&fp=chrome&type=tcp&allowInsecure=0&sni=cdn7-09.vk-cdnvideo.com#Servers9%20%F0%9F%87%A7%F0%9F%87%B7%20%40\nvless://931729a8-3c20-4841-89a1-f18dc9ce0a6f@46.229.243.75:8443?security=tls&encryption=none&insecure=0&headerType=none&fp=chrome&type=tcp&allowInsecure=0&sni=cdn7-39.vk-cdnvideo.com#Servers4%20%F0%9F%87%B8%F0%9F%87%B0%20%40\n#ویتوری #v2box \n@proxy_kafee",
+      "views": "4.02K",
+      "reactions": [],
+      "images": [],
+      "videos": []
+    },
+    {
+      "id": 43997,
+      "time": "2026-06-11T06:54:32+00:00",
+      "text": "یارو پرچم فلسطین . لبنان انداخته رو دوشش  کف تهران داره میچرخه بوسش میکنه همون آدم به منی که از این وضعیت مملکت ناراضی ام بقول اون غر میزنم میشم وطن فروش  \n\nحرومزاده😒\n\nپروکسی ⚡\nپروکسی | پروکسی | پروکسی | پروکسی\nپروکسی | پروکسی | پروکسی | پروکسی \nپروکسی | پروکسی | پروکسی",
+      "views": "5.02K",
+      "reactions": [],
+      "images": [],
+      "videos": []
+    },
+    {
+      "id": 43996,
+      "time": "1:32",
+      "text": "میدونی 40 هزار نفر چقدر ؟\n\nپروکسی ⚡",
+      "views": "5.44K",
+      "reactions": [],
+      "images": [],
+      "videos": []
+    },
+    {
+      "id": 43995,
+      "time": "2026-06-11T05:36:52+00:00",
+      "text": "کانفیگ ویژه نپسترنت مخصوص اینترنت ملی همه اپراتورها رایگان پر سرعت عالی🔥\n\n🚦دانلود از گوگل پلی استوری\n\n📲دانلود برای آیفون\n\n🖥دانلود اپلیکیشن Npv\n\n🎸@proxy_kafee🎸",
+      "views": "6.77K",
+      "reactions": [],
+      "images": [],
+      "videos": []
+    },
+    {
+      "id": 43994,
+      "time": "2026-06-11T05:30:08+00:00",
+      "text": "https://t.me/proxy?server=87.248.129.105&port=443&secret=7hYDAQIAAQAB_AMDhuJMOt1iaXNjb3R0aS55ZWt0YW5ldC5jb20\n\n\n@proxy_kafee",
+      "views": "6.71K",
+      "reactions": [],
+      "images": [],
+      "videos": []
+    },
+    {
+      "id": 43993,
+      "time": "2026-06-11T05:03:24+00:00",
+      "text": "🔵 فیلترشکن Cure VPN Private & Secure VPN (اندروید)\n\n• نسخه اندروید 1.0.7   \n\n\nبرای اینترنت بین‌الملل محدود طبقاتی جدید، این VPN عملکرد خوبی برای ایرانسل رایتل شاتل و سایر اپراتور به مناطق سرعت خوبی داره سرور موجود هم داره\n\n👈اول با فیلترشکن کانفیگ  وارد برنامه شوید و سرور لوکشین توربور انتخاب کنید که سرعت بالاتری دارند\n\nبرنامه های تست شده با سرعت مطلوب👇\nاینستاگرام\nتلگرام\nیوتیوپ\nگوگل پلی استوری\n\nلینک دانلود گوگل پلی استوری\n\n🔥@proxy_kafee🔥",
+      "views": "7.39K",
+      "reactions": [],
+      "images": [],
+      "videos": []
+    },
     {
       "id": 43991,
       "time": "2026-06-11T02:31:14+00:00",
       "text": "کانفیگ open vpn 😈\n\nدانلود فایل برنامه open vpn\n\nحتما آپدیت کنید از گوگل پلی ❤️‍🔥\n\nخطا retry داد ۴ الی ۵ بزنید روی retry وصل میشه 🌹",
-      "views": "1.59K",
+      "views": "8.74K",
       "reactions": [],
       "images": [],
       "videos": []
@@ -15,7 +105,7 @@
       "id": 43990,
       "time": "2026-06-10T22:59:20+00:00",
       "text": "ساعت حدود ۰۲:۱۵ صبح پنجشنبه؛ چند قایق تندرو در نزدیکی جزیره لارَک هدف قرار گرفته شدند.\n\nبراساس توصیف شاهدان، شلیک به صورت رگبار از آسمان به سطح دریا بود (احتمالاً توسط هواپیمای A-10)\n\n✍️ joker new",
-      "views": "6.84K",
+      "views": "12K",
       "reactions": [],
       "images": [],
       "videos": []
@@ -24,7 +114,7 @@
       "id": 43989,
       "time": "2026-06-10T22:57:41+00:00",
       "text": "فعالیت پدافند رباط کریم \n\n\n,✍️ joker new",
-      "views": "6.87K",
+      "views": "11.7K",
       "reactions": [],
       "images": [],
       "videos": []
@@ -33,7 +123,7 @@
       "id": 43988,
       "time": "2026-06-10T22:56:19+00:00",
       "text": "رژیم جمهوری اسلامی به دو کشتی در تنگه هرمز حمله کرد \n\n,✍️ joker new",
-      "views": "6.9K",
+      "views": "11.4K",
       "reactions": [],
       "images": [],
       "videos": []
@@ -42,7 +132,7 @@
       "id": 43987,
       "time": "2026-06-10T22:41:15+00:00",
       "text": "🔵 فیلترشکن Eagle VPN (اندروید)\n\n• نسخه 2.3\n\n\nبرای اینترنت بین‌الملل، عملکرد خوبی داره.\n\nوصل نشد، سرورهای دیگه رو تست کنید.\n\n\n📥دانلود EagleVPN از گوگل پلی\n\n@proxy_kafee",
-      "views": "7.5K",
+      "views": "11.5K",
       "reactions": [],
       "images": [],
       "videos": []
@@ -51,7 +141,7 @@
       "id": 43985,
       "time": "2026-06-10T22:38:34+00:00",
       "text": "vless://fe571bf6-1933-474f-baee-80722c08a4b4@138.201.173.163:20352?security=none&encryption=none&headerType=none&type=tcp#%40proxy_kafee%F0%9F%93%8A\n#ویتوری #v2box \n@proxy_kafee",
-      "views": "7.41K",
+      "views": "11K",
       "reactions": [],
       "images": [],
       "videos": []
@@ -60,7 +150,7 @@
       "id": 43984,
       "time": "2026-06-10T22:36:50+00:00",
       "text": "🔴سپاه پاسداران انقلاب اسلامی:\n\nدر پاسخ به حمله‌ای که از خاک دولت اسرائیل انجام شد، مرحله واکنش مستقیم آغاز شده است.\nدر ساعات آینده، موج‌هایی از موشک‌های بالستیک، موشک‌های هدایت‌شونده و پهپادها به سمت مرکز اسرائیل شلیک خواهد شد.\n\n\n\n✍️ joker new",
-      "views": "7.82K",
+      "views": "11.3K",
       "reactions": [],
       "images": [],
       "videos": []
@@ -69,7 +159,7 @@
       "id": 43983,
       "time": "2026-06-10T22:35:01+00:00",
       "text": "جمهوری اسلامی تهدید به شلیک موشک در آینده نزدیک به سمت اسرائیل کرد❗️\n\n✍️ joker new",
-      "views": "7.13K",
+      "views": "10.4K",
       "reactions": [],
       "images": [],
       "videos": []
@@ -78,88 +168,7 @@
       "id": 43982,
       "time": "2026-06-10T22:28:20+00:00",
       "text": "🔴#فوری\n\nفاکس نیوز گزارش می‌دهد که اهداف بعدی نیروگاه‌های برق در ایران خواهند بود.\n\nاهداف بعدی ترامپ در ایران، پل‌ها و نیروگاه‌ها خواهند بود.\n\n\n✍️ joker new",
-      "views": "7.85K",
-      "reactions": [],
-      "images": [],
-      "videos": []
-    },
-    {
-      "id": 43981,
-      "time": "2026-06-10T22:26:36+00:00",
-      "text": "پروکسی 🟪\n\ntg://proxy?server=5.75.211.203&port=8443&secret=dd104462821249bd7ac519130220c25d09\n\n@proxy_kafee",
-      "views": "7.25K",
-      "reactions": [],
-      "images": [],
-      "videos": []
-    },
-    {
-      "id": 43980,
-      "time": "2026-06-10T22:24:35+00:00",
-      "text": "گویا موج اول حملات به پایان رسیده است\n\n\n✍️ joker new",
-      "views": "7.35K",
-      "reactions": [],
-      "images": [],
-      "videos": []
-    },
-    {
-      "id": 43979,
-      "time": "2026-06-10T22:23:02+00:00",
-      "text": "حملات آمریکا به بندرعباس \n\n\n✍️ joker new",
-      "views": "7.24K",
-      "reactions": [],
-      "images": [],
-      "videos": []
-    },
-    {
-      "id": 43978,
-      "time": "2026-06-10T22:20:26+00:00",
-      "text": "🔴خبرنگار I24News  :\n\nعوامل آمریکایی: مراکز فرماندهی و کنترل، انبارهای مهمات، رادارها و واحدهای پهپادی مورد حمله قرار گرفتند\n\n\n✍️ joker new",
-      "views": "7.54K",
-      "reactions": [],
-      "images": [],
-      "videos": []
-    },
-    {
-      "id": 43977,
-      "time": "2026-06-10T22:19:27+00:00",
-      "text": "سیتنا: وضعیت اینترنت ایران پایدار است؛ نشانه‌ای از اختلال سراسری جدید مشاهده نمی‌شود",
-      "views": "7.33K",
-      "reactions": [],
-      "images": [],
-      "videos": []
-    },
-    {
-      "id": 43976,
-      "time": "2026-06-10T22:18:36+00:00",
-      "text": "🔴 مقامات امنیتی اسرائیل می‌گویند اسرائیل در این مرحله در حملات آمریکا به ایران دخالتی ندارد.\n\nمنبع: کان نیوز\n\n✍️ joker new",
-      "views": "7.36K",
-      "reactions": [],
-      "images": [],
-      "videos": []
-    },
-    {
-      "id": 43975,
-      "time": "2026-06-10T22:17:13+00:00",
-      "text": "🔴 چشم‌انداز دستیابی به یک پیشرفت دیپلماتیک تاریک‌تر شده بود وقتی که هیئت میانجی قطری چهارشنبه شب بدون پیشرفت در مذاکرات، تهران را ترک کرد، طبق گزارش نیویورک تایمز.\n\n\n✍️ joker new",
-      "views": "7.21K",
-      "reactions": [],
-      "images": [],
-      "videos": []
-    },
-    {
-      "id": 43973,
-      "time": "2026-06-10T22:15:23+00:00",
-      "text": "🔴 سوخت رسان های آمریکایی در نزدیکی ایران\n\n✍️ joker new",
-      "views": "7.1K",
-      "reactions": [],
-      "images": [],
-      "videos": []
-    },
-    {
-      "id": 43972,
-      "time": "2026-06-10T22:13:45+00:00",
-      "text": "🩸🩸🩸🩸❓🩸🅰️🩸🩸🩸\n\nhttps://t.me/proxy?server=1111.imtproxy-ir.info&port=4455&secret=7hYDAQIAAQAB_AMDhuJMOt1iaXNjb3R0aS55ZWt0YW5ldC5jb20%3D\n\nhttps://t.me/proxy?server=89.167.1.2&port=4455&secret=7vDusL2a3E_UqTmU7jsqIWtiaXNjb3R0aS55ZWt0YW5ldC5jb20%3D\n\nhttps://t.me/proxy?server=178.105.237.156&port=4455&secret=7hBEYoISSb16xRkTAiDCXQliaXNjb3R0aS55ZWt0YW5ldC5jb20%3D\n\n\n@proxy_kafee",
-      "views": "6.81K",
+      "views": "11K",
       "reactions": [],
       "images": [],
       "videos": []
