@@ -1,6 +1,6 @@
 {
   "channel": "iliaen",
-  "last_update": "2026-08-08 11:31:40",
+  "last_update": "2026-08-08 12:01:12",
   "posts": [
     {
       "id": 4660,
@@ -60,7 +60,7 @@
       "id": 4654,
       "time": "2026-07-30T00:43:21+00:00",
       "text": "یک پادگان نظامی در اطراف شهر کازرون (فارس) هدف اصابت موشک قرار گرفت.\n\n@iliaen",
-      "views": "111K",
+      "views": "112K",
       "reactions": [],
       "images": [],
       "videos": []
@@ -182,7 +182,9 @@
       "views": "132K",
       "reactions": [],
       "images": [],
-      "videos": []
+      "videos": [
+        "data/media/iliaen_4641_56657728.mp4"
+      ]
     }
   ]
 }
